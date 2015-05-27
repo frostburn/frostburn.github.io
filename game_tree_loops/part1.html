@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dealing with loops in game trees - Part 1</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container">
+            <h1>
+                Dealing with loops in game trees - Part 1
+            </h1>
+            <p>
+                Here I present data structures and algorithms suitable for solving deterministic two-player games of perfect information.
+            </p>
+            <p>
+                I've recently had modest success in solving life and death problems in go (baduk/weiqi) using novel (as far as I know) algorithms so I thought a write up would be in order.
+            </p>
+            <p>
+                A game tree is usually though of as a non-cyclic directed graph where the positions are nodes and the moves are directed edges. The non-cyclic nature is usually enforced with some kind of no-loops policy. This increases the number of possible positions exponentially as the move history must now be included in the position definition. Let's drop this requirement and simply talk about directed graphs where loops are allowed. We're also going to adopt the negamax approach so that we don't have to deal with separate maximizing and minimizing nodes.
+            </p>
+            <p>
+                Let's look at some examples.
+                <div id="simple_tree"></div>
+                Here we have a simple negamax game tree. You can verify that aside from the leaf nodes that have no children each node's value is the maximum of the additive inverses of their children's values.
+            </p>
+            <p>
+                How about a loop?
+                <div id="simple_loop"></div>
+                Nothing too complex going on here. Each node's value is still the negamax of their children's and the solution is unique.
+            </p>
+            <p>
+                How about this?
+                <div id="multi_valued_loop_mystery"></div>
+                If we tried to keep things single valued we would run into trouble in this case. Let's assume the first node chooses the 1 leaf getting the value of -1. Now the second leaf chooses between the first node and the 2 leaf ending up with a value of +1.
+                <div id="multi_valued_loop_single_1"></div>
+                While this is an internally consistent state of affairs we can try different assumptions and see where that takes us. Let's say that the second node chooses the 2-leaf getting the value of -2. Now the first node chooses between the second node and the 1-leaf ending up with a value of +2.
+                <div id="multi_valued_loop_single_2"></div>
+                The same graph but a different internally consistent answer. This is no good. We could even choose the value 0 for both nodes and things would stay internally consistent.
+                <div id="multi_valued_loop_single_3"></div>
+                You can verify that the negamax condition still holds.
+            </p>
+            <p>
+                The solution to dealing with game graphs like this lies in establishing bounds on the values that still satisfy the negamax condition. The algorithm is as follows:
+                <ol>
+                    <li>For each leaf node initialize the lower and upper bound to the value of the leaf.</li>
+                    <li>For each non-leaf node initialize the lower bound to negative infinity and the upper bound to positive infinity.</li>
+                    <li>For each non-leaf node set the lower bound to the negamax of its children's upper bounds.</li>
+                    <li>For each non-leaf node set the upper bound to the negamax of its children's lower bounds.</li>
+                    <li>Repeat steps 3. and 4. until nothing changes.</li>
+                </ol>
+                During each step the lower bounds get higher and upper bounds get lower. Also the lower bound cannot get higher than upper bound so the algorithm is guaranteed to terminate.
+            </p>
+            <p>
+                Calculating the lower bounds for the above graph we get the following result.
+                <div id="multi_valued_loop_low"></div>
+                And now we can calculate the upper bounds. It's easily verified that this is the final result.
+                <div id="multi_valued_loop_final"></div>
+            </p>
+            <p>
+                We can now calculate the lower and upper bounds for arbitrary negamax graphs.
+                <div id="three_loop"></div>
+                Well, given that we can fit the entire graph in memory anyway. Even with symmetry reduction this quickly becomes impractical for realistic game graphs.
+            </p>
+            <p>
+                This concludes Part 1. In Part 2 we're going to look at partial game graphs and effective expansion strategies to work out the final lower and upper bounds of the root node.
+            </p>
+        </div>
+        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="js/svg.min.js"></script>
+        <script type="text/javascript" src="js/part1.js" charset="utf-8"></script>
+    </body>
+</html>
