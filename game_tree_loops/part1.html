@@ -4,6 +4,10 @@
         <title>Dealing with loops in game trees - Part 1</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:image" content="img/preview_part1.png" />
+        <meta property="og:title" content="Dealing with loops in game trees - Part 1" />
+        <meta property="og:description" content="How to get unique bounds on the values of negamax graphs." />
     </head>
     <body>
         <div class="container">
@@ -63,11 +67,12 @@
                 Well, given that we can fit the entire graph in memory anyway. Even with symmetry reduction this quickly becomes impractical for realistic game graphs.
             </p>
             <p>
-                This concludes Part 1. In Part 2 we're going to look at partial game graphs and effective expansion strategies to work out the final lower and upper bounds of the root node.
+                This concludes Part 1. In <a href="part2.html">Part 2</a> we're going to look at partial game graphs and effective expansion strategies to work out the final lower and upper bounds of the root node.
             </p>
         </div>
         <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="js/svg.min.js"></script>
+        <script type="text/javascript" src="js/common.js" charset="utf-8"></script>
         <script type="text/javascript" src="js/part1.js" charset="utf-8"></script>
     </body>
 </html>

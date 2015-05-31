@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg id="drawing" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" >
+  <script type="text/javascript" xlink:href="js/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" xlink:href="js/svg.min.js"></script>
+  <script type="text/javascript" xlink:href="js/common.js"></script>
+  <script type="text/javascript" xlink:href="js/number_game.js"></script>
+  <script type="text/javascript">
+    <![CDATA[
+        var _draw = SVG('drawing')
+        _draw.height(1200);
+        var draw = _draw.group();
+        draw.scale(2.0, 2.0);
+        while(ng_expand()){}
+        render_graph(ng_root, draw);
+    ]]>
+  </script>
+</svg>
