@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dealing with loops in game trees - Part 2</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/part2.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:image" content="img/preview_part2.png" />
+        <meta property="og:title" content="Dealing with loops in game trees - Part 2" />
+        <meta property="og:description" content="How to get final results on partially expanded negamax graphs." />
+    </head>
+    <body>
+        <div class="container">
+            <h1>
+                Dealing with loops in game trees - Part 2
+            </h1>
+            <p>
+                In <a href="part1.html">Part 1</a> I introduced negamax graphs and an algorithm for calculating unique lower and upper bounds on the values of the nodes. In Part 2 we're going to look at partial graphs and strategies for expanding them in order to arrive at the final bounds with minimal effort.
+            </p>
+            <p>
+                Let's start with an example.
+                <div id="full_tree"></div>
+                Here we have a fully expanded negamax game tree. Let's work out the minimally expanded tree to establish the lower bound of the root node. For that we need to establish an upper bound on one of the children.
+                <div id="lower_bound_tree"></div>
+                The minimally expanded tree to establish an upper bound requires lower bounds on all of the children.
+                <div id="upper_bound_tree"></div>
+                Because the lower and upper bounds match we get the final minimally expanded tree by combining the above two.
+                <div id="minimal_tree"></div>
+                You can verify that no matter what value you put in the question marks the value at the top is not going to change.
+            </p>
+            <p>
+                So that works out for trees. Establish lower and upper bounds, see that they are the same and you're done. Doesn't work for loops though. In Part 1 we saw a game graph with distinct lower and upper bounds. So how do we know that the answer we got was final? The obvious answer is that we had the graph fully expanded. The bounds couldn't change because the graph couldn't change.
+            </p>
+            <p>
+                We can do better though. It is possible to prove that the lower and upper bounds of a node are final even in a partially expanded graph. Here's how:
+                <ol>
+                    <li>The lower bound of a node is final if all child nodes with -lower bound higher than the node's lower bound have final upper bounds.</li>
+                    <li>The upper bound of a node is final if it has a child node with a final -lower bound equal to the node's upper bound.</li>
+                    <li>If the lower and upper bound of a node are equal they are both final.
+                </ol>
+                Great, a recursive definition. So how does this work? Let's try applying this to a loop.
+                <div id="loop_finality_problem"></div>
+                It's obvious that the leaf nodes are final (by 3. above), but what about nodes A and B (hover over the nodes or click on them to see the labels)? Does A have a final lower bound? By 1. above that depends on if B has a final upper bound. By 2. above that then depends on if A has final lower bound. So if A does indeed have final lower bound it has a final lower bound. On the other hand if A doesn't have a final lower bound it doesn't have a final lower bound. Both states of affairs are consistent so which one is true?
+            </p>
+            <p>
+                The trick is to assume that every node with children has final lower and upper bounds. Then we just need to see if the assuptions hold using the nodes without children. There are optimizations to this but for now let's be content with this algorithm.
+                <ol>
+                    <li>For all nodes with equal lower and upper bounds set their bounds as final and remove them from consideration.</li>
+                    <li>Set the lower and upper bounds of every node (in consideration) without children as final.</li>
+                    <li>If a node has a child with non-final upper bound and -lower bound higher than the node's lower bound then set the node's lower bound as not final.</li>
+                    <li>If all children with -lower bound equal to a node's upper bound have non-final lower bounds then set the node's upper bound as not final.</li>
+                    <li>Repeat steps 3. and 4. until nothing changes.</li>
+                </ol>
+            </p>
+            <p>
+                Here we have a negamax graph expanded so that the nodes of interest are only half final.
+                <div id="half_final_loop"></div>
+                Node A has a final upper bound because it always has the choice of staying in the loop with B and B only has the choice of staying in the loop or falling back getting the low value of -2. Node C doesn't matter for A because A cannot hope to get a better result from it and because A can stay in the loop it cannot get a worse result either. Likewise B has a final lower bound because A can force B into a loop until it gives in and there's only one final way to give in. Node A doesn't have a final lower bound because if we put the value of 2 or higher in the question marks it would raise the lower bound of A to 2. The lower bound can change so it isn't final. This also means that B doesn't have a final upper bound. For now B can hope to stay in the loop and force A into choosing the low value of 1, but this hope is not guaranteed.
+                <div id="final_loop"></div>
+                Revealing that node C has a lower bound of 0 finalizes the lower bound of node A into 1. Node A cannot do any better now. This also means that the upper bound of B is final. Notice that it doesn't matter what you put in the question mark. The values of A and B are not going to change.
+            </p>
+            <p>
+                Finally let's go through a "real" example. For this purpose I've invented a game that goes as follows:
+                <ul>
+                    <li>Start with the number 13.</li>
+                    <li>On your turn your options are:</li>
+                    <ul>
+                        <li>Divide the number by a positive divisor other than 1 or the number itself.</li>
+                        <li>Add 2 or 4 to the number.</li>
+                    </ul>
+                    <li>If the number is less than 6 at the beginning of your turn turn you lose by the amount indicated by the number.</li>
+                </ul>
+                <p>
+                    Notice that this game has an infinite state space if both players decide to keep adding numbers. It is therefore impossible to expand the whole graph and we need other criteria for deciding when we have expanded enough to get the final answer.
+                </p>
+                <div class="row">
+                    <div id="number_game" class="col-md-7"></div>
+                    <div id="number_game_info" class="col-md-5 bg-info">
+                        <p class="active">
+                            Here we have the root node, the number 13. We don't know anything about it yet so its values could be anything.<br>
+                            <br>
+                            Note that you can hover over the nodes or click on them to see which number they represent.<br>
+                            <br>
+                            Click the button to proceed.
+                        </p>
+                        <p class="hidden">
+                            The number 13 is prime so the only allowed continuations are 15 and 17. We don't know anything about them yet either.
+                        </p>
+                        <p class="hidden">
+                            I've set it up so that that the node with the smallest number that can change the value of the root node is expanded first. Here it was 15. It's a composite number so the allowed continuations are its factors 3 and 5 in addition to 17 and 19. The number 17 was already in the graph so we just add an arrow to it instead of creating a new node.
+                        </p>
+                        <p class="hidden">
+                            Now the smallest choice 3. It's less than 6 which makes it a leaf node with value -3. The value is final so we mark it with a green border. We can see that node 15 now has a lower bound of 3. We don't know if this is the final lower bound so we keep the red border for now.
+                        </p>
+                        <p class="hidden">
+                            This time we tried to expand the 5 node which was also a leaf node. Now node 15 has a lower bound of 5 which incidentially is the best you can do in this game, but let's just pretend we don't know that yet.
+                        </p>
+                        <p class="hidden">
+                            Next up was 17. It's a prime number so the only continuations are 19 and 21. Again 19 was already in the graph so we just add an arrow to it.
+                        </p>
+                        <p class="hidden">
+                            Expanded 19. No new insights gained.
+                        </p>
+                        <p class="hidden">
+                            Expanded 21 which is a composite number. The continuations are 3, 7, 23 and 25. Because we already know that node 3 is worth -3 points we get the lower bound of 3 for node 21.
+                        </p>
+                        <p class="hidden">
+                            Next up was 7 with continuations 9 and 11.
+                        </p>
+                        <p class="hidden">
+                            Expanded 9 with continuations 3, 11 and 13 which was the number we started with. Cool a loop! Notice that we didn't create any new nodes during this expansion. Naturally node 9 also gets the lower bound of 3.
+                        </p>
+                        <p class="hidden">
+                            Expanded 11. Both continuations 13 and 15 were already in the graph.
+                        </p>
+                        <p class="hidden">
+                            Expanded 23. This time we got a new node 27, but that's about it.
+                        </p>
+                        <p class="hidden">
+                            The number 25 was composite. It gets the lower bound of 5. Other than that not much going on yet.
+                        </p>
+                        <div class="hidden">
+                            <p>
+                                Expanded 27 with continuations 3, 9, 29 and 31. It gets a lower bound of 3 which means that now node 23 has lower bounds on all of its child nodes. This means it gets an upper bound of -3 (the higher of -3 and -5). This then cascades to 19 which now has a node with an upper bound. The cascade continues to 17 which now has lower bounds on all of its children and it gets an upper bound. 
+                            </p>
+                            <p>
+                                This finally cascades to the root node 13 which now has a lower bound of 3. This means that no matter how the opponent plays the first player always has a strategy that wins at least by 3 points. Because this is a lower bound it also means that the first player can avoid all kinds of repetitions no matter what the opponent does.
+                            </p>
+                            <p>
+                                The cascade doesn't end there however. We also get an upper bound on 11 which gives lower bounds for 7 and 9.
+                            </p>
+                        </div>
+                        <p class="hidden">
+                            Expanded 29. Boring.
+                        </p>
+                        <p class="hidden">
+                            Expanded 31. Boring as well.
+                        </p>
+                        <p class="hidden">
+                            Expanded 33. It gets a lower bound of 3.
+                        </p>
+                        <div class="hidden">
+                            <p>
+                                Expanded 35. Now we're talking!
+                            </p>
+                            <p>
+                                Having factors 5 and 7 it gets a lower bound of 5. Now node 31 has lower bounds on every child and it gets an upper bound of -3. This gives the lower bound of 3 to 27 and 29. Now node 25 has lower bounds on every child and it gets the upper bound of 5. It already had a lower bound of 5 so this makes it final and we mark it green.
+                            </p>
+                            <p>
+                                This means that node 23 now gets a lower bound of -5 and this information cascades through the graph. Among other things we now know that node 15 is final with value 5.
+                            </p>
+                            <p>
+                                We also know that the rood node has an upper bound of 5. This just means that the opponent always has a strategy that allows them* to lose by at most 5 points even if they avoid all loops. This isn't surprising because losing by 5 points is the worst you can do in this game (aside from being stuck in a forced infinite loop with no exits).
+                            </p>
+                            <small>*) Yes it's a singular 'they' and yes it's proper english.</small>
+                        </div>
+                        <p class="hidden">
+                            Next up is 37. We still don't know if the lower and upper bounds on the root node are final. For example if both nodes 39 and 41 got the value of 4 for some reason that would raise the lower bound of the root node to 4 as well.
+                        </p>
+                        <p class="hidden">
+                            Expanded 39. It loops back to the root node 13 but also to the leaf node 3. This gives it a lower bound of 3 instead of -5 which it would've gotten if it only looped back to 13.
+                        </p>
+                        <p class="hidden">
+                            Expanded 41. Not much going on in here.
+                        </p>
+                        <p class="hidden">
+                            Expanded 43.
+                        </p>
+                        <p class="hidden">
+                            Expanded 45. It gets a lower bound of 5.
+                        </p>
+                        <p class="hidden">
+                            Expanded 47.
+                        </p>
+                        <p class="hidden">
+                            Expanded 49. It loops back to 7 giving it the lower bound of -5.
+                        </p>
+                        <div class="hidden">
+                            <p>
+                                Expanded 51. Now something interesting happens.
+                            </p>
+                            <p>
+                                Looping back to node 3 it gets the lower bound of 3. This information then cascades all the way to node 35 which now gets the upper bound of 5 in addition to the lower bound of 5 making it final.
+                            </p>
+                            <p>
+                                The cascade also sets the lower bound of 37 to -5. This then means that node 33 cannot do worse than get the value of 5 if loops are permitted. If node 37 did any better node 33 would just choose node 11 and keep the upper bound of 5. Previously it was imaginable that node 37 could've gotten a value like -6 setting the upper bound of 33 to 6, but now we know that this is impossible.
+                            </p>
+                            <p>
+                                Finally the cascade sets lower and upper bounds across the inner loops. This is good news for node 33. It has the choice between staying in the inner loops or escaping to node 37, but we just showed that escaping is not preferred. This makes nodes 33 and 35 sort of gatekeeper nodes. No matter what the opponent does you can always force the flow of the game back to the inner loops until the opponent gets tired and plays a move that lets you win by 5 points.
+                            </p>
+                        </div>
+                        <div class="hidden">
+                            <p>
+                                Expanded node 53.
+                            </p>
+                            <p>
+                                The cascade that happended on the previous step also means that the upper bound of node 33 is final and won't change. This then means that the lower bound of 31 is final as well. It can no longer hope that the upper bounds of nodes 33 or 35 could get lower. Finally all of this information about final upper and lower bounds cascades through the graph. This is marked with green semicircles on the sides of the bounds that are final.
+                            </p>
+                            <p>
+                                We still need a better lower bound for node 37. It's imaginable that it could get a value like -4 that would increase the lower bound of the gatekeeper node 33 to 4.
+                            </p>
+                        </div>
+                        <p class="hidden">
+                            Expanded 55. It gets a lower bound of 5.
+                        </p>
+                        <div class="hidden">
+                            <p>
+                                Finally after expanding 57 and showing that it gets a lower bound of 3. The resulting cascade sets the lower bound of node 37 to 3. This marks an end to any hopes that node 33 could get a better lower bound than 3. It's best to choose node 11 even if you're going to avoid repetitions.
+                            </p>
+                            <p>
+                                Now that the gatekeeper nodes have their final values we know that the inner loops have their final values as well including the root node 13. It has the lower bound of 3 and the upper bound of 5. No matter what values nodes 59 and 61 take the values of the root node are not going to change.
+                            </p>
+                        </div>
+                        <div class="hidden">
+                            <p>
+                                This concludes the expansion. We have proved everything there is to prove about this game.
+                            </p>
+                            <p>
+                                The final strategy can be achived by following the graph. An example of a low strategy is:
+                                <ul>
+                                    <li>Starting from 13 choose 17. It's the node with the least upper bound.</li>
+                                    <li>The opponent now has a choice between 19 and 21.</li>
+                                    <li>No matter what the opponent chooses. Choose 23.</li>
+                                    <li>The opponent can now choose between 25 and 27, the reasonable choise being 27.</li>
+                                    <li>If the opponent chooses 25, choose 5 and win by 5 points. If the opponent chooses 27, choose 3 and win by 3 points.</li>
+                                </ul>
+                            </p>
+                        </div>
+                        <button id="number_game_expand" class="btn btn-primary">Expand</button>
+                    </div>
+                </div>
+            </p>
+            <p class="closing">
+                This concludes Part 2. In Part 3 we're going to look at implementations and consider computationally effective strategies for arriving at the final values of a node in a negamax graph.
+            </p>
+        </div>
+        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="js/svg.min.js"></script>
+        <script type="text/javascript" src="js/number_game.js"></script>
+        <script type="text/javascript" src="js/common.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/part2.js" charset="utf-8"></script>
+    </body>
+</html>
