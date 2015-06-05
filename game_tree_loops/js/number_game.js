@@ -118,7 +118,7 @@ function _low_leaks(node, result){
     if (node.children.length){
         node.is_low_final = true;
         $(node.children).each(function(_, child){
-            if (-child.low >= node.low && !child.is_high_final){
+            if (-child.low > node.low && !child.is_high_final){
                 _high_leaks(child, result);
             }
         });
@@ -175,7 +175,7 @@ function update_high_finality(node){
         }
         else {
             $(node.children).each(function(_, child){
-                if (-child.low >= node.high && child.is_low_final){
+                if (-child.low == node.high && child.is_low_final){
                     new_high_final = true;
                 }
             });

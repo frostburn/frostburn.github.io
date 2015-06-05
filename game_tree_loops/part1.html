@@ -46,7 +46,16 @@
                 You can verify that the negamax condition still holds.
             </p>
             <p>
-                The solution to dealing with game graphs like this lies in establishing bounds on the values that still satisfy the negamax condition. The algorithm is as follows:
+                Let's look at an even simpler graph with a loop.
+                <div id="self_loop_mystery"></div>
+                Here the node connects to itself and a leaf with the value of 2. Let's try setting it's value to -2 which would be the correct answer if the node didn't connect to itself.
+                <div id="self_loop_single_1"></div>
+                However if we re-calculate the value, we get 2 which is the negamax of -2 and 2.
+                <div id="self_loop_single_2"></div>
+                If we now re-calculate we get -2 again and the value keeps oscillating. We could also try setting the value to 1 and we would get oscillation between -1 and 1. However if we set the value high or low enough like -3 we get something different. First we get the value of 3, then the value of -2 and then 2 where the value keeps oscillating.
+            </p>
+            <p>
+                The solution to dealing with game graphs like this lies in establishing bounds on the values that survive the negamax condition, oscillatory or not. The algorithm is as follows:
                 <ol>
                     <li>For each leaf node initialize the lower and upper bound to the value of the leaf.</li>
                     <li>For each non-leaf node initialize the lower bound to negative infinity and the upper bound to positive infinity.</li>
@@ -57,10 +66,14 @@
                 During each step the lower bounds get higher and upper bounds get lower. Also the lower bound cannot get higher than upper bound so the algorithm is guaranteed to terminate.
             </p>
             <p>
-                Calculating the lower bounds for the above graph we get the following result.
+                Calculating the lower bounds for the first problematic graph we get the following result.
                 <div id="multi_valued_loop_low"></div>
                 And now we can calculate the upper bounds. It's easily verified that this is the final result.
                 <div id="multi_valued_loop_final"></div>
+            </p>
+            <p>
+                For the second problematic graph the final result is as follows.
+                <div id="self_loop_final"></div>
             </p>
             <p>
                 We can now calculate the lower and upper bounds for arbitrary negamax graphs.

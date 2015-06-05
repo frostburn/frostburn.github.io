@@ -159,6 +159,59 @@ $(document).ready(function(){
     clear_render(a);
     render_graph(a, draw);
 
+    var _draw = SVG('self_loop_mystery').size(600, 150);
+    var draw = _draw.group();
+    draw.scale(1.5, 1.5);
+
+    var two = {
+        x: 50,
+        y: 50,
+        low: 2,
+        high: 2,
+    }
+
+    var a = {
+        x: 120,
+        y: 50,
+        low: '?',
+        high: '?',
+        children: [two],
+        controls: {1: [220, -10, 220, 100]},
+    }
+    a.children.push(a);
+
+    render_graph(a, draw);
+
+    var _draw = SVG('self_loop_single_1').size(600, 150);
+    var draw = _draw.group();
+    draw.scale(1.5, 1.5);
+
+    a.low = -2;
+    a.high = -2;
+
+    clear_render(a);
+    render_graph(a, draw);
+
+    var _draw = SVG('self_loop_single_2').size(600, 150);
+    var draw = _draw.group();
+    draw.scale(1.5, 1.5);
+
+    a.low = 2;
+    a.high = 2;
+
+    clear_render(a);
+    render_graph(a, draw);
+
+    var _draw = SVG('self_loop_final').size(600, 150);
+    var draw = _draw.group();
+    draw.scale(1.5, 1.5);
+
+    a.low = -2;
+    a.high = 2;
+
+    clear_render(a);
+    render_graph(a, draw);
+
     var _draw = SVG('three_loop').size(600, 400);
     var draw = _draw.group();
     draw.translate(0, -25);

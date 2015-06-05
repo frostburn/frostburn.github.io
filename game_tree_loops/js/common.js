@@ -134,11 +134,18 @@ function render_graph(root, draw){
         return;
     }
     $(root.children).each(function(i, child){
-        var cx;
-        var cy;
+        var bx, by, cx, cy;
         if (root.controls && root.controls[i]){
-            cx = root.controls[i][0];
-            cy = root.controls[i][1];
+            if (root.controls[i].length == 2){
+                cx = root.controls[i][0];
+                cy = root.controls[i][1];
+            }
+            else if (root.controls[i].length == 4){
+                bx = root.controls[i][0];
+                by = root.controls[i][1];
+                cx = root.controls[i][2];
+                cy = root.controls[i][3];
+            }
         }
         else {
             cx = (3 * root.x + child.x) / 4;
@@ -149,7 +156,14 @@ function render_graph(root, draw){
         var theta = Math.atan2(y, x);
         x = child.x + Math.cos(theta) * 25;
         y = child.y + Math.sin(theta) * 25;
-        var data = 'M ' + root.x + ' ' + root.y + ' Q ' + cx + ' ' + cy + ' ' + x + ' ' + y;
+        var curve;
+        if (bx !== undefined){
+            curve = ' C ' + bx + ' ' + by + ' ' + cx + ' ' + cy + ' ';
+        }
+        else {
+            curve = ' Q ' + cx + ' ' + cy + ' ';
+        }
+        var data = 'M ' + root.x + ' ' + root.y + curve + x + ' ' + y;
         draw.path(data).fill('none').stroke({width: 1}).marker('end', arrowhead).back();
         render_graph(child, draw);
     });
