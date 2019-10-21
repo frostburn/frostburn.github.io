@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<input id="base-frequency" type="number" value=110><label for="base-frequency"> Base frequency</label>
+<br>
+<br>
+<button id="add-one-button">Add voice</button>
+<br>
+<br>
+<input id="pre-gain" type="range" min="0" max="10" value="1" step="0.01" class="slider" id="myRange">
+<br>
+<br>
+<button id="panic-button">Panic</button>
+
+<script>
+  function makeSigmoidCurve() {
+    const nSamples = 44100;
+    const curve = new Float32Array(nSamples);
+
+    for (let i = 0; i < nSamples; ++i) {
+      let x = i - 0.5 * nSamples;
+      x /= nSamples;
+      x *= 10;
+      curve[i] = Math.tanh(x) * 0.5;
+    }
+    return curve;
+  }
+
+  window.onload = function() {
+    const context = new AudioContext();
+    context.suspend();
+
+    let voiceCount = 0;
+
+    const sigmoidDistortion = context.createWaveShaper();
+    sigmoidDistortion.curve = makeSigmoidCurve();
+    sigmoidDistortion.connect(context.destination);
+
+
+    const baseFrequency = document.querySelector("#base-frequency");
+    const preGainSlider = document.querySelector("#pre-gain");
+
+    const preGain = context.createGain();
+    preGain.connect(sigmoidDistortion);
+    function adjustPreGain() {
+      if (voiceCount) {
+        preGain.gain.linearRampToValueAtTime(parseFloat(preGainSlider.value) / voiceCount, context.currentTime + 0.05);
+      }
+    }
+
+    preGainSlider.addEventListener('input', adjustPreGain);
+
+
+    document.querySelector('#add-one-button').addEventListener('click', function() {
+      context.resume();
+      voiceCount += 1;
+      const oscillator = context.createOscillator();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(parseFloat(baseFrequency.value) * voiceCount * (1 + Math.random()*0.01), context.currentTime);
+      const gain = context.createGain();
+      gain.gain.setValueAtTime(0.1, context.currentTime);
+      oscillator.connect(gain).connect(preGain);
+      adjustPreGain();
+      oscillator.start();
+    });
+    document.querySelector('#panic-button').addEventListener('click', function() {
+      context.suspend().then(() => {
+        console.log('Playback halted successfully');
+      });
+    });
+  }
+</script>
+</html>
