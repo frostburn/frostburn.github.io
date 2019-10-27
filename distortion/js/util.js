@@ -27,3 +27,28 @@ function makeSoftBuzzPeriodicWave(context, sharpness=0.1) {
 
   return context.createPeriodicWave(real, imag);
 }
+
+
+
+function frequencyToMidiPitch(frequency) {
+  return 69 + 12 * Math.log(frequency / 440.0) / Math.log(2);
+}
+
+NOTE_NAMES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
+
+function frequencyToLabel(frequency) {
+  const pitch = frequencyToMidiPitch(frequency);
+  let nearest = Math.round(pitch);
+  const detune = pitch - nearest;
+  const cents = Math.floor(detune * 100);
+
+  let plus = "";
+  if (cents >= 0) {
+    plus = "+";
+  }
+
+  const noteName = NOTE_NAMES[nearest % 12];
+  const octaveNumber = Math.floor(nearest / 12.0);
+
+  return `${noteName}${octaveNumber} ${plus}${cents}`;
+}
