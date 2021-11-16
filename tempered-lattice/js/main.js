@@ -121,6 +121,13 @@ function notename(threes, fives) {
 let ACTIVE_CHORD = null;
 
 function canonize(threes, fives, horogram) {
+    if (horogram == "father") {
+        return [threes - fives, 0];
+    }
+    if (horogram == "bug") {
+        m = fives - Math.floor((fives+1)/2)*2;
+        return [threes + 3*(fives - m)/2, m];
+    }
     if (horogram == "dicot") {
         // return [0, fives + 2*threes];
         // return [4*(fives + 2*threes), 0];
@@ -172,7 +179,7 @@ function canonize(threes, fives, horogram) {
         const fifths_19edo = [0, 7, 14, 2, 9, 16, 4, 11, 18, 6, 13, 1, 8, 15, 3, 10, 17, 5, 12];
         const id = fives + 5*threes;
         const edo19 = mod(threes*30 + fives*44, 19);
-        const meantone = fifths_19edo[edo19];
+        const meantone = mod(fifths_19edo[edo19] + 8, 19) - 8;
         const arrows = Math.floor(id/19);
         return [meantone + arrows*4, -arrows];
     }
@@ -188,12 +195,63 @@ function canonize(threes, fives, horogram) {
         const m = fives - Math.floor((fives+2)/4)*4;
         return [threes - 3*(fives - m)/4, m];
     }
+    if (horogram == "würschmidt") {
+        const fifths_31edo = [0, 19, 7, 26, 14, 2, 21, 9, 28, 16, 4, 23, 11, 30, 18, 6, 25, 13, 1, 20, 8, 27, 15, 3, 22, 10, 29, 17, 5, 24, 12];
+        const index = fives + 8*threes;
+        const edo31 = mod(threes*49 + fives*72, 31)
+        const meantone = mod(fifths_31edo[edo31] + 11, 31) - 11;
+        const arrows = Math.floor(index / 31);
+        return [meantone + arrows*4, -arrows];
+    }
+
+    if (horogram == "quintriyo") {
+        const f = Math.floor((fives + 7)/15);
+        return [threes + f*15, fives - f*15];
+    }
+
+    if (horogram == "helmholtz") {
+        return [threes - 8*fives, 0];
+    }
+
+    if (horogram == "passion") {
+        const m = fives - Math.floor((fives + 2)/5)*5;
+        return [threes - 4*(fives - m)/5, m];
+    }
+
+    if (horogram == "12tet") {
+        return [mod(threes + fives*4 + 2, 12) - 2, 0];
+    }
+
+    if (horogram == "doublewide") {
+        const m = fives - Math.floor((fives + 4)/8)*8;
+        return [threes + 3*(fives-m)/4, m];
+    }
+
+    if (horogram == "sevond") {
+        const m = fives - Math.floor((fives+3)/7)*7;
+        return [threes + 14*(fives - m)/7, m];
+    }
+
+    if (horogram == "bohpieric") {
+        const m = fives - Math.floor((fives+6)/13)*13;
+        return [threes + 19*(fives - m)/13, m];
+    }
+
+    if (horogram == "wronecki") {
+        m = fives - Math.floor((fives + 3)/6)*6;
+        return [threes + 2*(fives-m), m];
+    }
+
     return [threes, fives];
 }
 
 function populateLattice(context, voices) {
-    // const horogram = "JI";
-    // const mapping = [Math.log(2), Math.log(3), Math.log(5)];
+    const horogram = "JI";
+    const mapping = [Math.log(2), Math.log(3), Math.log(5)];
+    // const horogram = "father";
+    // const mapping = [0.68199118, 1.10737079, 1.62059392];
+    // const horogram = "bug";
+    // const mapping = [0.69466579, 1.08322008, 1.62483012];
     // const horogram = "dicot";
     // const mapping = [0.70100704, 1.100135, 1.60157806];
     // const mapping = [Math.log(2), Math.log(3), Math.log(24)*0.5];
@@ -207,12 +265,13 @@ function populateLattice(context, voices) {
     // const mapping = [0.69805797, 1.0937015, 1.60530132];
     // const horogram = "porcupine";
     // const mapping = [0.69192113, 1.10200897, 1.60604123];
+    // const mapping = [Math.log(2), Math.log(3), Math.log(6) - Math.log(4/3)*2/3];
     // const horogram = "blackwood";
     // const mapping = [0.68913826, 1.10262121, 1.61101742];
     // const horogram = "dimipent";
     // const mapping = [0.69050286, 1.09508653, 1.61296367];
-    const horogram = "srutal";
-    const mapping = [0.69248279, 1.09927668, 1.61010196];
+    // const horogram = "srutal";
+    // const mapping = [0.69248279, 1.09927668, 1.61010196];
     // const horogram = "magic";
     // const mapping = [0.69430008, 1.09842424, 1.60828501];
     // const horogram = "ripple";
@@ -221,6 +280,24 @@ function populateLattice(context, voices) {
     // const mapping = [0.69343685, 1.09885368, 1.60914825];
     // const horogram = "negripent";
     // const mapping = [0.69461467, 1.09757457, 1.60797042];
+    // const horogram = "quintriyo";
+    // const mapping = [0.69387471, 1.09960437, 1.60844583];
+    // const horogram = "würschmidt";
+    // const mapping = [0.69288028, 1.09867381, 1.60970482];
+    // const horogram = "helmholtz";
+    // const mapping = [0.69319501, 1.09856446, 1.60940955];
+    // const horogram = "12tet";
+    // const mapping = [Math.log(2), 19/12*Math.log(2), 28/12*Math.log(2)];
+    // const horogram = "doublewide";
+    // const mapping = [0.69533394, 1.10000064, 1.60725116];
+    // const horogram = "bohpieric";
+    // const mapping = [0.69300505, 1.10014539, 1.60790481];
+    // const horogram = "sevond";
+    // const mapping = [0.69191719, 1.10037403, 1.60767617];
+    // const horogram = "wronecki";
+    // const mapping = [0.69509274, 1.09576472, 1.61228548];
+    // const horogram = "passion";
+    // const mapping = [0.69179527, 1.09959144, 1.61078982];
 
     const draw = SVG().addTo("#lattice").size(1100, 750);
 
@@ -236,9 +313,9 @@ function populateLattice(context, voices) {
             const tf = canonize(threes, fives, horogram);
             const x = 1.05*1.5*i;
             const y = 1.05*Math.sqrt(3)*(j+0.5*(i%2));
-            const r = cyrb53(tf[0], tf[1], 1);
-            const g = cyrb53(tf[0], tf[1], 2);
-            const b = cyrb53(tf[0], tf[1], 3);
+            const r = cyrb53(tf[0], tf[1], 0);
+            const g = cyrb53(tf[0], tf[1], 7);
+            const b = cyrb53(tf[0], tf[1], 6);
             const color = "rgb(" + (mod(r, 200)+56) + "," + (mod(g, 200)+56) + "," + (mod(b, 200)+56) + ")";
             const hexagon = draw.polygon(points).scale(20).move(x, y).fill(color);
             const label = draw.text(notename(tf[0], tf[1])).font({size: 15}).move(20*(x+0.5), 20*(y+0.5));
@@ -271,7 +348,7 @@ function populateLattice(context, voices) {
                     if (e.ctrlKey && e.altKey) {
                         if (e.shiftKey) {
                             voices[2][0].frequency.setValueAtTime(220*Math.exp(pitch + mapping[2] - 2*mapping[0]), context.currentTime);
-                            voices[3][0].frequency.setValueAtTime(220*Math.exp(pitch + 2*mapping[1] - mapping[2]), context.currentTime);
+                            voices[3][0].frequency.setValueAtTime(220*Math.exp(pitch - 2*mapping[1] + 4*mapping[0]), context.currentTime);
                         } else {
                             voices[2][0].frequency.setValueAtTime(220*Math.exp(pitch + mapping[1] - mapping[2] + mapping[0]), context.currentTime);
                             voices[3][0].frequency.setValueAtTime(220*Math.exp(pitch + mapping[1] + mapping[2] - 3*mapping[0]), context.currentTime);
@@ -315,6 +392,10 @@ function main() {
     const context = new AudioContext({latencyHint: "interactive"});
     context.suspend();
 
+    const globalGain = context.createGain();
+    globalGain.connect(context.destination);
+    globalGain.gain.setValueAtTime(0.5, context.currentTime);
+
     let freq = 220;
     const generator = 2;
     const modulus = 3;
@@ -325,7 +406,7 @@ function main() {
         oscillator.type = "triangle";
         const gain = context.createGain();
         gain.gain.setValueAtTime(0.0, context.currentTime);
-        oscillator.connect(gain).connect(context.destination);
+        oscillator.connect(gain).connect(globalGain);
         oscillator.start();
         voices.push([oscillator, gain]);
     }
