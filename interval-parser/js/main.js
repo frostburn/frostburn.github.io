@@ -21,34 +21,22 @@ Powers of three form the unbounded spiral of fifths ..., Eb, Bb, F, C, G, D, A, 
 Powers of five correspond to syntonic commas 81/80 represented by + and -
 Powers of seven correspond to Archytas commas 64/63 represented by > and <
 Powers of eleven correspond to 11 M-diesis 33/32 represented by ^ and v
-Powers of thirteen correspond to 13 L-diesis 27/26 represented by * and /
+Powers of thirteen correspond to 13 L-diesis 27/26 represented by * and %
 Powers of seventeen correspond to 17 kleismas 4131/4096 represented by u and d
 Powers of nineteen correspond to Boethius' commas 513/512 represented by U and D
 Powers of twentythree correspond to 23 commas 736/729 represented by A and V
 Powers of twentynine correspond to 29 S-diesis 261/256 represented by M and W
 
-There's a large bonus modifier for 416/405 represented by i and !. It allows you to spell the Barbados third 13/10 as M3i instead of P4+/.
-
-Monzos
-+,- : [-4, 4, -1>
->,< : [6, -2, 0, -1>
-^,v : [-5, 1, 0, 0, 1>
-*,/ : [-1, 3, 0, 0, 0, -1>
-u,d : [-12, 5, 0, 0, 0, 0, 1>
-U,D : [-9, 3, 0, 0, 0, 0, 0, 1>
-A,V : [5, -6, 0, 0, 0, 0, 0, 0, 1>
-M,W : [-8, 2, 0, 0, 0, 0, 0, 0, 0, 1>
-i,! : [5, -4, -1, 0, 0, 1>
-
+There's a large bonus modifier for 416/405 represented by i and !. It allows you to spell the Barbados third 13/10 as M3i instead of P4+%.
 ***/
 
-const UPDOWNS = ["+-", "><", "^v", "*/", "ud", "UD", "AV", "MW", "i!"];
+const UPDOWNS = ["+-", "><", "^v", "*%", "ud", "UD", "AV", "MW", "i!"];
 
 const COMMAS = {
     "+-": [-4, 4, -1],
     "><": [6, -2, 0, -1],
     "^v": [-5, 1, 0, 0, 1],
-    "*/": [-1, 3, 0, 0, 0, -1],
+    "*%": [-1, 3, 0, 0, 0, -1],
     "ud": [-12, 5, 0, 0, 0, 0, 1],
     "UD": [-9, 3, 0, 0, 0, 0, 0, 1],
     "AV": [5, -6, 0, 0, 0, 0, 0, 0, 1],
@@ -253,7 +241,7 @@ function parseConfiguration(text) {
     let tempo = [[1, 4], 120];
     let unparsed = [];
     text.split("\n").forEach(line => {
-        line = line.split("%", 1)[0];
+        line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
             baseFrequency = parseFloat(line.split(":", 2)[1]);
         }
@@ -315,7 +303,7 @@ function notate(pitch) {
         "+-": -fives,
         "><": -sevens,
         "^v": elevens,
-        "*/": -thirteens,
+        "*%": -thirteens,
         "ud": seventeens,
         "UD": nineteens,
         "AV": twentythrees,
