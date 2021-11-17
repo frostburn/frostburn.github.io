@@ -2,6 +2,10 @@ function mod(n, m) {
     return ((n % m) + m) % m;
 }
 
+function isDigit(str) {
+    return !isNaN(str);
+}
+
 function parseFraction(token) {
     if (token.includes("/")) {
         [numerator, denominator] = token.split("/", 2);
@@ -52,8 +56,39 @@ const COMMAS = {
     "i!": [5, -4, -1, 0, 0, 1],
 }
 
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 const JI = [Math.log(2), Math.log(3), Math.log(5), Math.log(7), Math.log(11), Math.log(13), Math.log(17), Math.log(19), Math.log(23), Math.log(29)];
 
+function toVector(num) {
+    if (num < 1) {
+        throw "Non-vectorizable number";
+    }
+    const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < result.length; ++i) {
+        const p = PRIMES[i];
+        while (num % p == 0) {
+            num /= p;
+            result[i] += 1;
+        }
+    }
+    if (num != 1) {
+        throw "Number not in 29-limit"
+    }
+    return result;
+}
+
+// TODO: Exponents
+function parseNumericExpression(token) {
+    [numerator, denominator] = token.split("/", 2);
+    numerator = parseInt(numerator);
+    denominator = parseInt(denominator || 1);
+    const pitch = toVector(numerator);
+    const denominatorPitch = toVector(denominator);
+    for (let i = 0; i < pitch.length; ++i) {
+        pitch[i] -= denominatorPitch[i];
+    }
+    return pitch;
+}
 
 const BASIC_INTERVALS = {
     "d2": [19, -12],
@@ -84,6 +119,9 @@ const BASIC_INTERVALS = {
 };
 
 function parseInterval(token) {
+    if (isDigit(token[0])) {
+        return parseNumericExpression(token);
+    }
     const quality = token[0];
     token = token.slice(1);
     const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -165,13 +203,15 @@ function parseHarmony(text, extraChords) {
             const interval = parseInterval(intervalToken);
             const chord = [];
             if (chordToken == "U") {
-                chord.push("P1");
+                chord.push(parseInterval("P1"));
             } else {
-                let chordTones;
-                if (chordToken in extraChords) {
-                    chordTones = extraChords[chordToken];
-                } else {
-                    chordTones = parseChord(chordToken);
+                let chordTones = chordToken.split(",");
+                if (chordTones.length <= 1) {
+                    if (chordToken in extraChords) {
+                        chordTones = extraChords[chordToken];
+                    } else {
+                        chordTones = parseChord(chordToken);
+                    }
                 }
                 chordTones.forEach(chordTone => {
                     chord.push(parseInterval(chordTone));
@@ -329,7 +369,7 @@ function updateAbsolutePitches(notess) {
             notes.forEach(note => {
                 subtokens.push(tokenizeNotation(notate(note.pitch)));
             });
-            token = "(" + subtokens.join(" ") + ")";
+            token = "(" + subtokens.join(",") + ")";
         }
         if (notes[0].duration != 1) {
             token += "[" + notes[0].duration + "]";
