@@ -1,24 +1,24 @@
 <!doctype html>
 <html>
 <body>
-    <p>Why don't you write some music...</p>
-    <button id="play">Play</button>
-    <button id="panic">Panic</button>
-    <br>
-    <br>
-    <textarea id="text" rows="10" cols="100">
+  <p>5-limit interval parser v0.0 alpha</p>
+  <button id="play">Play</button>
+  <button id="panic">Panic</button>
+  <br>
+  <br>
+  <textarea id="text" rows="10" cols="100">
 % Giant Steps by John Coltrane
 A:432  % The vibes are real
 M:2/2
-Q:1/2=60
-% The interval jumps make no sense. This is just a demo.
--P5(M) +m3u(dom) | -P5(M) +m3u(dom) | +P4(M)[2] | +A4d(m7) -P5(dom) |
-+P4(M) +m3u(dom) | -P5(M) +m3u(dom) | -P5(M)[2] | +A4d(m7) -P5(dom) |
-+P4(M)[2] | +A4d(m7) -P5(dom) | -P5(M)[2] | +A4d(m7) -P5(dom) |
-+P4(M)[2] | +A4d(m7) -P5(dom) | -P5(M)[2] | +m7u(m7) -P5(dom) |
+Q:1/2=80
+-P5(M) m3u(dom) | -P5(M)   m3u(dom) | P4(M)[2] | A4d2(m7) -P5(7) |
+-P5(M) m3u(dom) | -P5(M)   m3u(dom) | P4(M)[2] | A4d2(m7) -P5(7) |
+-P5(M)[2]       | A4d2(m7) -P5(dom) | P4(M)[2] | A4d2(m7) -P5(7) |
+-P5(M)[2]       | A4d2(m7) -P5(dom) | P4(M)[2] | m7(m7)   -P5(7) |
 </textarea>
+  <div><span>Parsed output:</span></div>
+  <div id="absolute"></div>
 
-<!-- <script type="text/javascript" src="js/lib/svg.min.js"></script> -->
 <script type="text/javascript" src="js/ya_chords.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script>

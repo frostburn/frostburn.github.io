@@ -1,3 +1,7 @@
+function mod(n, m) {
+    return ((n % m) + m) % m;
+}
+
 function parseFraction(token) {
     if (token.includes("/")) {
         [numerator, denominator] = token.split("/", 2);
@@ -66,7 +70,7 @@ function parseYaInterval(token) {
 function parseYa(text) {
     const result = [];
     const pitch = [0, 0, 0];
-    let t = 0;
+    let time = 0;
 
     text.split(/\s+/).forEach(token => {
         if (token == "") {
@@ -124,14 +128,16 @@ function parseYa(text) {
             for (let i = 0; i < 3; ++i) {
                 pitch[i] += interval[i]*direction;
             }
-            const notes = [];
-            for (let j = 0; j < chord.length; ++j) {
-                const notePitch = [pitch[0] + chord[j][0], pitch[1] + chord[j][1], pitch[2] + chord[j][2]];
-                notes.push([notePitch, duration, t]);
+            if (duration > 0) {
+                const notes = [];
+                for (let j = 0; j < chord.length; ++j) {
+                    const notePitch = [pitch[0] + chord[j][0], pitch[1] + chord[j][1], pitch[2] + chord[j][2]];
+                    notes.push({pitch: notePitch, duration, time});
+                }
+                result.push(notes);
             }
-            result.push(notes);
         }
-        t += duration
+        time += duration;
     });
 
     return result;
@@ -160,12 +166,96 @@ function parseConfiguration(text) {
         }
     });
     beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) / measure[1];
-    return [baseFrequency, beatDuration, unparsed.join("\n")];
+    return {baseFrequency, beatDuration, unparsed: unparsed.join("\n")};
+}
+
+const LYDIAN = ["F", "C", "G", "D", "A", "E", "B"];
+const LYDIAN_INDEX_A = LYDIAN.indexOf("A");
+const REFERENCE_OCTAVE = 4;
+const INDEX_A_12EDO = 9;
+
+function notateYa(pitch) {
+    const twos = pitch[0];
+    const threes = pitch[1];
+    const fives = pitch[2];
+
+    const index = LYDIAN_INDEX_A + threes + fives*4;
+    const sharps = Math.floor(index / LYDIAN.length);
+    const letter = LYDIAN[mod(index, LYDIAN.length)];
+    const arrows = -fives;
+
+    const edo12 = twos*12 + threes*19 + fives*28;
+    const octaves = REFERENCE_OCTAVE + Math.floor((edo12 + INDEX_A_12EDO)/12);
+
+    return {letter, sharps, arrows, octaves};
+}
+
+function tokenizeNotation(notation) {
+    let syntonicArrows = notation.syntonicArrows;
+    if (syntonicArrows === undefined) {
+        syntonicArrows = notation.arrows;
+    }
+    if (syntonicArrows === undefined) {
+        syntonicArrows = 0;
+    }
+    let sharps = notation.sharps;
+    let accidental = "";
+    if (sharps > 0) {
+        if (sharps % 2) {
+            accidental = "#";
+        }
+        while (sharps > 0) {
+            accidental = accidental + "x";
+            sharps -= 2;
+        }
+    } else if (sharps < 0) {
+        while (sharps < 0) {
+            accidental += "b";
+            sharps += 1;
+        }
+    }
+    let arrows = "";
+    if (syntonicArrows > 0) {
+        arrows = "u";
+        if (syntonicArrows > 1) {
+            arrows += syntonicArrows;
+        }
+    } else if (syntonicArrows < 0) {
+        arrows = "d";
+        if (syntonicArrows < -1) {
+            arrows += (-syntonicArrows);
+        }
+    }
+    return notation.letter + notation.octaves + accidental + arrows;
+}
+
+function updateAbsolutePitches(notess) {
+    const el = document.getElementById('absolute');
+    tokens = [];
+    notess.forEach(notes => {
+        let token;
+        if (notes.length == 1) {
+            token = tokenizeNotation(notateYa(notes[0].pitch));
+        } else {
+            subtokens = [];
+            notes.forEach(note => {
+                subtokens.push(tokenizeNotation(notateYa(note.pitch)));
+            });
+            token = "(" + subtokens.join(" ") + ")";
+        }
+        if (notes[0].duration != 1) {
+            token += "[" + notes[0].duration + "]";
+        }
+        tokens.push(token);
+    });
+    el.textContent = tokens.join(" ");
 }
 
 function main() {
     const context = new AudioContext({latencyHint: "interactive"});
     context.suspend();
+    const attackTime = 0.01;
+    const decayTime = 0.02;
 
     const globalGain = context.createGain();
     globalGain.connect(context.destination);
@@ -180,7 +270,7 @@ function main() {
         oscillator.connect(gain).connect(globalGain);
         oscillator.frequency.setValueAtTime(200+100*i, context.currentTime);
         oscillator.start();
-        voices.push([oscillator, gain]);
+        voices.push({oscillator, gain});
     }
 
     const playEl = document.getElementById('play');
@@ -190,14 +280,16 @@ function main() {
     const mapping = JI_YA;
 
     playEl.onclick = e => {
-        [baseFrequency, beatDuration, text] = parseConfiguration(textEl.value);
-        const notess = parseYa(text);
+        const config = parseConfiguration(textEl.value);
+        const notess = parseYa(config.unparsed);
+        updateAbsolutePitches(notess);
+
         const now = context.currentTime;
 
         for (let i = 0; i < voices.length; ++i) {
-            voices[i][0].frequency.cancelScheduledValues(now);
-            voices[i][1].gain.cancelScheduledValues(now);
-            voices[i][1].gain.setValueAtTime(0.0, now);
+            voices[i].oscillator.frequency.cancelScheduledValues(now);
+            voices[i].gain.gain.cancelScheduledValues(now);
+            voices[i].gain.gain.setValueAtTime(0.0, now);
         }
 
         notess.forEach(notes => {
@@ -205,16 +297,18 @@ function main() {
                 if (i > voices.length) {
                     continue;
                 }
-                let log_ratio = 0;
+                let logRatio = 0;
                 for (let j = 0; j < mapping.length; ++j) {
-                    log_ratio += mapping[j]*notes[i][0][j];
+                    logRatio += mapping[j]*notes[i].pitch[j];
                 }
-                const frequency = baseFrequency * Math.exp(log_ratio);
-                const time = notes[i][2] * beatDuration + now;
-                const duration = notes[i][1] * beatDuration;
-                voices[i][0].frequency.setValueAtTime(frequency, time);
-                voices[i][1].gain.setValueAtTime(1.0, time);
-                voices[i][1].gain.setValueAtTime(0.0, time + duration);
+                const frequency = config.baseFrequency * Math.exp(logRatio);
+                const time = notes[i].time * config.beatDuration + now;
+                const duration = notes[i].duration * config.beatDuration;
+                voices[i].oscillator.frequency.setValueAtTime(frequency, time);
+                voices[i].gain.gain.setValueAtTime(0.0, time);
+                voices[i].gain.gain.linearRampToValueAtTime(1.0, time + attackTime);
+                voices[i].gain.gain.setValueAtTime(1.0, time + duration - decayTime);
+                voices[i].gain.gain.linearRampToValueAtTime(0.0, time + duration);
             }
         });
 
