@@ -247,6 +247,22 @@ function parseHarmony(text, extraChords) {
     return result;
 }
 
+function expandRepeats(text) {
+    while (1) {
+        let start = text.indexOf("|:");
+        if (start < 0) {
+            break;
+        }
+        let end = text.indexOf(":|");
+        if (end < 0) {
+            end = text.length;
+        }
+        const repeatedSection = text.slice(start+2, end);
+        text = text.slice(0, start) + "|" + repeatedSection + "|" + repeatedSection + "|" + text.slice(end+2);
+    }
+    return text;
+}
+
 function parseConfiguration(text, temperaments) {
     let baseFrequency = 440;
     let unit = [1, 4];
@@ -432,7 +448,8 @@ function updateAbsolutePitches(notess) {
 function parseElementContent(textEl, voices, now) {
     const attackTime = 0.01;
     const decayTime = 0.02;
-    const config = parseConfiguration(textEl.value, TEMPERAMENTS);
+    const text = expandRepeats(textEl.value);
+    const config = parseConfiguration(text, TEMPERAMENTS);
 
     let mapping = JI;
     if (config.divisions !== undefined) {
