@@ -244,6 +244,7 @@ function parseConfiguration(text, temperaments) {
     let divisions;
     let numberDivided;
     let gain = 1.0;
+    let constraints;
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
@@ -278,6 +279,9 @@ function parseConfiguration(text, temperaments) {
             numberDivided = parseFraction(dividedToken);
         } else if (line.startsWith("G:")){
             gain = parseFraction(line.split(":", 2)[1]);
+        } else if (line.startsWith("C:")){
+            constraints = [];
+            line.split(":", 2)[1].split(",").forEach(token => constraints.push(parseInterval(token)));
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
@@ -290,6 +294,7 @@ function parseConfiguration(text, temperaments) {
         divisions,
         numberDivided,
         gain,
+        constraints,
         unparsed: unparsed.join("\n")
     };
 }
@@ -401,7 +406,7 @@ function updateAbsolutePitches(notess) {
     el.textContent += tokens.join(" ") + "||";
 }
 
-function parseElementContent(textEl, voices, context) {
+function parseElementContent(textEl, voices, now) {
     const attackTime = 0.01;
     const decayTime = 0.02;
     const config = parseConfiguration(textEl.value, YA_TEMPERAMENTS);
@@ -412,13 +417,14 @@ function parseElementContent(textEl, voices, context) {
         generator = Math.log(config.numberDivided) / config.divisions;
         JI.forEach(logPrime => mapping.push(generator*Math.round(logPrime/generator)));
     } else if (config.commaList !== undefined) {
-        mapping = minimax(temper(config.commaList, JI), JI);
+        mapping = temper(config.commaList, JI, config.constraints);
+        if (config.constraints === undefined) {
+            mapping = minimax(mapping, JI);
+        }
     }
 
     const notess = parseHarmony(config.unparsed, YA_CHORDS);
     updateAbsolutePitches(notess);
-
-    const now = context.currentTime;
 
     for (let i = 0; i < voices.length; ++i) {
         voices[i].oscillator.frequency.cancelScheduledValues(now);
@@ -477,8 +483,10 @@ function main() {
 
     playEl.onclick = e => {
         absoluteEl.textContent = "";
+        context.suspend();
+        const now = context.currentTime;
         for (let i = 0; i < 2; ++i) {
-            parseElementContent(textEls[i], voicess[i], context);
+            parseElementContent(textEls[i], voicess[i], now);
         }
         context.resume();
     }

@@ -12,12 +12,18 @@ function dot(vectorA, vectorB) {
     return result;
 }
 
-function temper(commaList, justMapping, numIterations=1000) {
+function temper(commaList, justMapping, constraints, numIterations=1000, stepSize=0.1) {
     /*
     Temper out a given list of commas.
 
     The magnitude of the resulting mapping is arbitrary, but reasonably close to just intonation
     */
+    const jFactors = [];
+    if (constraints === undefined) {
+        constraints = [];
+    }
+    constraints.forEach(constraint => jFactors.push(dot(constraint, justMapping)));
+
     const mapping = [];
     justMapping.forEach(logPrime => mapping.push(logPrime));
 
@@ -35,6 +41,14 @@ function temper(commaList, justMapping, numIterations=1000) {
                 mapping[j] -= dot_ * comma[j];
             }
         });
+        for (let j = 0; j < constraints.length; ++j) {
+            // TODO: Proper analysis to check if this is the best way to enforce constraints.
+            const mFactor = dot(constraints[j], mapping);
+            const step = (mFactor - jFactors[j]) * mFactor * stepSize;
+            for (let k = 0; k < mapping.length; ++k) {
+                mapping[k] -= constraints[j][k]*step;
+            }
+        }
     }
     return mapping
 }
