@@ -46,6 +46,18 @@ const COMMAS = {
 
 const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 const JI = [Math.log(2), Math.log(3), Math.log(5), Math.log(7), Math.log(11), Math.log(13), Math.log(17), Math.log(19), Math.log(23), Math.log(29)];
+const JI_SUBGROUP = [];
+for (let i = 0; i < JI.length; ++i) {
+    const vector = [];
+    for (let j = 0; j < JI.length; ++j) {
+        if (i == j) {
+            vector.push(1);
+        } else {
+            vector.push(0);
+        }
+    }
+    JI_SUBGROUP.push(vector);
+}
 
 function toVector(num) {
     if (num < 1) {
@@ -237,7 +249,7 @@ function parseHarmony(text, extraChords) {
 
 function parseConfiguration(text, temperaments) {
     let baseFrequency = 440;
-    let measure = [4, 4];
+    let unit = [1, 4];
     let tempo = [[1, 4], 120];
     let unparsed = [];
     let commaList;
@@ -245,14 +257,16 @@ function parseConfiguration(text, temperaments) {
     let numberDivided;
     let gain = 1.0;
     let constraints;
+    let subgroup = JI_SUBGROUP;
+
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
             baseFrequency = parseFloat(line.split(":", 2)[1]);
         }
-        else if (line.startsWith("M:")) {
+        else if (line.startsWith("L:")) {
             [numerator, denominator] = line.split(":", 2)[1].split("/", 2);
-            measure = [parseInt(numerator), parseInt(denominator)];
+            unit = [parseInt(numerator), parseInt(denominator)];
         }
         else if (line.startsWith("Q:")) {
             [beat, value] = line.split(":", 2)[1].split("=", 2);
@@ -264,11 +278,19 @@ function parseConfiguration(text, temperaments) {
             tokens.forEach(token => {
                 commaList.push(parseNumericExpression(token.trim()));
             });
+        } else if (line.startsWith("SG:")) {
+            tokens = line.split(":", 2)[1].split(".");
+            subgroup = [];
+            tokens.forEach(token => {c
+                subgroup.push(parseNumericExpression(token.trim()));
+            });
         } else if (line.startsWith("T:")) {
             const temperament = line.split(":", 2)[1];
-            tokens = temperaments[temperament];
+            [tokens, subgroupToken] = temperaments[temperament];
             commaList = [];
+            subgroup = [];
             tokens.forEach(token => commaList.push(parseNumericExpression(token)));
+            subgroupToken.split(".").forEach(token => subgroup.push(parseNumericExpression(token)));
         } else if (line.startsWith("EDO:")) {
             // TODO: Warts
             divisions = parseInt(line.split(":", 2)[1]);
@@ -286,11 +308,12 @@ function parseConfiguration(text, temperaments) {
             unparsed.push(line.replaceAll("|", " "));
         }
     });
-    beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) / measure[1];
+    beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) * (unit[0]/unit[1]);
     return {
         baseFrequency,
         beatDuration,
         commaList,
+        subgroup,
         divisions,
         numberDivided,
         gain,
@@ -409,7 +432,7 @@ function updateAbsolutePitches(notess) {
 function parseElementContent(textEl, voices, now) {
     const attackTime = 0.01;
     const decayTime = 0.02;
-    const config = parseConfiguration(textEl.value, YA_TEMPERAMENTS);
+    const config = parseConfiguration(textEl.value, TEMPERAMENTS);
 
     let mapping = JI;
     if (config.divisions !== undefined) {

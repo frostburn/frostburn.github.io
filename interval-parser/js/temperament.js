@@ -53,6 +53,7 @@ function temper(commaList, justMapping, constraints, numIterations=1000, stepSiz
     return mapping
 }
 
+// TODO: Measure error using subgroup
 function minimax(mapping, justMapping) {
     /*
     Re-scale the mapping vector to minimize the maximum deviation from just intonation.
