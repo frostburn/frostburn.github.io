@@ -235,7 +235,7 @@ function parseHarmony(text, extraChords) {
     return result;
 }
 
-function parseConfiguration(text) {
+function parseConfiguration(text, temperaments) {
     let baseFrequency = 440;
     let measure = [4, 4];
     let tempo = [[1, 4], 120];
@@ -243,6 +243,7 @@ function parseConfiguration(text) {
     let commaList;
     let divisions;
     let numberDivided;
+    let gain = 1.0;
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
@@ -262,6 +263,11 @@ function parseConfiguration(text) {
             tokens.forEach(token => {
                 commaList.push(parseNumericExpression(token.trim()));
             });
+        } else if (line.startsWith("T:")) {
+            const temperament = line.split(":", 2)[1];
+            tokens = temperaments[temperament];
+            commaList = [];
+            tokens.forEach(token => commaList.push(parseNumericExpression(token)));
         } else if (line.startsWith("EDO:")) {
             // TODO: Warts
             divisions = parseInt(line.split(":", 2)[1]);
@@ -270,6 +276,8 @@ function parseConfiguration(text) {
             [divisionsToken, dividedToken] = line.split(":", 2)[1].split(",", 2);
             divisions = parseInt(divisionsToken);
             numberDivided = parseFraction(dividedToken);
+        } else if (line.startsWith("G:")){
+            gain = parseFraction(line.split(":", 2)[1]);
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
@@ -281,6 +289,7 @@ function parseConfiguration(text) {
         commaList,
         divisions,
         numberDivided,
+        gain,
         unparsed: unparsed.join("\n")
     };
 }
@@ -395,7 +404,7 @@ function updateAbsolutePitches(notess) {
 function parseElementContent(textEl, voices, context) {
     const attackTime = 0.01;
     const decayTime = 0.02;
-    const config = parseConfiguration(textEl.value);
+    const config = parseConfiguration(textEl.value, YA_TEMPERAMENTS);
 
     let mapping = JI;
     if (config.divisions !== undefined) {
@@ -431,8 +440,8 @@ function parseElementContent(textEl, voices, context) {
             const duration = notes[i].duration * config.beatDuration;
             voices[i].oscillator.frequency.setValueAtTime(frequency, time);
             voices[i].gain.gain.setValueAtTime(0.0, time);
-            voices[i].gain.gain.linearRampToValueAtTime(1.0, time + attackTime);
-            voices[i].gain.gain.setValueAtTime(1.0, time + duration - decayTime);
+            voices[i].gain.gain.linearRampToValueAtTime(config.gain, time + attackTime);
+            voices[i].gain.gain.setValueAtTime(config.gain, time + duration - decayTime);
             voices[i].gain.gain.linearRampToValueAtTime(0.0, time + duration);
         }
     });

@@ -6,22 +6,23 @@
   <button id="panic">Panic</button>
   <br>
   <br>
-  <textarea id="text0" rows="10" cols="100">
+  <textarea id="text0" rows="12" cols="100">
 $ Giant Steps by John Coltrane
 A:432      $ The vibes are real
-CL:128/125 $ Augmented temperament
+T:augmented
 Q:1/4=180
 M:2/2
+G:0.5
 -P5(M-) m3+(dom) | -P5(M-)   m3+(dom_2) | P4(M-_1)[2] | A4-(m7+_1) -P5(7_2) |
 -P5(M-) m3+(dom) | -P5(M-)   m3+(dom_2) | P4(M-)[2]   | A4-(m7+_1) -P5(7_2) |
 -P5(M-)[2]       | A4-(m7+) -P5(dom)    | P4(M-)[2]   | A4-(m7+)   -P5(7) |
 -P5(M-)[2]       | A4-(m7+) -P5(dom)    | P4(M-)[2]   | m7(m7+)    -P5(7) ||
 </textarea>
   <br>
-  <textarea id="text1" rows="10" cols="100">
+  <textarea id="text1" rows="12" cols="100">
 $ Melody
 A:432      $ There's no global config yet so the tuning has to be repeated
-CL:128/125
+T:augmented
 Q:1/4=180  $ Same goes for tempo
 M:8/8
 P8[4] -M3-[4] | -m3+[4] -M3-[3] m3+[9] | A1-[3] -M2[5] |
@@ -35,6 +36,7 @@ P4[9]         |  A1-[4] -M2[3]  P4[9]  | -M3-[3] P1[5] ||
 <script type="text/javascript" src="js/temperament.js"></script>
 <script type="text/javascript" src="js/chords.js"></script>
 <script type="text/javascript" src="js/ya_chords.js"></script>
+<script type="text/javascript" src="js/ya_temperaments.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script>
   window.onload = main;
