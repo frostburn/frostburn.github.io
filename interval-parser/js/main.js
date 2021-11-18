@@ -241,6 +241,8 @@ function parseConfiguration(text) {
     let tempo = [[1, 4], 120];
     let unparsed = [];
     let commaList;
+    let divisions;
+    let numberDivided;
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
@@ -260,12 +262,27 @@ function parseConfiguration(text) {
             tokens.forEach(token => {
                 commaList.push(parseNumericExpression(token.trim()));
             });
+        } else if (line.startsWith("EDO:")) {
+            // TODO: Warts
+            divisions = parseInt(line.split(":", 2)[1]);
+            numberDivided = 2;
+        } else if (line.startsWith("EDN:")) {
+            [divisionsToken, dividedToken] = line.split(":", 2)[1].split(",", 2);
+            divisions = parseInt(divisionsToken);
+            numberDivided = parseFraction(dividedToken);
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
     });
     beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) / measure[1];
-    return {baseFrequency, beatDuration, commaList, unparsed: unparsed.join("\n")};
+    return {
+        baseFrequency,
+        beatDuration,
+        commaList,
+        divisions,
+        numberDivided,
+        unparsed: unparsed.join("\n")
+    };
 }
 
 const LYDIAN = ["F", "C", "G", "D", "A", "E", "B"];
@@ -372,74 +389,88 @@ function updateAbsolutePitches(notess) {
         }
         tokens.push(token);
     });
-    el.textContent = tokens.join(" ");
+    el.textContent += tokens.join(" ") + "||";
+}
+
+function parseElementContent(textEl, voices, context) {
+    const attackTime = 0.01;
+    const decayTime = 0.02;
+    const config = parseConfiguration(textEl.value);
+
+    let mapping = JI;
+    if (config.divisions !== undefined) {
+        mapping = [];
+        generator = Math.log(config.numberDivided) / config.divisions;
+        JI.forEach(logPrime => mapping.push(generator*Math.round(logPrime/generator)));
+    } else if (config.commaList !== undefined) {
+        mapping = minimax(temper(config.commaList, JI), JI);
+    }
+
+    const notess = parseHarmony(config.unparsed, YA_CHORDS);
+    updateAbsolutePitches(notess);
+
+    const now = context.currentTime;
+
+    for (let i = 0; i < voices.length; ++i) {
+        voices[i].oscillator.frequency.cancelScheduledValues(now);
+        voices[i].gain.gain.cancelScheduledValues(now);
+        voices[i].gain.gain.setValueAtTime(0.0, now);
+    }
+
+    notess.forEach(notes => {
+        for (let i = 0; i < notes.length; ++i) {
+            if (i > voices.length) {
+                continue;
+            }
+            let logRatio = 0;
+            for (let j = 0; j < notes[i].pitch.length; ++j) {
+                logRatio += mapping[j]*notes[i].pitch[j];
+            }
+            const frequency = config.baseFrequency * Math.exp(logRatio);
+            const time = notes[i].time * config.beatDuration + now;
+            const duration = notes[i].duration * config.beatDuration;
+            voices[i].oscillator.frequency.setValueAtTime(frequency, time);
+            voices[i].gain.gain.setValueAtTime(0.0, time);
+            voices[i].gain.gain.linearRampToValueAtTime(1.0, time + attackTime);
+            voices[i].gain.gain.setValueAtTime(1.0, time + duration - decayTime);
+            voices[i].gain.gain.linearRampToValueAtTime(0.0, time + duration);
+        }
+    });
 }
 
 function main() {
     const context = new AudioContext({latencyHint: "interactive"});
     context.suspend();
-    const attackTime = 0.01;
-    const decayTime = 0.02;
 
     const globalGain = context.createGain();
     globalGain.connect(context.destination);
     globalGain.gain.setValueAtTime(0.199, context.currentTime);
 
-    const voices = [];
-    for (let i = 0; i < 8; ++i) {
-        const oscillator = context.createOscillator();
-        oscillator.type = "triangle";
-        const gain = context.createGain();
-        gain.gain.setValueAtTime(0.0, context.currentTime);
-        oscillator.connect(gain).connect(globalGain);
-        oscillator.frequency.setValueAtTime(200+100*i, context.currentTime);
-        oscillator.start();
-        voices.push({oscillator, gain});
+    const voicess = [];
+    for (let j = 0; j < 2; ++j) {
+        const voices = [];
+        for (let i = 0; i < 8; ++i) {
+            const oscillator = context.createOscillator();
+            oscillator.type = "triangle";
+            const gain = context.createGain();
+            gain.gain.setValueAtTime(0.0, context.currentTime);
+            oscillator.connect(gain).connect(globalGain);
+            oscillator.start();
+            voices.push({oscillator, gain});
+        }
+        voicess.push(voices);
     }
 
     const playEl = document.getElementById('play');
     const panicEl = document.getElementById('panic');
-    const textEl = document.getElementById('text');
+    const textEls = [document.getElementById('text0'), document.getElementById('text1')];
+    const absoluteEl = document.getElementById('absolute');
 
     playEl.onclick = e => {
-        const config = parseConfiguration(textEl.value);
-
-        let mapping = JI;
-        if (config.commaList !== undefined) {
-            mapping = minimax(temper(config.commaList, JI), JI);
+        absoluteEl.textContent = "";
+        for (let i = 0; i < 2; ++i) {
+            parseElementContent(textEls[i], voicess[i], context);
         }
-
-        const notess = parseHarmony(config.unparsed, YA_CHORDS);
-        updateAbsolutePitches(notess);
-
-        const now = context.currentTime;
-
-        for (let i = 0; i < voices.length; ++i) {
-            voices[i].oscillator.frequency.cancelScheduledValues(now);
-            voices[i].gain.gain.cancelScheduledValues(now);
-            voices[i].gain.gain.setValueAtTime(0.0, now);
-        }
-
-        notess.forEach(notes => {
-            for (let i = 0; i < notes.length; ++i) {
-                if (i > voices.length) {
-                    continue;
-                }
-                let logRatio = 0;
-                for (let j = 0; j < notes[i].pitch.length; ++j) {
-                    logRatio += mapping[j]*notes[i].pitch[j];
-                }
-                const frequency = config.baseFrequency * Math.exp(logRatio);
-                const time = notes[i].time * config.beatDuration + now;
-                const duration = notes[i].duration * config.beatDuration;
-                voices[i].oscillator.frequency.setValueAtTime(frequency, time);
-                voices[i].gain.gain.setValueAtTime(0.0, time);
-                voices[i].gain.gain.linearRampToValueAtTime(1.0, time + attackTime);
-                voices[i].gain.gain.setValueAtTime(1.0, time + duration - decayTime);
-                voices[i].gain.gain.linearRampToValueAtTime(0.0, time + duration);
-            }
-        });
-
         context.resume();
     }
 
