@@ -240,6 +240,7 @@ function parseConfiguration(text) {
     let measure = [4, 4];
     let tempo = [[1, 4], 120];
     let unparsed = [];
+    let commaList;
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
         if (line.startsWith("A:")) {
@@ -253,12 +254,18 @@ function parseConfiguration(text) {
             [beat, value] = line.split(":", 2)[1].split("=", 2);
             [numerator, denominator] = beat.split("/", 2);
             tempo = [[parseInt(numerator), parseInt(denominator)], parseInt(value)];
+        } else if (line.startsWith("CL:")) {
+            tokens = line.split(":", 2)[1].split(",");
+            commaList = [];
+            tokens.forEach(token => {
+                commaList.push(parseNumericExpression(token.trim()));
+            });
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
     });
     beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) / measure[1];
-    return {baseFrequency, beatDuration, unparsed: unparsed.join("\n")};
+    return {baseFrequency, beatDuration, commaList, unparsed: unparsed.join("\n")};
 }
 
 const LYDIAN = ["F", "C", "G", "D", "A", "E", "B"];
@@ -345,6 +352,7 @@ function tokenizeNotation(notation) {
     return notation.letter + notation.octaves + accidental + arrows;
 }
 
+// TODO: Use the same symbol for comma-equal pitch-classes
 function updateAbsolutePitches(notess) {
     const el = document.getElementById('absolute');
     tokens = [];
@@ -393,10 +401,14 @@ function main() {
     const panicEl = document.getElementById('panic');
     const textEl = document.getElementById('text');
 
-    const mapping = JI;
-
     playEl.onclick = e => {
         const config = parseConfiguration(textEl.value);
+
+        let mapping = JI;
+        if (config.commaList !== undefined) {
+            mapping = minimax(temper(config.commaList, JI), JI);
+        }
+
         const notess = parseHarmony(config.unparsed, YA_CHORDS);
         updateAbsolutePitches(notess);
 
