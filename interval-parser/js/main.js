@@ -205,7 +205,14 @@ function parseHarmony(text, extraChords) {
             if (chordToken == "U") {
                 chord.push(parseInterval("P1"));
             } else {
-                let chordTones = chordToken.split(",");
+                let chordTones;
+                if (chordToken.includes(":")) {
+                    chordTones = chordToken.split(":");
+                } else if (chordToken.includes(";")) {
+                    chordTones = chordToken.split(";");
+                } else {
+                    chordTones = chordToken.split(",");
+                }
                 if (chordTones.length <= 1) {
                     if (chordToken in extraChords) {
                         chordTones = extraChords[chordToken];
@@ -216,6 +223,24 @@ function parseHarmony(text, extraChords) {
                 chordTones.forEach(chordTone => {
                     chord.push(parseInterval(chordTone));
                 });
+                // Otonal chords
+                if (chordToken.includes(":")) {
+                    const root = parseInterval(chordTones[0]);
+                    chord.forEach(chordPitch => {
+                        for (let i = 0; i < root.length; ++i) {
+                            chordPitch[i] -= root[i];
+                        }
+                    });
+                }
+                // Utonal chords
+                if (chordToken.includes(";")) {
+                    const root = parseInterval(chordTones[0]);
+                    chord.forEach(chordPitch => {
+                        for (let i = 0; i < root.length; ++i) {
+                            chordPitch[i] = root[i] - chordPitch[i];
+                        }
+                    });
+                }
             }
             const inversion = parseInt(inversionToken);
             for (let i = 0; i < inversion; ++i) {
@@ -476,7 +501,7 @@ function parseElementContent(textEl, voices, now) {
 
     notess.forEach(notes => {
         for (let i = 0; i < notes.length; ++i) {
-            if (i > voices.length) {
+            if (i >= voices.length) {
                 continue;
             }
             let logRatio = 0;
@@ -497,6 +522,7 @@ function parseElementContent(textEl, voices, now) {
 }
 
 function main() {
+    const max_polyphony = 12;
     const context = new AudioContext();
     context.suspend();
 
@@ -507,7 +533,7 @@ function main() {
     const voicess = [];
     for (let j = 0; j < 2; ++j) {
         const voices = [];
-        for (let i = 0; i < 8; ++i) {
+        for (let i = 0; i < max_polyphony; ++i) {
             const oscillator = context.createOscillator();
             oscillator.type = "triangle";
             const gain = context.createGain();
