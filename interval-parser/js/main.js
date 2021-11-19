@@ -363,6 +363,92 @@ function parseConfiguration(text, temperaments) {
     };
 }
 
+const PYTHAGOREAN_QUALITIES = ["m", "m", "m", "m", "P", "P", "P", "M", "M", "M", "M"];
+const PYTHAGOREAN_INDEX_P1 = 5;
+
+function notateInterval(interval) {
+    let twos = interval[0] || 0;
+    let threes = interval[1] || 0;
+    let fives = interval[2] || 0;
+    const sevens = interval[3] || 0;
+    const elevens = interval[4] || 0;
+    let thirteens = interval[5] || 0;
+    const seventeens = interval[6] || 0;
+    const nineteens = interval[7] || 0;
+    const twentythrees = interval[8] || 0;
+    const twentynines = interval[9] || 0;
+
+    let islands = 0;
+    if (thirteens > 0 && fives < 0) {
+        islands = Math.min(thirteens, -fives);
+    }
+    if (thirteens < 0 && fives > 0) {
+        islands = Math.max(thirteens, -fives);
+    }
+    thirteens -= islands;
+    fives += islands;
+
+    twos += -4*fives + 6*sevens + 5*elevens -thirteens + 12*seventeens + 9*nineteens -5*twentythrees + 8*twentynines - 5*islands;
+    threes += 4*fives - 2*sevens - elevens + 3*thirteens - 5*seventeens - 3*nineteens + 6*twentythrees - 2*twentynines + 4*islands;
+
+    let index = threes + PYTHAGOREAN_INDEX_P1;
+    let quality;
+    if (index >= 0 && index < PYTHAGOREAN_QUALITIES.length) {
+        quality = PYTHAGOREAN_QUALITIES[index];
+    } else if (index < 0) {
+        quality = "";
+        while (index < 0) {
+            quality += "d";
+            index += 7;
+        }
+    } else {
+        index -= PYTHAGOREAN_QUALITIES.length;
+        quality = "";
+        while (index > 0) {
+            quality += "A";
+            index -= 7
+        }
+    }
+    let value = 7*twos + 11*threes;
+    let sign = "";
+    if (value < 0) {
+        sign = "-";
+    }
+    value = Math.abs(value) + 1;
+
+    return {
+        sign,
+        quality,
+        value,
+        "+-": -fives,
+        "><": -sevens,
+        "^v": elevens,
+        "*%": -thirteens,
+        "ud": seventeens,
+        "UD": nineteens,
+        "AV": twentythrees,
+        "MW": twentynines,
+        "i!": islands,
+    }
+}
+
+function tokenizeIntervalNotation(notation) {
+    let arrows = "";
+    UPDOWNS.forEach(updown => {
+        const amount = notation[updown];
+        if (amount > 0) {
+            arrows += updown[0];
+        } else if (amount < 0) {
+            arrows += updown[1];
+        }
+        if (Math.abs(amount) > 1) {
+            arrows += Math.abs(amount);
+        }
+    });
+
+    return notation.sign + notation.quality + notation.value + arrows;
+}
+
 const LYDIAN = ["F", "C", "G", "D", "A", "E", "B"];
 const LYDIAN_INDEX_A = LYDIAN.indexOf("A");
 const REFERENCE_OCTAVE = 4;

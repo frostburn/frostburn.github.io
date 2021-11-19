@@ -44,6 +44,7 @@ const YAZA_TEMPERAMENTS = {
 
 const YAZALA = "2.3.5.7.11";
 const YAZALA_TEMPERAMENTS = {
+    "rastmic": ["243/242"],
     "unimarv": ["225/224", "385/384"],
 };
 
@@ -55,7 +56,6 @@ const ISLAND_TEMPERAMENTS = {
 };
 
 const TEMPERAMENTS = {
-    "rastmic": [["243/242"], "2.3.5.7.11"],
     "neutral": [["243/242"], "2.3.11"],
     "orgone": [["65536/65219"], "2.7.11"],
     "negra": [["49/48", "65/64", "91/90"], "2.3.5.7.13"],
