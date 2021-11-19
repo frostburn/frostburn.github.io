@@ -297,7 +297,7 @@ function parseConfiguration(text, temperaments) {
         } else if (line.startsWith("SG:")) {
             tokens = line.split(":", 2)[1].split(".");
             subgroup = [];
-            tokens.forEach(token => {c
+            tokens.forEach(token => {
                 subgroup.push(parseNumericExpression(token.trim()));
             });
         } else if (line.startsWith("T:")) {
