@@ -446,8 +446,10 @@ function updateAbsolutePitches(notess) {
 }
 
 function parseElementContent(textEl, voices, now) {
+    const glideTime = 0.01;
     const attackTime = 0.01;
     const decayTime = 0.02;
+    const silence = 1e-6;
     const text = expandRepeats(textEl.value);
     const config = parseConfiguration(text, TEMPERAMENTS);
 
@@ -463,7 +465,7 @@ function parseElementContent(textEl, voices, now) {
         }
     }
 
-    const notess = parseHarmony(config.unparsed, YA_CHORDS);
+    const notess = parseHarmony(config.unparsed, EXTRA_CHORDS);
     updateAbsolutePitches(notess);
 
     for (let i = 0; i < voices.length; ++i) {
@@ -484,17 +486,18 @@ function parseElementContent(textEl, voices, now) {
             const frequency = config.baseFrequency * Math.exp(logRatio);
             const time = notes[i].time * config.beatDuration + now;
             const duration = notes[i].duration * config.beatDuration;
-            voices[i].oscillator.frequency.setValueAtTime(frequency, time);
-            voices[i].gain.gain.setValueAtTime(0.0, time);
-            voices[i].gain.gain.linearRampToValueAtTime(config.gain, time + attackTime);
+            voices[i].oscillator.frequency.exponentialRampToValueAtTime(frequency, time);
+            voices[i].oscillator.frequency.setValueAtTime(frequency, time + duration - glideTime);
+            voices[i].gain.gain.setValueAtTime(silence, time);
+            voices[i].gain.gain.exponentialRampToValueAtTime(config.gain, time + attackTime);
             voices[i].gain.gain.setValueAtTime(config.gain, time + duration - decayTime);
-            voices[i].gain.gain.linearRampToValueAtTime(0.0, time + duration);
+            voices[i].gain.gain.exponentialRampToValueAtTime(silence, time + duration);
         }
     });
 }
 
 function main() {
-    const context = new AudioContext({latencyHint: "interactive"});
+    const context = new AudioContext();
     context.suspend();
 
     const globalGain = context.createGain();
