@@ -343,7 +343,7 @@ function parseHarmony(text, extraChords, generator) {
 
 function expandRepeats(text) {
     while (1) {
-        let start = text.indexOf("|:");
+        let start = text.lastIndexOf("|:");
         if (start < 0) {
             break;
         }
@@ -352,7 +352,20 @@ function expandRepeats(text) {
             end = text.length;
         }
         const repeatedSection = text.slice(start+2, end);
-        text = text.slice(0, start) + "|" + repeatedSection + "|" + repeatedSection + "|" + text.slice(end+2);
+        let numRepeats;
+        let endSection;
+        if (isDigit(text[end+2])) {
+            endSection = text.slice(end + 3);
+            numRepeats = parseInt(text[end+2]);
+        } else {
+            endSection = text.slice(end + 2);
+            numRepeats = 2;
+        }
+        let expanded = "";
+        for (let i = 0; i < numRepeats; ++i) {
+            expanded += "|" + repeatedSection;
+        }
+        text = text.slice(0, start) + "|" + expanded + "|" + endSection;
     }
     return text;
 }
