@@ -90,6 +90,20 @@ function parseNumericExpression(token) {
     return pitch;
 }
 
+function pitchToFraction(pitch) {
+    let numerator = 1;
+    let denominator = 1;
+    for (let i = 0; i < PRIMES.length; ++i) {
+        const coord = pitch[i] || 0;
+        if (coord > 0) {
+            numerator *= Math.pow(PRIMES[i], coord);
+        } else {
+            denominator *= Math.pow(PRIMES[i], -coord);
+        }
+    }
+    return [numerator, denominator];
+}
+
 const BASIC_INTERVALS = {
     "d2": [19, -12],
     "d6": [18, -11],
@@ -404,7 +418,7 @@ function notateInterval(interval) {
     } else {
         index -= PYTHAGOREAN_QUALITIES.length;
         quality = "";
-        while (index > 0) {
+        while (index >= 0) {
             quality += "A";
             index -= 7
         }
