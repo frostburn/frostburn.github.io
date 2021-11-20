@@ -137,7 +137,7 @@ const BASIC_INTERVALS = {
     "A7": [-18, 12],
 };
 
-function parseInterval(token) {
+function parseInterval(token, generator) {
     let direction = 1;
     if (token[0] == "-") {
         direction = -1;
@@ -148,15 +148,24 @@ function parseInterval(token) {
     }
     const result = Array(JI.length + EXTRA_COORDS).fill(0);
     if (token.endsWith("c")) {
-        result[CENTS_INDEX] = parseFraction(token.slice(0, -1))*direction;
+        result[CENTS_INDEX] = parseFraction(token.slice(0, -1))*direction*CENTS_MAPPING;
         return result;
     } else if (token.endsWith("Hz")) {
         result[HZ_INDEX] = parseFraction(token.slice(0, -2))*direction;
         return result;
     } else if (isDigit(token[0])) {
-        const pitch = parseNumericExpression(token);
-        for (let i = 0; i < pitch.length; ++i) {
-            result[i] = pitch[i]*direction;
+        if (token.includes("\\")) {
+            [steps, divisionsOfTwo] = token.split("\\", 2);
+            if (divisionsOfTwo === undefined || divisionsOfTwo == "") {
+                result[CENTS_INDEX] = parseFloat(steps)*generator*direction;
+            } else {
+                result[CENTS_INDEX] = direction*parseFloat(steps)*Math.log(2)/parseFloat(divisionsOfTwo);
+            }
+        } else {
+            const pitch = parseNumericExpression(token);
+            for (let i = 0; i < pitch.length; ++i) {
+                result[i] = pitch[i]*direction;
+            }
         }
         return result;
     }
@@ -198,7 +207,7 @@ function parseInterval(token) {
     return result;
 }
 
-function parseHarmony(text, extraChords) {
+function parseHarmony(text, extraChords, generator) {
     const result = [];
     const pitch = Array(JI.length + EXTRA_COORDS).fill(0);
     let time = 0;
@@ -246,7 +255,7 @@ function parseHarmony(text, extraChords) {
         if (intervalToken != "Z") {
             const interval = Array(JI.length + EXTRA_COORDS).fill(0);
             intervalToken.split("&").forEach(subTone => {
-                accumulate(interval, parseInterval(subTone));
+                accumulate(interval, parseInterval(subTone, generator));
             });
             const chord = [];
             if (chordToken == "U") {
@@ -270,13 +279,13 @@ function parseHarmony(text, extraChords) {
                 chordTones.forEach(chordTone => {
                     const chordPitch = Array(JI.length + EXTRA_COORDS).fill(0);
                     chordTone.split("&").forEach(subTone => {
-                        accumulate(chordPitch, parseInterval(subTone));
+                        accumulate(chordPitch, parseInterval(subTone, generator));
                     });
                     chord.push(chordPitch);
                 });
                 // Otonal chords
                 if (chordToken.includes(":")) {
-                    const root = parseInterval(chordTones[0]);
+                    const root = parseInterval(chordTones[0], generator);
                     chord.forEach(chordPitch => {
                         for (let i = 0; i < root.length; ++i) {
                             chordPitch[i] -= root[i];
@@ -285,7 +294,7 @@ function parseHarmony(text, extraChords) {
                 }
                 // Utonal chords
                 if (chordToken.includes(";")) {
-                    const root = parseInterval(chordTones[0]);
+                    const root = parseInterval(chordTones[0], generator);
                     chord.forEach(chordPitch => {
                         for (let i = 0; i < root.length; ++i) {
                             chordPitch[i] = root[i] - chordPitch[i];
@@ -359,6 +368,7 @@ function parseConfiguration(text, temperaments) {
     let gain = 1.0;
     let constraints;
     let subgroup = JI_SUBGROUP;
+    let mapEDN = true;
 
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
@@ -393,7 +403,6 @@ function parseConfiguration(text, temperaments) {
             tokens.forEach(token => commaList.push(parseNumericExpression(token)));
             subgroupToken.split(".").forEach(token => subgroup.push(parseNumericExpression(token)));
         } else if (line.startsWith("EDO:")) {
-            // TODO: Warts
             divisions = parseInt(line.split(":", 2)[1]);
             numberDivided = 2;
         } else if (line.startsWith("EDN:")) {
@@ -405,6 +414,11 @@ function parseConfiguration(text, temperaments) {
         } else if (line.startsWith("C:")){
             constraints = [];
             line.split(":", 2)[1].split(",").forEach(token => constraints.push(parseInterval(token)));
+        } else if (line.startsWith("F:")) {
+            const flags = line.split(":", 2)[1].split(",");
+            if (flags.includes("unmapEDN")) {
+                mapEDN = false;
+            }
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
@@ -419,6 +433,7 @@ function parseConfiguration(text, temperaments) {
         numberDivided,
         gain,
         constraints,
+        mapEDN,
         unparsed: unparsed.join("\n")
     };
 }
@@ -627,9 +642,12 @@ function parseElementContent(textEl, voices, now) {
     const config = parseConfiguration(text, TEMPERAMENTS);
 
     let mapping = [...JI];
+    let generator = Math.log(2) / 12;
     if (config.divisions !== undefined) {
-        mapping = [];
         generator = Math.log(config.numberDivided) / config.divisions;
+    }
+    if (config.divisions !== undefined && config.mapEDN) {
+        mapping = [];
         JI.forEach(logPrime => mapping.push(generator*Math.round(logPrime/generator)));
     } else if (config.commaList !== undefined) {
         mapping = temper(config.commaList, JI, config.constraints);
@@ -637,10 +655,10 @@ function parseElementContent(textEl, voices, now) {
             mapping = minimax(mapping, JI);
         }
     }
-    mapping.push(CENTS_MAPPING);
+    mapping.push(1);  // Cents are already mapped when parsed
     mapping.push(HZ_MAPPING);
 
-    const notess = parseHarmony(config.unparsed, EXTRA_CHORDS);
+    const notess = parseHarmony(config.unparsed, EXTRA_CHORDS, generator);
     updateAbsolutePitches(notess);
 
     for (let i = 0; i < voices.length; ++i) {
