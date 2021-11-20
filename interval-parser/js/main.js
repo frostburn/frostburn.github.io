@@ -58,12 +58,17 @@ for (let i = 0; i < JI.length; ++i) {
     }
     JI_SUBGROUP.push(vector);
 }
+const CENTS_MAPPING = Math.log(2) / 1200;
+const HZ_MAPPING = 0;  // Hz offset requires special treatment. Mapped to nothing to reduce interference.
+const CENTS_INDEX = JI.length;
+const HZ_INDEX = CENTS_INDEX + 1;
+const EXTRA_COORDS = 2;
 
 function toVector(num) {
     if (num < 1) {
         throw "Non-vectorizable number";
     }
-    const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const result = Array(JI.length).fill(0);
     for (let i = 0; i < result.length; ++i) {
         const p = PRIMES[i];
         while (num % p == 0) {
@@ -133,12 +138,30 @@ const BASIC_INTERVALS = {
 };
 
 function parseInterval(token) {
-    if (isDigit(token[0])) {
-        return parseNumericExpression(token);
+    let direction = 1;
+    if (token[0] == "-") {
+        direction = -1;
+        token = token.slice(1);
+    }
+    if (token[0] == "+") {
+        token = token.slice(1);
+    }
+    const result = Array(JI.length + EXTRA_COORDS).fill(0);
+    if (token.endsWith("c")) {
+        result[CENTS_INDEX] = parseFraction(token.slice(0, -1))*direction;
+        return result;
+    } else if (token.endsWith("Hz")) {
+        result[HZ_INDEX] = parseFraction(token.slice(0, -2))*direction;
+        return result;
+    } else if (isDigit(token[0])) {
+        const pitch = parseNumericExpression(token);
+        for (let i = 0; i < pitch.length; ++i) {
+            result[i] = pitch[i]*direction;
+        }
+        return result;
     }
     const quality = token[0];
     token = token.slice(1);
-    const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     UPDOWNS.forEach(updown => {
         let arrows = 0;
         if (token.includes(updown[0])) {
@@ -167,12 +190,17 @@ function parseInterval(token) {
     const baseVector = BASIC_INTERVALS[baseLookUp];
     result[0] += octave + baseVector[0];
     result[1] += baseVector[1];
+    if (direction < 0) {
+        for (let i = 0; i < result.length; ++i) {
+            result[i] *= direction;
+        }
+    }
     return result;
 }
 
 function parseHarmony(text, extraChords) {
     const result = [];
-    const pitch = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const pitch = Array(JI.length + EXTRA_COORDS).fill(0);
     let time = 0;
 
     text.split(/\s+/).forEach(token => {
@@ -216,15 +244,10 @@ function parseHarmony(text, extraChords) {
         const duration = parseFraction(durationToken);
 
         if (intervalToken != "Z") {
-            let direction = 1;
-            if (intervalToken[0] == "-") {
-                direction = -1;
-                intervalToken = intervalToken.slice(1);
-            }
-            if (intervalToken[0] == "+") {
-                intervalToken = intervalToken.slice(1);
-            }
-            const interval = parseInterval(intervalToken);
+            const interval = Array(JI.length + EXTRA_COORDS).fill(0);
+            intervalToken.split("&").forEach(subTone => {
+                accumulate(interval, parseInterval(subTone));
+            });
             const chord = [];
             if (chordToken == "U") {
                 chord.push(parseInterval("P1"));
@@ -245,7 +268,11 @@ function parseHarmony(text, extraChords) {
                     }
                 }
                 chordTones.forEach(chordTone => {
-                    chord.push(parseInterval(chordTone));
+                    const chordPitch = Array(JI.length + EXTRA_COORDS).fill(0);
+                    chordTone.split("&").forEach(subTone => {
+                        accumulate(chordPitch, parseInterval(subTone));
+                    });
+                    chord.push(chordPitch);
                 });
                 // Otonal chords
                 if (chordToken.includes(":")) {
@@ -277,9 +304,9 @@ function parseHarmony(text, extraChords) {
             }
             for (let i = 0; i < pitch.length; ++i) {
                 if (absolute) {
-                    pitch[i] = interval[i]*direction;
+                    pitch[i] = interval[i];
                 } else {
-                    pitch[i] += interval[i]*direction;
+                    pitch[i] += interval[i];
                 }
             }
             if (duration > 0) {
@@ -295,7 +322,7 @@ function parseHarmony(text, extraChords) {
             }
             if (floaty) {
                 for (let i = 0; i < pitch.length; ++i) {
-                    pitch[i] -= interval[i]*direction;
+                    pitch[i] -= interval[i];
                 }
             }
         }
@@ -399,6 +426,7 @@ function parseConfiguration(text, temperaments) {
 const PYTHAGOREAN_QUALITIES = ["m", "m", "m", "m", "P", "P", "P", "M", "M", "M", "M"];
 const PYTHAGOREAN_INDEX_P1 = 5;
 
+// TODO: Notate cents & Hz
 function notateInterval(interval) {
     let twos = interval[0] || 0;
     let threes = interval[1] || 0;
@@ -487,6 +515,7 @@ const LYDIAN_INDEX_A = LYDIAN.indexOf("A");
 const REFERENCE_OCTAVE = 4;
 const INDEX_A_12EDO = 9;
 
+// TODO: Notate cents & Hz
 function notate(pitch) {
     const twos = pitch[0] || 0;
     const threes = pitch[1] || 0;
@@ -597,7 +626,7 @@ function parseElementContent(textEl, voices, now) {
     const text = expandRepeats(textEl.value);
     const config = parseConfiguration(text, TEMPERAMENTS);
 
-    let mapping = JI;
+    let mapping = [...JI];
     if (config.divisions !== undefined) {
         mapping = [];
         generator = Math.log(config.numberDivided) / config.divisions;
@@ -608,6 +637,8 @@ function parseElementContent(textEl, voices, now) {
             mapping = minimax(mapping, JI);
         }
     }
+    mapping.push(CENTS_MAPPING);
+    mapping.push(HZ_MAPPING);
 
     const notess = parseHarmony(config.unparsed, EXTRA_CHORDS);
     updateAbsolutePitches(notess);
@@ -627,7 +658,7 @@ function parseElementContent(textEl, voices, now) {
             for (let j = 0; j < notes[i].pitch.length; ++j) {
                 logRatio += mapping[j]*notes[i].pitch[j];
             }
-            const frequency = config.baseFrequency * Math.exp(logRatio);
+            const frequency = config.baseFrequency * Math.exp(logRatio) + notes[i].pitch[HZ_INDEX];
             const time = notes[i].time * config.beatDuration + now;
             const duration = notes[i].duration * config.beatDuration;
             voices[i].oscillator.frequency.exponentialRampToValueAtTime(frequency, time);

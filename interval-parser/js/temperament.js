@@ -12,6 +12,20 @@ function dot(vectorA, vectorB) {
     return result;
 }
 
+function add(vectorA, vectorB) {
+    const result = [...vectorA];
+    for (let i = 0; i < vectorA.length; ++i) {
+        result[i] += vectorB[i];
+    }
+    return result;
+}
+
+function accumulate(vectorA, vectorB) {
+    for (let i = 0; i < vectorA.length; ++i) {
+        vectorA[i] += vectorB[i];
+    }
+}
+
 function temper(commaList, justMapping, constraints, numIterations=1000, stepSize=0.1) {
     /*
     Temper out a given list of commas.
