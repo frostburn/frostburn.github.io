@@ -26,6 +26,22 @@ function accumulate(vectorA, vectorB) {
     }
 }
 
+function subtract(vectorA, vectorB) {
+    const result = [...vectorA];
+    for (let i = 0; i < vectorA.length; ++i) {
+        result[i] -= vectorB[i];
+    }
+    return result;
+}
+
+function scalarMultiply(vector, scalar) {
+    const result = [...vector];
+    for (let i = 0; i < vector.length; ++i) {
+        result[i] *= scalar;
+    }
+    return result;
+}
+
 function temper(commaList, justMapping, constraints, numIterations=1000, stepSize=0.1) {
     /*
     Temper out a given list of commas.
@@ -90,4 +106,69 @@ function minimax(mapping, justMapping) {
     const result = [];
     mapping.forEach(coord => result.push(coord*bestRescale));
     return result;
+}
+
+function isLessComplex(pitchA, pitchB) {
+    for (let i = pitchA.length - 1; i >= 0; i--) {
+        if (Math.abs(pitchA[i]) < Math.abs(pitchB[i])) {
+            return true;
+        }
+        if (Math.abs(pitchA[i]) > Math.abs(pitchB[i])) {
+            return false;
+        }
+    }
+    // All components equal in magnitude.
+    for (let i = pitchA.length - 1; i >= 0; i--) {
+        if (pitchA[i] > 0 && pitchB[i] < 0) {
+            return true;
+        }
+        if (pitchA[i] < 0 && pitchB[i] > 0) {
+            return false;
+        }
+    }
+    return false;
+}
+
+function commaReduce(pitch, commaList, persistence=3) {
+    /*
+    Reduce the dimensionality of the pitch vector as much as possible by adding commas from the list
+    */
+    // Random walk towards "zero"
+    let current = pitch;
+    let didAdvance = true;
+    while (didAdvance) {
+        didAdvance = false;
+        commaList.forEach(comma => {
+            let candidate = add(current, comma);
+            if (isLessComplex(candidate, current)) {
+                current = candidate;
+                didAdvance = true;
+            }
+            candidate = subtract(current, comma);
+            if (isLessComplex(candidate, current)) {
+                current = candidate;
+                didAdvance = true;
+            }
+        });
+    }
+    let best = current;
+    function combine(coefs) {
+        if (coefs.length == commaList.length) {
+            const candidate = [...current];
+            for (let i = 0; i < coefs.length; ++i) {
+                accumulate(candidate, scalarMultiply(commaList[i], coefs[i]));
+            }
+            if (isLessComplex(candidate, best)) {
+                best = candidate;
+            }
+            return;
+        }
+        for (let i = -persistence; i < persistence+1; ++i) {
+            const newCoefs = [...coefs];
+            newCoefs.push(i);
+            combine(newCoefs);
+        }
+    }
+    combine([]);
+    return best;
 }

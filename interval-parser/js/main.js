@@ -382,6 +382,7 @@ function parseConfiguration(text, temperaments) {
     let constraints;
     let subgroup = JI_SUBGROUP;
     let mapEDN = true;
+    let doCommaReduction = false;
     let waveform = "triangle";
 
     text.split("\n").forEach(line => {
@@ -410,7 +411,7 @@ function parseConfiguration(text, temperaments) {
                 subgroup.push(parseNumericExpression(token.trim()));
             });
         } else if (line.startsWith("T:")) {
-            const temperament = line.split(":", 2)[1];
+            const temperament = line.split(":", 2)[1].trim();
             [tokens, subgroupToken] = temperaments[temperament];
             commaList = [];
             subgroup = [];
@@ -427,11 +428,14 @@ function parseConfiguration(text, temperaments) {
             gain = parseFraction(line.split(":", 2)[1]);
         } else if (line.startsWith("C:")){
             constraints = [];
-            line.split(":", 2)[1].split(",").forEach(token => constraints.push(parseInterval(token)));
+            line.split(":", 2)[1].split(",").forEach(token => constraints.push(parseInterval(token.trim())));
         } else if (line.startsWith("F:")) {
-            const flags = line.split(":", 2)[1].split(",");
+            const flags = line.split(":", 2)[1].split(",").map(f => f.trim());
             if (flags.includes("unmapEDN")) {
                 mapEDN = false;
+            }
+            if (flags.includes("CR")) {
+                doCommaReduction = true;
             }
         } else if (line.startsWith("WF:")) {
             waveform = line.split(":", 2)[1].trim();
@@ -451,6 +455,7 @@ function parseConfiguration(text, temperaments) {
         gain,
         constraints,
         mapEDN,
+        doCommaReduction,
         unparsed: unparsed.join("\n")
     };
 }
@@ -627,18 +632,25 @@ function tokenizeNotation(notation) {
     return notation.letter + notation.octaves + accidental + arrows;
 }
 
-// TODO: Use the same symbol for comma-equal pitch-classes
-function updateAbsolutePitches(notess) {
+function updateAbsolutePitches(notess, commaList) {
     const el = document.getElementById('absolute');
     tokens = [];
     notess.forEach(notes => {
         let token;
         if (notes.length == 1) {
-            token = tokenizeNotation(notate(notes[0].pitch));
+            let pitch = notes[0].pitch;
+            if (commaList !== undefined) {
+                pitch = commaReduce(pitch, commaList);
+            }
+            token = tokenizeNotation(notate(pitch));
         } else {
             subtokens = [];
             notes.forEach(note => {
-                subtokens.push(tokenizeNotation(notate(note.pitch)));
+                let pitch = note.pitch;
+                if (commaList !== undefined) {
+                    pitch = commaReduce(pitch, commaList);
+                }
+                subtokens.push(tokenizeNotation(notate(pitch)));
             });
             token = "(" + subtokens.join(",") + ")";
         }
@@ -687,7 +699,11 @@ function parseElementContent(textEl, voices, now) {
     mapping.push(HZ_MAPPING);
 
     const notess = parseHarmony(config.unparsed, EXTRA_CHORDS, generator);
-    updateAbsolutePitches(notess);
+    if (config.doCommaReduction) {
+        updateAbsolutePitches(notess, config.commaList);
+    } else {
+        updateAbsolutePitches(notess);
+    }
 
     for (let i = 0; i < voices.length; ++i) {
         voices[i].oscillator.frequency.cancelScheduledValues(now);

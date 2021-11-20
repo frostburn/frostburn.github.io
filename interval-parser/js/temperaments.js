@@ -29,6 +29,13 @@ const YA_TEMPERAMENTS = {
     // Bonus
     "vishnu": ["6115295232/6103515625"],
     "luna": ["274877906944/274658203125"],
+
+    // Equal temperament meets
+    // TODO: All up to at least 31
+    "12tet": ["81/80", "128/125"],  // meantone | augmented
+    "19tet": ["81/80", "3125/3072"],  // meantone | magic
+    "22tet": ["250/243", "2028/2025"],  // porcupine | diaschismic
+    "31tet": ["81/80", "393216/390625"],  // meantone | würschmidt
 };
 
 const ZA = "2.3.7";
