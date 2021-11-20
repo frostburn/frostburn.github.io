@@ -203,6 +203,16 @@ function parseHarmony(text, extraChords) {
             }
         }
 
+        let floaty = false;
+        let absolute = false;
+        if (intervalToken[0] == "~") {
+            floaty = true;
+            intervalToken = intervalToken.slice(1);
+        } else if (intervalToken[0] == "@") {
+            absolute = true;
+            intervalToken = intervalToken.slice(1);
+        }
+
         const duration = parseFraction(durationToken);
 
         if (intervalToken != "Z") {
@@ -266,7 +276,11 @@ function parseHarmony(text, extraChords) {
                 }
             }
             for (let i = 0; i < pitch.length; ++i) {
-                pitch[i] += interval[i]*direction;
+                if (absolute) {
+                    pitch[i] = interval[i]*direction;
+                } else {
+                    pitch[i] += interval[i]*direction;
+                }
             }
             if (duration > 0) {
                 const notes = [];
@@ -278,6 +292,11 @@ function parseHarmony(text, extraChords) {
                     notes.push({pitch: notePitch, duration, time});
                 }
                 result.push(notes);
+            }
+            if (floaty) {
+                for (let i = 0; i < pitch.length; ++i) {
+                    pitch[i] -= interval[i]*direction;
+                }
             }
         }
         time += duration;
