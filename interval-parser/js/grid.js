@@ -1,7 +1,7 @@
 function gridMain() {
     const tableEl = document.getElementById("grid");
 
-    const N = 7;
+    const N = 10;
     const M = 3;
     const baseIntervals = [Array(N).fill(0)];
     for (let i = 1; i < M+1; ++i) {

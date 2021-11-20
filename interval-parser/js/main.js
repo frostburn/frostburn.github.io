@@ -343,7 +343,7 @@ function parseHarmony(text, extraChords, generator) {
 
 function expandRepeats(text) {
     while (1) {
-        let start = text.lastIndexOf("|:");
+        let start = text.indexOf("|:");
         if (start < 0) {
             break;
         }
@@ -351,7 +351,7 @@ function expandRepeats(text) {
         if (end < 0) {
             end = text.length;
         }
-        const repeatedSection = text.slice(start+2, end);
+        const repeatedSection = text.slice(start+2, end).replace("|:", "|");  // To prevent infinite recursion
         let numRepeats;
         let endSection;
         if (isDigit(text[end+2])) {
@@ -382,6 +382,7 @@ function parseConfiguration(text, temperaments) {
     let constraints;
     let subgroup = JI_SUBGROUP;
     let mapEDN = true;
+    let waveform = "triangle";
 
     text.split("\n").forEach(line => {
         line = line.split("$", 1)[0];
@@ -432,6 +433,8 @@ function parseConfiguration(text, temperaments) {
             if (flags.includes("unmapEDN")) {
                 mapEDN = false;
             }
+        } else if (line.startsWith("WF:")) {
+            waveform = line.split(":", 2)[1].trim();
         } else {
             unparsed.push(line.replaceAll("|", " "));
         }
@@ -439,6 +442,7 @@ function parseConfiguration(text, temperaments) {
     beatDuration = 60/tempo[1] * (tempo[0][1]/tempo[0][0]) * (unit[0]/unit[1]);
     return {
         baseFrequency,
+        waveform,
         beatDuration,
         commaList,
         subgroup,
@@ -646,6 +650,9 @@ function updateAbsolutePitches(notess) {
     el.textContent += tokens.join(" ") + "||";
 }
 
+const BASIC_WAVEFORMS = ["sine", "square", "sawtooth", "triangle"];
+let WAVEFORMS;
+
 function parseElementContent(textEl, voices, now) {
     const glideTime = 0.01;
     const attackTime = 0.01;
@@ -653,6 +660,14 @@ function parseElementContent(textEl, voices, now) {
     const silence = 1e-6;
     const text = expandRepeats(textEl.value);
     const config = parseConfiguration(text, TEMPERAMENTS);
+
+    voices.forEach(voice => {
+        if (BASIC_WAVEFORMS.includes(config.waveform)) {
+            voice.oscillator.type = config.waveform;
+        } else {
+            voice.oscillator.setPeriodicWave(WAVEFORMS[config.waveform]);
+        }
+    });
 
     let mapping = [...JI];
     let generator = Math.log(2) / 12;
@@ -707,6 +722,8 @@ function main() {
     const context = new AudioContext();
     context.suspend();
 
+    WAVEFORMS = createWaveforms(context);
+
     const globalGain = context.createGain();
     globalGain.connect(context.destination);
     globalGain.gain.setValueAtTime(0.199, context.currentTime);
@@ -716,7 +733,6 @@ function main() {
         const voices = [];
         for (let i = 0; i < max_polyphony; ++i) {
             const oscillator = context.createOscillator();
-            oscillator.type = "triangle";
             const gain = context.createGain();
             gain.gain.setValueAtTime(0.0, context.currentTime);
             oscillator.connect(gain).connect(globalGain);
