@@ -19,27 +19,37 @@ const CHORD_MODIFIERS = {
     "19": "P19",
 
     "b2": "m2",
+    "#2": "A2",
     "b3": "m3",
+    "#3": "A3",
     "b4": "d4",
     "#4": "A4",
     "b5": "d5",
     "#5": "A5",
     "b6": "m6",
+    "#6": "A6",
     "b7": "m7",
+    "#7": "A7",
     "b8": "d8",
     "#8": "A8",
     "b9": "m9",
+    "#9": "A9",
     "b10": "m10",
+    "#10": "A10",
     "b11": "d11",
     "#11": "A11",
     "b12": "d12",
     "#12": "A12",
     "b13": "m13",
+    "#13": "A13",
     "b14": "m14",
+    "#14": "A14",
     "b15": "d15",
     "#15": "A15",
     "b16": "m16",
+    "#16": "A16",
     "b17": "m17",
+    "#17": "A17",
     "b19": "d19",
     "#19": "A19",
 };
@@ -85,16 +95,34 @@ const CHORDS = {
     "M#15": [["P1", "M3", "P5", "M7", "M9", "M13", "A15"], [1, 3, 5]],
 };
 
+const IRREPLACABLES = ["sus2", "sus4", "quartal", "quintal"];
+
 
 function parseChord(token) {
     let greed = 0;
     let result;
     Object.keys(CHORDS).forEach(modifiable => {
         if (token.startsWith(modifiable) && modifiable.length > greed) {
-            [modifiers, ...added] = token.slice(modifiable.length).split("add");
+            [base, ...added] = token.slice(modifiable.length).split("add");
+            let modifiers;
+            let susReplacement;
+            if (IRREPLACABLES.includes(modifiable)) {
+                modifiers = base;
+            } else {
+                [modifiers, susReplacement] = base.split("sus");
+            }
             const chord = [];
             CHORDS[modifiable][0].forEach(mtoken => chord.push(mtoken));
             CHORDS[modifiable][1].forEach(index => chord[index] += modifiers);
+            if (susReplacement !== undefined) {
+                if (susReplacement[0] in CHORD_MODIFIERS) {
+                    chord[1] = CHORD_MODIFIERS[susReplacement[0]] + susReplacement.slice(1);
+                } else if (susReplacement.slice(0, 2) in CHORD_MODIFIERS) {
+                    chord[1] = CHORD_MODIFIERS[susReplacement.slice(0, 2)] + susReplacement.slice(2);
+                } else if (susReplacement.slice(0, 3) in CHORD_MODIFIERS) {
+                    chord[1] = CHORD_MODIFIERS[susReplacement.slice(0, 3)] + susReplacement.slice(3);
+                }
+            }
             added.forEach(addedToken => {
                 if (addedToken[0] in CHORD_MODIFIERS) {
                     chord.push(CHORD_MODIFIERS[addedToken[0]] + addedToken.slice(1));
