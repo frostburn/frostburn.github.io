@@ -32,16 +32,27 @@ There's a large bonus modifier for 416/405 represented by i and !. It allows you
 
 const UPDOWNS = ["+-", "><", "^v", "*%", "ud", "UD", "AV", "MW", "i!"];
 
+const ANY_UPDOWN = UPDOWNS.join("");
+
 const COMMAS = {
-    "+-": [-4, 4, -1],
-    "><": [6, -2, 0, -1],
-    "^v": [-5, 1, 0, 0, 1],
-    "*%": [-1, 3, 0, 0, 0, -1],
-    "ud": [-12, 5, 0, 0, 0, 0, 1],
-    "UD": [-9, 3, 0, 0, 0, 0, 0, 1],
-    "AV": [5, -6, 0, 0, 0, 0, 0, 0, 1],
-    "MW": [-8, 2, 0, 0, 0, 0, 0, 0, 0, 1],
-    "i!": [5, -4, -1, 0, 0, 1],
+    "+": [-4, 4, -1],
+    "-": [4, -4, 1],
+    ">": [6, -2, 0, -1],
+    "<": [-6, 2, 0, 1],
+    "^": [-5, 1, 0, 0, 1],
+    "v": [5, -1, 0, 0, -1],
+    "*": [-1, 3, 0, 0, 0, -1],
+    "%": [1, -3, 0, 0, 0, 1],
+    "u": [-12, 5, 0, 0, 0, 0, 1],
+    "d": [12, -5, 0, 0, 0, 0, -1],
+    "U": [-9, 3, 0, 0, 0, 0, 0, 1],
+    "D": [9, -3, 0, 0, 0, 0, 0, -1],
+    "A": [5, -6, 0, 0, 0, 0, 0, 0, 1],
+    "V": [-5, 6, 0, 0, 0, 0, 0, 0, -1],
+    "M": [-8, 2, 0, 0, 0, 0, 0, 0, 0, 1],
+    "W": [8, -2, 0, 0, 0, 0, 0, 0, 0, -1],
+    "i": [5, -4, -1, 0, 0, 1],
+    "!": [-5, 4, 1, 0, 0, -1],
 }
 
 const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
@@ -171,26 +182,31 @@ function parseInterval(token, generator) {
     }
     const quality = token[0];
     token = token.slice(1);
-    UPDOWNS.forEach(updown => {
-        let arrows = 0;
-        if (token.includes(updown[0])) {
-            [token, arrowToken] = token.split(updown[0], 2);
-            arrows = parseInt(arrowToken);
+
+    const separated = []
+    let currentArrowToken = "";
+    token.split("").forEach(character => {
+        if (ANY_UPDOWN.includes(character)) {
+            separated.push(currentArrowToken);
+            currentArrowToken = "";
+        }
+        currentArrowToken += character;
+    });
+    separated.push(currentArrowToken);
+    token = separated[0];
+    separated.slice(1).forEach(arrowToken => {
+        if (arrowToken[0] in COMMAS) {
+            let arrows = parseInt(arrowToken.slice(1));
             if (isNaN(arrows)) {
                 arrows = 1;
             }
-        }
-        if (token.includes(updown[1])) {
-            [token, arrowToken] = token.split(updown[1], 2);
-            arrows = -parseInt(arrowToken);
-            if (isNaN(arrows)) {
-                arrows = -1;
+            const comma = COMMAS[arrowToken[0]];
+            for (let i = 0; i < comma.length; ++i) {
+                result[i] += arrows*comma[i];
             }
         }
-        for (let i = 0; i < COMMAS[updown].length; ++i) {
-            result[i] += arrows * COMMAS[updown][i];
-        }
     });
+
     const intervalClass = parseInt(token);
     const octave = Math.floor((intervalClass - 1)/7);
     const basicClass = intervalClass - octave*7;
