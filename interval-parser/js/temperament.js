@@ -129,7 +129,7 @@ function isLessComplex(pitchA, pitchB) {
     return false;
 }
 
-function commaReduce(pitch, commaList, persistence=3) {
+function commaReduce(pitch, commaList, persistence=5) {
     /*
     Reduce the dimensionality of the pitch vector as much as possible by adding commas from the list
     */

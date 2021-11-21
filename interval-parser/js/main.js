@@ -1,3 +1,5 @@
+const EPSILON = 1e-6;
+
 function mod(n, m) {
     return ((n % m) + m) % m;
 }
@@ -685,7 +687,7 @@ function parseElementContent(textEl, voices, now) {
     const glideTime = 0.01;
     const attackTime = 0.01;
     const decayTime = 0.02;
-    const silence = 1e-6;
+    const silence = EPSILON;
     const text = expandRepeats(textEl.value);
     const config = parseConfiguration(text, TEMPERAMENTS);
 
@@ -742,8 +744,8 @@ function parseElementContent(textEl, voices, now) {
             voices[i].oscillator.frequency.exponentialRampToValueAtTime(frequency, time);
             voices[i].oscillator.frequency.setValueAtTime(frequency, time + duration - glideTime);
             voices[i].gain.gain.setValueAtTime(silence, time);
-            voices[i].gain.gain.exponentialRampToValueAtTime(config.gain, time + attackTime);
-            voices[i].gain.gain.setValueAtTime(config.gain, time + duration - decayTime);
+            voices[i].gain.gain.exponentialRampToValueAtTime(Math.max(config.gain, silence), time + attackTime);
+            voices[i].gain.gain.setValueAtTime(Math.max(config.gain, silence), time + duration - decayTime);
             voices[i].gain.gain.exponentialRampToValueAtTime(silence, time + duration);
         }
     });

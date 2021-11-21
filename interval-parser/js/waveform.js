@@ -1,7 +1,7 @@
 // https://github.com/SeanArchibald/scale-workshop/blob/master/src/js/synth/Synth.js
 // set up custom waveforms
 function createWaveforms(audioCtx) {
-  return {
+  const result = {
     warm1: audioCtx.createPeriodicWave(
       new Float32Array([0, 1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.05]),
       new Float32Array([0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.00])
@@ -40,4 +40,24 @@ function createWaveforms(audioCtx) {
       new Float32Array([0, 0, 0.0, 0.000, 0.00, 0.0, 0.000])  // cosine components
     )
   };
+
+  // Elliptic Theta 3
+  [1, 0.5, 0.25, 0.1, 0.05].forEach((softness, index) => {
+    const harmonics = [0];
+    i = 1;
+    let value;
+    do {
+      value = Math.exp(-softness*i*i);
+      harmonics.push(value);
+      i += 1;
+    } while(value > 0.0001);
+    const zeroComponents = Array(harmonics.length).fill(0);
+    result["theta" + (index+1)] = audioCtx.createPeriodicWave(new Float32Array(zeroComponents), new Float32Array(harmonics));
+
+    for (let i = 0; i < harmonics.length; i += 2) {
+      harmonics[i] = 0;
+    }
+    result["oddtheta" + (index+1)] = audioCtx.createPeriodicWave(new Float32Array(harmonics), new Float32Array(zeroComponents));
+  });
+  return result;
 }
