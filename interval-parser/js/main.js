@@ -58,6 +58,8 @@ const COMMAS = {
 }
 
 const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+const SEMANTIC = [];
+PRIMES.forEach(prime => SEMANTIC.push(prime.toString()));
 const JI = [Math.log(2), Math.log(3), Math.log(5), Math.log(7), Math.log(11), Math.log(13), Math.log(17), Math.log(19), Math.log(23), Math.log(29)];
 const JI_SUBGROUP = [];
 for (let i = 0; i < JI.length; ++i) {
@@ -74,7 +76,9 @@ for (let i = 0; i < JI.length; ++i) {
 const CENTS_MAPPING = Math.log(2) / 1200;
 const HZ_MAPPING = 0;  // Hz offset requires special treatment. Mapped to nothing to reduce interference.
 const CENTS_INDEX = JI.length;
+SEMANTIC.push("e");
 const HZ_INDEX = CENTS_INDEX + 1;
+SEMANTIC.push("Hz");
 const EXTRA_COORDS = 2;
 
 function toVector(num) {
@@ -228,7 +232,7 @@ function parseInterval(token, generator) {
 function parseHarmony(text, extraChords, generator) {
     const result = [];
     const pitch = Array(JI.length + EXTRA_COORDS).fill(0);
-    let time = 0;
+    const time = new MaybeFraction(0, 1);
 
     text.split(/\s+/).forEach(token => {
         if (token == "") {
@@ -268,7 +272,7 @@ function parseHarmony(text, extraChords, generator) {
             intervalToken = intervalToken.slice(1);
         }
 
-        const duration = parseFraction(durationToken);
+        const duration = new MaybeFraction(durationToken);
 
         if (intervalToken != "Z") {
             const interval = Array(JI.length + EXTRA_COORDS).fill(0);
@@ -336,16 +340,22 @@ function parseHarmony(text, extraChords, generator) {
                     pitch[i] += interval[i];
                 }
             }
-            if (duration > 0) {
-                const notes = [];
+            if (duration.numerator > 0) {
+                const pitches = [];
                 for (let j = 0; j < chord.length; ++j) {
                     const notePitch = [];
                     for (let i = 0; i < pitch.length; ++i) {
                         notePitch.push(pitch[i] + chord[j][i]);
                     }
-                    notes.push({pitch: notePitch, duration, time});
+                    pitches.push(notePitch);
                 }
-                result.push(notes);
+                const data = {
+                    type: "notes",
+                    pitches: pitches,
+                    duration: duration.toString(),
+                    time: time.toString(),
+                };
+                result.push(data);
             }
             if (floaty) {
                 for (let i = 0; i < pitch.length; ++i) {
@@ -353,7 +363,7 @@ function parseHarmony(text, extraChords, generator) {
                 }
             }
         }
-        time += duration;
+        time.accumulate(duration);
     });
 
     return result;
@@ -570,6 +580,8 @@ const LYDIAN_INDEX_A = LYDIAN.indexOf("A");
 const REFERENCE_OCTAVE = 4;
 const INDEX_A_12EDO = 9;
 
+// TODO: Make A4 into a4 to disambiguate. Make sure not to make D5 into d5.
+// TODO: Implement a parser for absolute pitches
 // TODO: Notate cents & Hz
 function notate(pitch) {
     const twos = pitch[0] || 0;
@@ -650,21 +662,20 @@ function tokenizeNotation(notation) {
     return notation.letter + notation.octaves + accidental + arrows;
 }
 
-function updateAbsolutePitches(notess, commaList) {
+function updateAbsolutePitches(events, commaList) {
     const el = document.getElementById('absolute');
     tokens = [];
-    notess.forEach(notes => {
+    events.forEach(event => {
         let token;
-        if (notes.length == 1) {
-            let pitch = notes[0].pitch;
+        if (event.pitches.length == 1) {
+            let pitch = event.pitches[0];
             if (commaList !== undefined) {
                 pitch = commaReduce(pitch, commaList);
             }
             token = tokenizeNotation(notate(pitch));
         } else {
             subtokens = [];
-            notes.forEach(note => {
-                let pitch = note.pitch;
+            event.pitches.forEach(pitch => {
                 if (commaList !== undefined) {
                     pitch = commaReduce(pitch, commaList);
                 }
@@ -672,12 +683,12 @@ function updateAbsolutePitches(notess, commaList) {
             });
             token = "(" + subtokens.join(",") + ")";
         }
-        if (notes[0].duration != 1) {
-            token += "[" + notes[0].duration + "]";
+        if (event.duration != 1) {
+            token += "[" + event.duration + "]";
         }
         tokens.push(token);
     });
-    el.textContent += tokens.join(" ") + "||";
+    el.textContent += tokens.join(" ") + "||\n";
 }
 
 const BASIC_WAVEFORMS = ["sine", "square", "sawtooth", "triangle"];
@@ -716,11 +727,14 @@ function parseElementContent(textEl, voices, now) {
     mapping.push(1);  // Cents are already mapped when parsed
     mapping.push(HZ_MAPPING);
 
-    const notess = parseHarmony(config.unparsed, EXTRA_CHORDS, generator);
+    // TODO: JSON body
+    const events = parseHarmony(config.unparsed, EXTRA_CHORDS, generator);
+    // TODO: Tempo event
+    // TODO: Tuning event
     if (config.doCommaReduction) {
-        updateAbsolutePitches(notess, config.commaList);
+        updateAbsolutePitches(events, config.commaList);
     } else {
-        updateAbsolutePitches(notess);
+        updateAbsolutePitches(events);
     }
 
     for (let i = 0; i < voices.length; ++i) {
@@ -729,18 +743,19 @@ function parseElementContent(textEl, voices, now) {
         voices[i].gain.gain.setValueAtTime(0.0, now);
     }
 
-    notess.forEach(notes => {
-        for (let i = 0; i < notes.length; ++i) {
+    events.forEach(event => {
+        for (let i = 0; i < event.pitches.length; ++i) {
             if (i >= voices.length) {
                 continue;
             }
+            const pitch = event.pitches[i];
             let logRatio = 0;
-            for (let j = 0; j < notes[i].pitch.length; ++j) {
-                logRatio += mapping[j]*notes[i].pitch[j];
+            for (let j = 0; j < pitch.length; ++j) {
+                logRatio += mapping[j]*pitch[j];
             }
-            const frequency = config.baseFrequency * Math.exp(logRatio) + notes[i].pitch[HZ_INDEX];
-            const time = notes[i].time * config.beatDuration + now;
-            const duration = notes[i].duration * config.beatDuration;
+            const frequency = config.baseFrequency * Math.exp(logRatio) + pitch[HZ_INDEX];
+            const time = parseFraction(event.time) * config.beatDuration + now;
+            const duration = parseFraction(event.duration) * config.beatDuration;
             voices[i].oscillator.frequency.exponentialRampToValueAtTime(frequency, time);
             voices[i].oscillator.frequency.setValueAtTime(frequency, time + duration - glideTime);
             voices[i].gain.gain.setValueAtTime(silence, time);
