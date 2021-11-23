@@ -242,9 +242,14 @@ function parseHarmony(text, extraChords, generator) {
         let inversionToken = "0";
         let durationToken = "1";
         let intervalToken;
-        if (token.includes("(")) {
-            [intervalToken, token] = token.split("(", 2);
-            [chordToken, token] = token.split(")", 2);
+        if (token.includes("=")) {
+            [intervalToken, token] = token.split("=", 2);
+            if (token.includes("[")) {
+                [chordToken, token] = token.split("[", 2);
+            } else {
+                chordToken = token;
+                token = "";
+            }
             if (chordToken.includes("_")) {
                 [chordToken, inversionToken] = chordToken.split("_", 2);
             }
@@ -382,9 +387,15 @@ function expandRepeats(text) {
         const repeatedSection = text.slice(start+2, end).replace("|:", "|");  // To prevent infinite recursion
         let numRepeats;
         let endSection;
-        if (isDigit(text[end+2])) {
-            endSection = text.slice(end + 3);
-            numRepeats = parseInt(text[end+2]);
+        if (text[end+2] == "x") {
+            endIndex = end + 3;
+            let num = "";
+            while (isDigit(text[endIndex])) {
+                num += text[endIndex];
+                endIndex += 1;
+            }
+            numRepeats = parseInt(num);
+            endSection = text.slice(endIndex);
         } else {
             endSection = text.slice(end + 2);
             numRepeats = 2;
@@ -575,8 +586,8 @@ function tokenizeIntervalNotation(notation) {
     return notation.sign + notation.quality + notation.value + arrows;
 }
 
-const LYDIAN = ["F", "C", "G", "D", "A", "E", "B"];
-const LYDIAN_INDEX_A = LYDIAN.indexOf("A");
+const LYDIAN = ["f", "c", "g", "D", "a", "e", "B"];
+const LYDIAN_INDEX_A = LYDIAN.indexOf("a");
 const REFERENCE_OCTAVE = 4;
 const INDEX_A_12EDO = 9;
 
