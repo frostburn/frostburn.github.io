@@ -109,7 +109,8 @@ function minimax(mapping, justMapping) {
 }
 
 function isLessComplex(pitchA, pitchB) {
-    for (let i = pitchA.length - 1; i >= 0; i--) {
+    // Measure pitch-class complexity, ignoring octaves
+    for (let i = pitchA.length - 1; i >= 1; i--) {
         if (Math.abs(pitchA[i]) < Math.abs(pitchB[i])) {
             return true;
         }
@@ -118,7 +119,7 @@ function isLessComplex(pitchA, pitchB) {
         }
     }
     // All components equal in magnitude.
-    for (let i = pitchA.length - 1; i >= 0; i--) {
+    for (let i = pitchA.length - 1; i >= 1; i--) {
         if (pitchA[i] > 0 && pitchB[i] < 0) {
             return true;
         }

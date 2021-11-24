@@ -374,6 +374,7 @@ function parseHarmony(text, extraChords, generator) {
     return result;
 }
 
+// TODO: Fix repeats happening inside commented code
 function expandRepeats(text) {
     while (1) {
         let start = text.indexOf("|:");
@@ -586,7 +587,7 @@ function tokenizeIntervalNotation(notation) {
     return notation.sign + notation.quality + notation.value + arrows;
 }
 
-const LYDIAN = ["f", "c", "g", "D", "a", "e", "B"];
+const LYDIAN = ["F", "C", "G", "D", "a", "E", "B"];
 const LYDIAN_INDEX_A = LYDIAN.indexOf("a");
 const REFERENCE_OCTAVE = 4;
 const INDEX_A_12EDO = 9;
@@ -674,7 +675,7 @@ function tokenizeNotation(notation) {
 }
 
 function updateAbsolutePitches(events, commaList) {
-    const el = document.getElementById('absolute');
+    const container = document.getElementById('absolute');
     tokens = [];
     events.forEach(event => {
         let token;
@@ -699,7 +700,10 @@ function updateAbsolutePitches(events, commaList) {
         }
         tokens.push(token);
     });
-    el.textContent += tokens.join(" ") + "||\n";
+    const el = document.createElement("span");
+    el.textContent = tokens.join(" ") + "||";
+    container.appendChild(el);
+    container.appendChild(document.createElement("br"))
 }
 
 const BASIC_WAVEFORMS = ["sine", "square", "sawtooth", "triangle"];
@@ -778,7 +782,16 @@ function parseElementContent(textEl, voices, now) {
 }
 
 function main() {
-    const max_polyphony = 12;
+    const playEl = document.getElementById('play');
+    const panicEl = document.getElementById('panic');
+    const textEls = [
+        document.getElementById('text0'),
+        document.getElementById('text1'),
+        document.getElementById('text2')
+    ];
+    const absoluteEl = document.getElementById('absolute');
+
+    const max_polyphony = 8;
     const context = new AudioContext();
     context.suspend();
 
@@ -789,7 +802,7 @@ function main() {
     globalGain.gain.setValueAtTime(0.199, context.currentTime);
 
     const voicess = [];
-    for (let j = 0; j < 2; ++j) {
+    for (let j = 0; j < textEls.length; ++j) {
         const voices = [];
         for (let i = 0; i < max_polyphony; ++i) {
             const oscillator = context.createOscillator();
@@ -802,16 +815,11 @@ function main() {
         voicess.push(voices);
     }
 
-    const playEl = document.getElementById('play');
-    const panicEl = document.getElementById('panic');
-    const textEls = [document.getElementById('text0'), document.getElementById('text1')];
-    const absoluteEl = document.getElementById('absolute');
-
     playEl.onclick = e => {
         absoluteEl.textContent = "";
         context.suspend();
         const now = context.currentTime;
-        for (let i = 0; i < 2; ++i) {
+        for (let i = 0; i < textEls.length; ++i) {
             parseElementContent(textEls[i], voicess[i], now);
         }
         context.resume();
