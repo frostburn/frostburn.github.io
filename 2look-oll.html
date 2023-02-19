@@ -1,0 +1,363 @@
+<html>
+<head>
+<title>Shortest 2-Look OLL algorithms (slice turn metric)</title>
+<style>
+table, th, td {border: 1px solid;}
+td {text-align:center; padding:0.5em;}
+table {border-collapse: collapse;}
+td.case {width:100px; height:100px; padding:0;}
+</style>
+</head>
+<body>
+<p>2-Look OLL (Orientation of the Last Layer) solves the top color of the last layer in 2 steps.</p>
+<p>Manually curated from the <a href="oll.html">full list</a>.</p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Case</th>
+        <th>Algorithm</th>
+        <th>Group</th>
+    </tr>
+    <tr>
+        <td>Dot</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>M' U2 F2 U M2 U M' U2 F2</td>
+        <td>1: Edges</td>
+    </tr>
+    <tr>
+        <td>I-Shape</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>F R U R' U' F'</td>
+        <td>1: Edges</td>
+    <tr>
+        <td>L-Shape</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>F U R U' R' F'</td>
+        <td>1: Edges</td>
+    </tr>
+    <tr>
+        <td>Antisune</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="yellow"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>R U2 R' U' R U' R'</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>H</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>r' F2 M' U F2 U F2 U' F2 R</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>F R' F' r U R U' r'</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>Pi</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>R U2 R2 U' R2 U' R2 U2 R</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>Sune</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="yellow"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>R U R' U R U2 R'</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="yellow"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="gray"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>R' F' r U R U' r' F</td>
+        <td>2: Corners</td>
+    </tr>
+    <tr>
+        <td>U</td>
+        <td class="case">
+            <svg viewBox="0 0 98 98" width="100%" height="100%">
+             <g fill="gray" stroke="black" stroke-width="1.1">
+              <rect x="10.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="10.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="10.5" width="10" height="25" fill="gray"></rect>
+              <rect x="36.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="36.5" y="87" width="25" height="10" fill="gray"></rect>
+              <rect x="1" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="36.5" width="10" height="25" fill="gray"></rect>
+              <rect x="62.5" y="1" width="25" height="10" fill="gray"></rect>
+              <rect x="62.5" y="87" width="25" height="10" fill="yellow"></rect>
+              <rect x="1" y="62.5" width="10" height="25" fill="gray"></rect>
+              <rect x="87" y="62.5" width="10" height="25" fill="gray"></rect>
+             </g>
+             <g stroke="black" stroke-width="2.1">
+              <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+              <rect x="11" y="63" width="24" height="24" fill="gray"></rect>
+              <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+              <rect x="63" y="63" width="24" height="24" fill="gray"></rect>
+             </g>
+            </svg>
+        </td>
+        <td>r2 U' R F2 R' U r F2 r</td>
+        <td>2: Corners</td>
+    </tr>
+</table>
+</body>
+</html>
