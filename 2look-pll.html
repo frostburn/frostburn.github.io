@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>Shortest 2-Look PLL algorithms (slice turn metric)</title>
+<style>
+table, th, td {border: 1px solid;}
+td {text-align:center; padding:0.5em;}
+table {border-collapse: collapse;}
+td.case {width:100px; height:100px; padding:0;}
+</style>
+</head>
+<body>
+<p>2-Look PLL (Permutation of the Last Layer) solves the cube in 2 steps after completing <a href="2look-oll.html">2-Look OLL.</a></p>
+<p>Manually curated from the <a href="pll.html">full list</a>.</p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Case</th>
+        <th>Algorithm</th>
+        <th>Group</th>
+    </tr>
+    <tr>
+        <td>Ab y2</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="red"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="red"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="blue"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="red"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="blue"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="lime"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="70.1394" y1="25.0373" x2="24.8606" y2="71.9627"></line>
+          <path d="M 23.3708,67.746 L 22.0831,74.8411 L 29.1278,73.3009, z" stroke="none"></path>
+          <line x1="27" y1="77" x2="68" y2="77"></line>
+          <path d="M 66,81 L 72,77 L 66,73, z" stroke="none"></path>
+          <line x1="75" y1="70" x2="75" y2="27"></line>
+          <path d="M 79,29 L 75,23 L 71,29, z" stroke="none"></path> </g>
+        </svg>
+        </td>
+        <td>F2 R2 F r U' R2 U r' F</td>
+        <td>1: Corners</td>
+    </tr>
+    <tr>
+        <td>Diagonal (Y)</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="blue"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="orange"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="lime"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="red"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="lime"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="orange"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="70.1394" y1="71.9627" x2="24.8606" y2="25.0373"></line>
+          <path d="M 29.1278,23.6991 L 22.0831,22.1589 L 23.3708,29.254, z" stroke="none"></path>
+          <line x1="24.8606" y1="25.0373" x2="70.1394" y2="71.9627"></line>
+          <path d="M 65.8722,73.3009 L 72.9169,74.8411 L 71.6292,67.746, z" stroke="none"></path>
+        </g>
+        </svg>
+        </td>
+        <td>R' U' R F2 R' U R U F2 U' F2 U' F2</td>
+        <td>1: Corners</td>
+    </tr>
+    <tr>
+        <td>H</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="blue"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="lime"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="red"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="orange"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="red"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="70" y1="49" x2="27" y2="49"></line>
+          <path d="M 29,45 L 23,49 L 29,53, z" stroke="none"></path>  <line x1="49" y1="27" x2="49" y2="70"></line>
+          <path d="M 45,68 L 49,74 L 53,68, z" stroke="none"></path>  <line x1="27" y1="49" x2="70" y2="49"></line>
+          <path d="M 68,53 L 74,49 L 68,45, z" stroke="none"></path>  <line x1="49" y1="70" x2="49" y2="27"></line>
+          <path d="M 53,29 L 49,23 L 45,29, z" stroke="none"></path> </g>
+        </svg>
+        </td>
+        <td>M2 U' M2 U2 M2 U' M2</td>
+        <td>2: Edges</td>
+    </tr>
+    <tr>
+        <td>Ua</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="red"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="blue"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="orange"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="red"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="70" y1="49" x2="27" y2="49"></line>
+          <path d="M 29,45 L 23,49 L 29,53, z" stroke="none"></path>  <line x1="25.0358" y1="53.8622" x2="43.9642" y2="72.1378"></line>
+          <path d="M 39.747,73.6263 L 46.8418,74.9162 L 45.3038,67.871, z" stroke="none"></path>  <line x1="53.9497" y1="72.0503" x2="72.0503" y2="53.9497"></line>
+          <path d="M 73.4645,58.1924 L 74.8787,51.1213 L 67.8076,52.5355, z" stroke="none"></path> </g>
+        </svg>
+        </td>
+        <td>M2 U M U2 M' U M2<br>(M2 U r' R U2 M' U M2)</td>
+        <td>2: Edges</td>
+    </tr>
+    <tr>
+        <td>Ub</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="orange"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="red"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="blue"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="red"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="43.9642" y1="72.1378" x2="25.0358" y2="53.8622"></line>
+          <path d="M 29.253,52.3737 L 22.1582,51.0838 L 23.6962,58.129, z" stroke="none"></path>  <line x1="72.0503" y1="53.9497" x2="53.9497" y2="72.0503"></line>
+          <path d="M 52.5355,67.8076 L 51.1213,74.8787 L 58.1924,73.4645, z" stroke="none"></path>  <line x1="27" y1="49" x2="70" y2="49"></line>
+          <path d="M 68,53 L 74,49 L 68,45, z" stroke="none"></path> </g>
+        </svg>
+        </td>
+        <td>M2 U' M U2 M' U' M2<br>(M2 U' r' R U2 M' U' M2)</td>
+        <td>2: Edges</td>
+    </tr>
+    <tr>
+        <td>Z</td>
+        <td class="case">
+        <svg viewBox="0 0 98 98" width="100%" height="100%">
+         <g stroke="black" stroke-width="1.1">
+          <rect x="10.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="10.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="10.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="10.5" width="10" height="25" fill="red"></rect>
+          <rect x="36.5" y="1" width="25" height="10" fill="orange"></rect>
+          <rect x="36.5" y="87" width="25" height="10" fill="red"></rect>
+          <rect x="1" y="36.5" width="10" height="25" fill="lime"></rect>
+          <rect x="87" y="36.5" width="10" height="25" fill="blue"></rect>
+          <rect x="62.5" y="1" width="25" height="10" fill="lime"></rect>
+          <rect x="62.5" y="87" width="25" height="10" fill="blue"></rect>
+          <rect x="1" y="62.5" width="10" height="25" fill="orange"></rect>
+          <rect x="87" y="62.5" width="10" height="25" fill="red"></rect>
+         </g>
+         <g stroke="black" stroke-width="2.1">
+          <rect x="11" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="11" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="37" width="24" height="24" fill="yellow"></rect>
+          <rect x="11" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="37" y="63" width="24" height="24" fill="yellow"></rect>
+          <rect x="63" y="63" width="24" height="24" fill="yellow"></rect>
+         </g>
+         <g stroke="black" stroke-width="4" fill="black">
+          <line x1="44.0503" y1="24.9497" x2="24.9497" y2="44.0503"></line>
+          <path d="M 23.5355,39.8076 L 22.1213,46.8787 L 29.1924,45.4645, z" stroke="none"></path>  <line x1="72.0503" y1="53.9497" x2="53.9497" y2="72.0503"></line>
+          <path d="M 52.5355,67.8076 L 51.1213,74.8787 L 58.1924,73.4645, z" stroke="none"></path>  <line x1="53.9497" y1="72.0503" x2="72.0503" y2="53.9497"></line>
+          <path d="M 73.4645,58.1924 L 74.8787,51.1213 L 67.8076,52.5355, z" stroke="none"></path>  <line x1="24.9497" y1="44.0503" x2="44.0503" y2="24.9497"></line>
+          <path d="M 45.4645,29.1924 L 46.8787,22.1213 L 39.8076,23.5355, z" stroke="none"></path> </g>
+        </svg>
+        </td>
+        <td>M2 u M2 u' S M2 S'<br>(M2 u M2 u' y' M' y' M2 y' M')</td>
+        <td>2: Edges</td>
+    </tr>
+</table>
+</body>
+</html>
