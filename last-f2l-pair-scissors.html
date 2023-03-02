@@ -9,7 +9,7 @@ td.case {width:100px; height:100px; padding:0;}
 </style>
 </head>
 <body>
-<p>Shortest algorithms for solving the last F2L pair.</p><p><span style="color:lime">Green</span> face is <b>F</b>ront.<br><span style="color:orange">Orange</span> face is <b>R</b>ight.<br>Gray face is <b>U</b>p.<br><span style="color:blue">Blue</span> face is <b>B</b>ack.<br><span style="color:red">Red</span> face is <b>L</b>eft.<br>White face is <b>D</b>own.</p><p>Scissor moves are defined as follows and can in principle be performed in one single motion:<br>m = R L<br>e = U D<br>s = F B</p><h2>0 moves</h2>
+<p>Shortest algorithms for solving the last F2L pair.</p><p><span style="color:lime">Green</span> face is <b>F</b>ront.<br><span style="color:orange">Orange</span> face is <b>R</b>ight.<br>Gray face is <b>U</b>p.<br><span style="color:blue">Blue</span> face is <b>B</b>ack.<br><span style="color:red">Red</span> face is <b>L</b>eft.<br>White face is <b>D</b>own.</p><p>Scissor moves [in square brackets] can in principle be performed in one single motion.</p><h2>0 moves</h2>
 <table>
 <tr>
 <th>Case</th>
@@ -2184,7 +2184,7 @@ R U2 B U2 B' R'
  </g></svg>
 </td>
 <td>
-m F U F' U' m' 
+[RL] F d R' U' [F'B'] 
 </td>
 </tr>
 <tr>
@@ -2598,7 +2598,7 @@ F2 U' L' U L F2
  </g></svg>
 </td>
 <td>
-s' R' U' R U s 
+[F'B'] R' U' R U [FB] 
 </td>
 </tr>
 <tr>
@@ -3779,7 +3779,7 @@ F2 U' F U' F' U2 F2
  </g></svg>
 </td>
 <td>
-U2 m F U F' U' m' 
+U2 [RL] F d R' U' [F'B'] 
 </td>
 </tr>
 <tr>
@@ -4469,7 +4469,7 @@ R2 U2 R2 U' R2 U' R2
  </g></svg>
 </td>
 <td>
-U2 s' R' U' R U s 
+U2 [F'B'] R' U' R U [FB] 
 </td>
 </tr>
 <tr>
@@ -4883,7 +4883,7 @@ F' U F U' F' U' F
  </g></svg>
 </td>
 <td>
-U' m F U F' U' m' 
+d' [FB] L U L' U' [F'B'] 
 </td>
 </tr>
 <tr>
@@ -5240,6 +5240,75 @@ F' U2 F U' F' U' F
   <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
   <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
   <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="orange"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="gray"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="gray"/>
+ </g></svg>
+</td>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="orange"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td>
+S' R U2 l' [U2D] L' U 
+</td>
+</tr>
+<tr>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="lime"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="gray"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
   <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
   <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
   <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
@@ -5297,7 +5366,7 @@ F' U2 F U' F' U' F
  </g></svg>
 </td>
 <td>
-M B' U2 B L2 F' m' 
+M B' U2 f U2 F' [U'D'] 
 </td>
 </tr>
 <tr>
@@ -5573,7 +5642,7 @@ F' U2 F U' R U R'
  </g></svg>
 </td>
 <td>
-U' s' R' U' R U s 
+U' [F'B'] R' U' R U [FB] 
 </td>
 </tr>
 <tr>
@@ -6195,6 +6264,144 @@ U' F' U2 F2 R' F' R
 </td>
 <td>
 F' U2 F U F' U' F 
+</td>
+</tr>
+<tr>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="lime"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="orange"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="lime"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="orange"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td>
+[R2L'] D B' D' M' B' R' 
+</td>
+</tr>
+<tr>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="lime"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="lime"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="orange"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="orange"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td>
+[F2B] D' L D S' L F 
 </td>
 </tr>
 <tr>
@@ -6884,7 +7091,7 @@ R U2 R' U' R U2 R'
  </g></svg>
 </td>
 <td>
-U m F U F' U' m' 
+d [FB] R U R' U' [F'B'] 
 </td>
 </tr>
 <tr>
@@ -7160,7 +7367,76 @@ U2 R U2 R2 F R F'
  </g></svg>
 </td>
 <td>
-S L U2 L' B2 R s 
+S L U2 L' B2 R [FB] 
+</td>
+</tr>
+<tr>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="gray"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="lime"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="gray"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="orange"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="gray"/>
+ </g></svg>
+</td>
+<td class="case">
+<svg viewBox="0 0 100 100" width="100%" height="100%">
+ <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
+  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
+  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
+  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
+  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
+  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
+  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
+  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
+  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
+  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
+  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
+  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
+  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
+  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
+  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
+  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
+  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
+  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
+  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
+  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
+  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
+  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
+  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
+  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
+  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
+  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
+  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="lime"/>
+  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
+ </g></svg>
+</td>
+<td>
+M' F' U2 b [U2D'] B U' 
 </td>
 </tr>
 <tr>
@@ -7505,7 +7781,7 @@ R U R' U R U R'
  </g></svg>
 </td>
 <td>
-U s' R' U' R U s 
+U [F'B'] R' U' R U [FB] 
 </td>
 </tr>
 <tr>
@@ -9043,75 +9319,6 @@ U2 R U2 R' U F' U' F
   <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
   <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
   <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="orange"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="gray"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="gray"/>
- </g></svg>
-</td>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="orange"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td>
-U' F' U2 F U F' U' F 
-</td>
-</tr>
-<tr>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="lime"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="gray"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
   <polygon points="35,20 50,25 35,30, 20,25" fill="lime"/>
   <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
   <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
@@ -9446,144 +9653,6 @@ U F' U F U' F' U' F
 </td>
 <td>
 U' R U R' U F' U' F 
-</td>
-</tr>
-<tr>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="lime"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="orange"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="lime"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="orange"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td>
-U2 R2 U2 R' U' R U' R2 
-</td>
-</tr>
-<tr>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="lime"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="lime"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="gray"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="orange"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="gray"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="gray"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="orange"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="gray"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="gray"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td>
-U2 F2 U2 F U F' U F2 
 </td>
 </tr>
 <tr>
@@ -9929,75 +9998,6 @@ U' R2 U2 R' U' R U' R2
 </td>
 <td>
 R' F R F' U' F' U' F 
-</td>
-</tr>
-<tr>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="gray"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="gray"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="lime"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="gray"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="gray"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="lime"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="gray"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="gray"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="gray"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="lime"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="lime"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="orange"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="gray"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="lime"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="gray"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="gray"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="orange"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="gray"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="orange"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="gray"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="orange"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="gray"/>
- </g></svg>
-</td>
-<td class="case">
-<svg viewBox="0 0 100 100" width="100%" height="100%">
- <g stroke="black" stroke-width="1.1" stroke-linejoin="bevel">
-  <polygon points="5,30 20,35 20.4444,50.5556, 5.66667,45" fill="red"/>
-  <polygon points="50,45 65,40 64.7778,56.1111, 50,61.6667" fill="blue"/>
-  <polygon points="50,15 65,20 50,25, 35,20" fill="gray"/>
-  <polygon points="5.66667,45 20.4444,50.5556 20.8889,66.1111, 6.33333,60" fill="red"/>
-  <polygon points="50,61.6667 64.7778,56.1111 64.5556,72.2222, 50,78.3333" fill="blue"/>
-  <polygon points="35,20 50,25 35,30, 20,25" fill="white"/>
-  <polygon points="6.33333,60 20.8889,66.1111 21.3333,81.6667, 7,75" fill="gray"/>
-  <polygon points="50,78.3333 64.5556,72.2222 64.3333,88.3333, 50,95" fill="gray"/>
-  <polygon points="20,25 35,30 20,35, 5,30" fill="white"/>
-  <polygon points="20,35 35,40 35.2222,56.1111, 20.4444,50.5556" fill="red"/>
-  <polygon points="65,40 80,35 79.5556,50.5556, 64.7778,56.1111" fill="blue"/>
-  <polygon points="65,20 80,25 65,30, 50,25" fill="white"/>
-  <polygon points="20.4444,50.5556 35.2222,56.1111 35.4444,72.2222, 20.8889,66.1111" fill="red"/>
-  <polygon points="64.7778,56.1111 79.5556,50.5556 79.1111,66.1111, 64.5556,72.2222" fill="blue"/>
-  <polygon points="50,25 65,30 50,35, 35,30" fill="white"/>
-  <polygon points="20.8889,66.1111 35.4444,72.2222 35.6667,88.3333, 21.3333,81.6667" fill="gray"/>
-  <polygon points="64.5556,72.2222 79.1111,66.1111 78.6667,81.6667, 64.3333,88.3333" fill="orange"/>
-  <polygon points="35,30 50,35 35,40, 20,35" fill="white"/>
-  <polygon points="35,40 50,45 50,61.6667, 35.2222,56.1111" fill="red"/>
-  <polygon points="80,35 95,30 94.3333,45, 79.5556,50.5556" fill="blue"/>
-  <polygon points="80,25 95,30 80,35, 65,30" fill="white"/>
-  <polygon points="35.2222,56.1111 50,61.6667 50,78.3333, 35.4444,72.2222" fill="red"/>
-  <polygon points="79.5556,50.5556 94.3333,45 93.6667,60, 79.1111,66.1111" fill="blue"/>
-  <polygon points="65,30 80,35 65,40, 50,35" fill="white"/>
-  <polygon points="35.4444,72.2222 50,78.3333 50,95, 35.6667,88.3333" fill="gray"/>
-  <polygon points="79.1111,66.1111 93.6667,60 93,75, 78.6667,81.6667" fill="lime"/>
-  <polygon points="50,35 65,40 50,45, 35,40" fill="white"/>
- </g></svg>
-</td>
-<td>
-U R U2 R' U' R U R' 
 </td>
 </tr>
 <tr>
