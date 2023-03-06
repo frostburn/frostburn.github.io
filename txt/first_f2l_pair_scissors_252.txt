@@ -1,0 +1,5 @@
+S2 [U2D'] F' [U2D] S2 
+S2 [U2D'] S [R2L] S2 
+S2 [U2D'] b' [R2L] S2 
+S2 [U2D'] [F'B'] [U2D] S2 
+S2 [U2D'] [B2F'] [U2D] S2 

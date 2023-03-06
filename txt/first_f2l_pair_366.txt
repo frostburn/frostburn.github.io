@@ -1,0 +1,16 @@
+M2 S' u2 S' r2 
+M2 S' u2 S' L2 
+M2 S' D2 S R2 
+M2 S' D2 S l2 
+M2 S2 u2 M2 S2 
+M2 S2 u2 S2 M2 
+M2 S2 D2 M2 S2 
+M2 S2 D2 S2 M2 
+S2 M' u2 M' f2 
+S2 M' u2 M' B2 
+S2 M' D2 M F2 
+S2 M' D2 M b2 
+S2 M2 u2 M2 S2 
+S2 M2 u2 S2 M2 
+S2 M2 D2 M2 S2 
+S2 M2 D2 S2 M2 

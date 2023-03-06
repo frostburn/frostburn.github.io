@@ -1,0 +1,16 @@
+M F2 E F E' M' 
+M F2 E b M E' 
+M F2 E2 F E2 M' 
+M F2 E2 b M2 E' 
+M E2 F E2 F2 M' 
+M E2 F E2 b2 M 
+M E2 b M2 F2 E' 
+M E2 b M2 b2 E 
+M E' F E F2 M' 
+M E' F E b2 M 
+M E' b M' F2 E' 
+M E' b M' b2 E 
+M b2 E2 F E2 M 
+M b2 E2 b M2 E 
+M b2 E' F E M 
+M b2 E' b M' E 

@@ -1,0 +1,8 @@
+S2 U2 [RL] S2 [RL] 
+S2 U2 [R'L'] S2 [R'L'] 
+S2 d2 [RL] S2 [RL] 
+S2 d2 [R'L'] S2 [R'L'] 
+[FB] M2 [FB] U2 M2 
+[FB] M2 [FB] d2 M2 
+[F'B'] M2 [F'B'] U2 M2 
+[F'B'] M2 [F'B'] d2 M2 

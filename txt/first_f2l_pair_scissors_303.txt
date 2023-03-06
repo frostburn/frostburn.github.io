@@ -1,0 +1,2 @@
+[D2U'] [L2R] u [L2R] [U2D] [F2B] 
+[D2U'] [L2R] D [F2B] [U2D] [R2L] 

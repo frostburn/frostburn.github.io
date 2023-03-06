@@ -1,0 +1,8 @@
+M' f R2 E' F2 
+M' f R2 E' b2 
+M' f l2 E f2 
+M' f l2 E B2 
+M' B U2 M F2 
+M' B U2 M b2 
+M' B d2 M' f2 
+M' B d2 M' B2 

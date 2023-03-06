@@ -1,0 +1,8 @@
+S' r' F2 E R2 
+S' r' F2 E l2 
+S' r' b2 E' r2 
+S' r' b2 E' L2 
+S' L' U2 S R2 
+S' L' U2 S l2 
+S' L' d2 S' r2 
+S' L' d2 S' L2 

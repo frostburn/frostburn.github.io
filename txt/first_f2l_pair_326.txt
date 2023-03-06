@@ -1,0 +1,12 @@
+u' S R S' u 
+u' S R S' D 
+u' S R S' E' 
+u' S l E' f 
+u' S l E' B 
+u' S l E' S 
+D' M F M' u 
+D' M F M' D 
+D' M F M' E' 
+D' M b E' R 
+D' M b E' l 
+D' M b E' M 

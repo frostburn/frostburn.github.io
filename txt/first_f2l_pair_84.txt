@@ -1,0 +1,12 @@
+S2 U M' F' M2 F' 
+S2 U M' F' M2 S 
+S2 U M' F' M2 b' 
+S2 U M' b' E2 F' 
+S2 U M' b' E2 S 
+S2 U M' b' E2 b' 
+S2 d S' R' S2 R' 
+S2 d S' R' S2 M' 
+S2 d S' R' S2 l' 
+S2 d S' l' E2 R' 
+S2 d S' l' E2 M' 
+S2 d S' l' E2 l' 

@@ -1,0 +1,5 @@
+[F2B] [L2R] f' [D2U'] [F2B'] 
+[F2B] [L2R] B' [L2R'] [F2B'] 
+[B2F] [D2U] f' [R2L'] [B2F'] 
+[B2F] [D2U] B' [D2U'] [B2F'] 
+[B2F'] [D2U] [F2B'] [D2U'] [B2F'] 

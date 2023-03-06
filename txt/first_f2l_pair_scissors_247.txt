@@ -1,0 +1,8 @@
+[R2L] U' [R2L'] U R2 
+[R2L] U' [R2L'] U l2 
+[R2L] U' [R2L'] d f2 
+[R2L] U' [R2L'] d B2 
+[R2L] d' [F2B'] U F2 
+[R2L] d' [F2B'] U b2 
+[R2L] d' [F2B'] d R2 
+[R2L] d' [F2B'] d l2 

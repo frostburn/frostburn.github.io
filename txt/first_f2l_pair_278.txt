@@ -1,0 +1,16 @@
+S R2 E2 R' E2 S' 
+S R2 E2 l' S2 E 
+S R2 E' R' E S' 
+S R2 E' l' S E 
+S l2 E R' E' S 
+S l2 E l' S' E' 
+S l2 E2 R' E2 S 
+S l2 E2 l' S2 E' 
+S E R' E' R2 S' 
+S E R' E' l2 S 
+S E l' S' R2 E 
+S E l' S' l2 E' 
+S E2 R' E2 R2 S' 
+S E2 R' E2 l2 S 
+S E2 l' S2 R2 E 
+S E2 l' S2 l2 E' 

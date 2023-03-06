@@ -1,0 +1,8 @@
+F U [F2B'] U [FB] 
+F U [F2B'] d [RL] 
+F d [R2L'] U [RL] 
+F d [R2L'] d [FB] 
+b r [U2D'] r [FB] 
+b r [U2D'] L [UD] 
+b L [F2B'] r [UD] 
+b L [F2B'] L [FB] 

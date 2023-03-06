@@ -1,0 +1,4 @@
+E2 R E' [L2R] E' [L2R] 
+E2 l S [L2R] S [L2R] 
+E2 [L2R'] E [L2R] E R' 
+E2 [L2R'] E [L2R] E l' 

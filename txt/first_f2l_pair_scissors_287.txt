@@ -1,0 +1,3 @@
+S2 [U2D] [B2F'] [U2D'] S2 
+[F2B] [D2U] [B2F'] [D2U'] [F2B] 
+[F2B'] [D2U] [B2F'] [D2U'] [F2B'] 

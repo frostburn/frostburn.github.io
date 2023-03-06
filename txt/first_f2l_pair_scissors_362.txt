@@ -1,0 +1,12 @@
+[B2F'] r2 [F2B] [L2R] u' f' 
+[B2F'] r2 [F2B] [L2R] u' B' 
+[B2F'] r2 [F2B] [L2R] D' R' 
+[B2F'] r2 [F2B] [L2R] D' l' 
+[B2F'] L2 [B2F] [L2R] U' R' 
+[B2F'] L2 [B2F] [L2R] U' l' 
+[B2F'] L2 [B2F] [L2R] d' F' 
+[B2F'] L2 [B2F] [L2R] d' b' 
+[R2L] [B2F] u' [L2R] [B2F'] R2 
+[R2L] [B2F] u' [L2R] [B2F'] l2 
+[R2L] [B2F] D' [B2F] [R2L'] F2 
+[R2L] [B2F] D' [B2F] [R2L'] b2 

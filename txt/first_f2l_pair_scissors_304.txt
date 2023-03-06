@@ -1,0 +1,8 @@
+F' [U'D'] r S' r 
+F' [U'D'] r S' L 
+F' [U'D'] L E' r 
+F' [U'D'] L E' L 
+b' [R'L'] U M' U 
+b' [R'L'] U M' d 
+b' [R'L'] d S' U 
+b' [R'L'] d S' d 

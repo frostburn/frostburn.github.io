@@ -1,0 +1,4 @@
+[D2U] f' M' [F2B'] M' [F2B'] 
+[D2U] B' E [F2B'] E [F2B'] 
+[D2U] [F2B] E' [F2B'] E' f 
+[D2U] [F2B] E' [F2B'] E' B 

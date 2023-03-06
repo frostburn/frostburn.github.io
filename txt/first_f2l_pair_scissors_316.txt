@@ -1,0 +1,8 @@
+R [UD] f' M' f' 
+R [UD] f' M' B' 
+R [UD] B' E f' 
+R [UD] B' E B' 
+l [FB] U' S' U' 
+l [FB] U' S' d' 
+l [FB] d' M' U' 
+l [FB] d' M' d' 

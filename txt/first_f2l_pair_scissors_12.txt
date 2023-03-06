@@ -1,0 +1,8 @@
+R U2 R' 
+R U2 l' 
+R d2 r' 
+R d2 L' 
+l F2 R' 
+l F2 l' 
+l b2 r' 
+l b2 L' 

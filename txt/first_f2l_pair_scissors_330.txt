@@ -1,0 +1,8 @@
+R [U2D] f' M' f' 
+R [U2D] f' M' B' 
+R [U2D] B' E f' 
+R [U2D] B' E B' 
+l [F2B] U' S' U' 
+l [F2B] U' S' d' 
+l [F2B] d' M' U' 
+l [F2B] d' M' d' 

@@ -1,0 +1,3 @@
+M2 [D2U] S [L2R'] E2 
+M [U2D] R [U2D'] M' 
+M [U2D] l [F2B'] M' 

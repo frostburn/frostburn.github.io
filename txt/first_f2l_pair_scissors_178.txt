@@ -1,0 +1,4 @@
+U2 S R S' 
+U2 S l E' 
+d2 S' r E' 
+d2 S' L S 

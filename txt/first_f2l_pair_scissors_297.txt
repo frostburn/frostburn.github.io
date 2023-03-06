@@ -1,0 +1,4 @@
+[D2U'] r S' [R2L] S' [R2L] 
+[D2U'] L E' [R2L] E' [R2L] 
+[D2U'] [R2L'] E [R2L] E r' 
+[D2U'] [R2L'] E [R2L] E L' 

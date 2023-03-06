@@ -1,0 +1,12 @@
+R U R' 
+R U l' 
+R d f' 
+R d B' 
+l F R' 
+l F l' 
+l b U' 
+l b d' 
+M F M' 
+M b E' 
+[RL] U [R'L'] 
+[RL] d [F'B'] 

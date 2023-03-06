@@ -1,0 +1,4 @@
+r2 [B2F] r2 [F2B'] 
+r2 [B2F] L2 [B2F'] 
+L2 [F2B] r2 [B2F'] 
+L2 [F2B] L2 [F2B'] 

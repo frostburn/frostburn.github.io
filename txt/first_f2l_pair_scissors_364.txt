@@ -1,0 +1,4 @@
+[R2L'] [F2B'] u [L2R] [F2B] 
+[R2L'] [F2B'] D [F2B] [R2L] 
+[L2R'] [U2D'] F [U2D] [L2R] 
+[L2R'] [U2D'] b [L2R] [D2U] 

@@ -1,0 +1,16 @@
+[FB] U [F2B'] U F 
+[FB] U [F2B'] U b 
+[FB] U [F2B'] d R 
+[FB] U [F2B'] d l 
+[FB] d [R2L'] U R 
+[FB] d [R2L'] U l 
+[FB] d [R2L'] d f 
+[FB] d [R2L'] d B 
+[R'L'] U [R2L] U' R' 
+[R'L'] U [R2L] U' l' 
+[R'L'] U [R2L] d' F' 
+[R'L'] U [R2L] d' b' 
+[R'L'] d [B2F] U' f' 
+[R'L'] d [B2F] U' B' 
+[R'L'] d [B2F] d' R' 
+[R'L'] d [B2F] d' l' 
