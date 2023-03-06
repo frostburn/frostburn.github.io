@@ -12,6 +12,7 @@ td.case {width:100px; height:100px; padding:0;}
 <p>OLL (Orientation of the Last Layer) solves the top color of the last layer.</p>
 <p>Next step: <a href="pll.html">PLL</a></p>
 <p>Shortest STM solutions discovered by <a href="https://github.com/frostburn/speedcube">frostburn/speedcube</a>.</p>
+<p>If there are two solutions listed the second one doesn't rotate the cube at the cost of some complexity.</p>
 <table>
 <tr>
 <th>Name</th>
@@ -57,8 +58,8 @@ td.case {width:100px; height:100px; padding:0;}
 </a>
 </td>
 <td>0</td>
-<td>0</td>
-</tr>
+<td>-nan
+</td></tr>
 <tr>
 <td>1</td>
 <td class="case">
@@ -96,8 +97,8 @@ R U2 R2 F R F' U2 R' F R F'
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>7.8
+</td></tr>
 <tr>
 <td>1 U</td>
 <td class="case">
@@ -135,8 +136,8 @@ F' U2 F2 R' F' R U2 F R' F' R
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>8.6
+</td></tr>
 <tr>
 <td>2</td>
 <td class="case">
@@ -170,12 +171,12 @@ F' U2 F2 R' F' R U2 F R' F' R
 </td>
 <td>
 <a href="txt/oll_2_0.txt">
-R' F' R U2 R' F2 r U2 r' F R 
+F R U r' U F' U' F M' U' F' 
 </a>
 </td>
 <td>11</td>
-<td>13</td>
-</tr>
+<td>8.6
+</td></tr>
 <tr>
 <td>2 U</td>
 <td class="case">
@@ -213,8 +214,8 @@ F R' F' R U2 F R' F' R2 U2 R'
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>7.8
+</td></tr>
 <tr>
 <td>2 U2</td>
 <td class="case">
@@ -252,8 +253,8 @@ R' F R F' U2 R' F R F2 U2 F
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>2 U'</td>
 <td class="case">
@@ -287,12 +288,12 @@ R' F R F' U2 R' F R F2 U2 F
 </td>
 <td>
 <a href="txt/oll_2_3.txt">
-F' U' R' M2 F r U' R' F r F 
+F R U r' U' R U R' M' U' F' 
 </a>
 </td>
 <td>11</td>
-<td>12</td>
-</tr>
+<td>8.0
+</td></tr>
 <tr>
 <td>3</td>
 <td class="case">
@@ -326,12 +327,12 @@ F' U' R' M2 F r U' R' F r F
 </td>
 <td>
 <a href="txt/oll_3_0.txt">
-R2 r' U R' U r U2 r' U M' 
+M2 r U R' U r U2 r' U M' 
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>3 U</td>
 <td class="case">
@@ -365,12 +366,15 @@ R2 r' U R' U r U2 r' U M'
 </td>
 <td>
 <a href="txt/oll_3_1.txt">
-F2 f' U F' U f U2 f' d M' 
+F2 f' d R' U r U2 r' U M' 
 </a>
+<br>
+F2 f' U F' U f U2 f' U S 
 </td>
 <td>10</td>
-<td>30</td>
-</tr>
+<td>17.8
+<br>23.3
+</td></tr>
 <tr>
 <td>3 U2</td>
 <td class="case">
@@ -404,12 +408,12 @@ F2 f' U F' U f U2 f' d M'
 </td>
 <td>
 <a href="txt/oll_3_2.txt">
-M' U r' U2 r U R' U R2 r' 
+M' U r' U2 r U R' U M2 r 
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>3 U'</td>
 <td class="case">
@@ -445,10 +449,13 @@ M' U r' U2 r U R' U R2 r'
 <a href="txt/oll_3_3.txt">
 F' f2 R f' d R f2 L' D M' 
 </a>
+<br>
+S U f' U2 f U F' U F2 f' 
 </td>
 <td>10</td>
-<td>30</td>
-</tr>
+<td>20.8
+<br>23.3
+</td></tr>
 <tr>
 <td>4</td>
 <td class="case">
@@ -486,8 +493,8 @@ R' M2 F' r U' R' F2 R U' M'
 </a>
 </td>
 <td>10</td>
-<td>12</td>
-</tr>
+<td>8.5
+</td></tr>
 <tr>
 <td>4 U</td>
 <td class="case">
@@ -521,12 +528,15 @@ R' M2 F' r U' R' F2 R U' M'
 </td>
 <td>
 <a href="txt/oll_4_1.txt">
-F f2 L' f d' L' f2 R D' M' 
+F f2 r' U L' u' r2 U f' M 
 </a>
+<br>
+F f2 r' U r' f' r2 F U' S 
 </td>
 <td>10</td>
-<td>31</td>
-</tr>
+<td>21.1
+<br>23.3
+</td></tr>
 <tr>
 <td>4 U2</td>
 <td class="case">
@@ -560,12 +570,12 @@ F f2 L' f d' L' f2 R D' M'
 </td>
 <td>
 <a href="txt/oll_4_2.txt">
-M' U' R f2 r' f' U f' R r2 
+M' U' R f2 r' f' U f' R' M2 
 </a>
 </td>
 <td>10</td>
-<td>20</td>
-</tr>
+<td>14.6
+</td></tr>
 <tr>
 <td>4 U'</td>
 <td class="case">
@@ -599,12 +609,15 @@ M' U' R f2 r' f' U f' R r2
 </td>
 <td>
 <a href="txt/oll_4_3.txt">
-F2 f U' F U' f' U2 f d' M' 
+F2 f U' F d' R' F2 R U' M' 
 </a>
+<br>
+S U' F R2 F' U' f R' F f2 
 </td>
 <td>10</td>
-<td>31</td>
-</tr>
+<td>18.0
+<br>23.1
+</td></tr>
 <tr>
 <td>5</td>
 <td class="case">
@@ -642,8 +655,8 @@ R' F2 r U r' F R
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>9.7
+</td></tr>
 <tr>
 <td>5 U</td>
 <td class="case">
@@ -681,8 +694,8 @@ F' r2 F r U' r F
 </a>
 </td>
 <td>7</td>
-<td>14</td>
-</tr>
+<td>10.9
+</td></tr>
 <tr>
 <td>5 U2</td>
 <td class="case">
@@ -720,8 +733,8 @@ r' U2 R U R' U r
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>9.3
+</td></tr>
 <tr>
 <td>5 U'</td>
 <td class="case">
@@ -759,8 +772,8 @@ f' U2 F U F' U f
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>6</td>
 <td class="case">
@@ -798,8 +811,8 @@ r U2 R' U' R U' r'
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>9.3
+</td></tr>
 <tr>
 <td>6 U</td>
 <td class="case">
@@ -837,8 +850,8 @@ f U2 F' U' F U' f'
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>6 U2</td>
 <td class="case">
@@ -876,8 +889,8 @@ R f2 R' f' U f' R'
 </a>
 </td>
 <td>7</td>
-<td>20</td>
-</tr>
+<td>15.7
+</td></tr>
 <tr>
 <td>6 U'</td>
 <td class="case">
@@ -915,8 +928,8 @@ F R2 f' U' f R' F'
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>7</td>
 <td class="case">
@@ -954,8 +967,8 @@ r U R' U R U2 r'
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>9.3
+</td></tr>
 <tr>
 <td>7 U</td>
 <td class="case">
@@ -993,8 +1006,8 @@ f U F' U F U2 f'
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>7 U2</td>
 <td class="case">
@@ -1032,8 +1045,8 @@ R f U' f R f2 R'
 </a>
 </td>
 <td>7</td>
-<td>20</td>
-</tr>
+<td>15.2
+</td></tr>
 <tr>
 <td>7 U'</td>
 <td class="case">
@@ -1071,8 +1084,8 @@ F R f' U f R2 F'
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>8</td>
 <td class="case">
@@ -1110,8 +1123,8 @@ R' F' r U' r' F2 R
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>10.1
+</td></tr>
 <tr>
 <td>8 U</td>
 <td class="case">
@@ -1149,8 +1162,8 @@ F' r' U r' F' r2 F
 </a>
 </td>
 <td>7</td>
-<td>14</td>
-</tr>
+<td>11.6
+</td></tr>
 <tr>
 <td>8 U2</td>
 <td class="case">
@@ -1188,8 +1201,8 @@ r' U' R U' R' U2 r
 </a>
 </td>
 <td>7</td>
-<td>13</td>
-</tr>
+<td>9.3
+</td></tr>
 <tr>
 <td>8 U'</td>
 <td class="case">
@@ -1227,8 +1240,8 @@ f' U' F U' F' U2 f
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>13.8
+</td></tr>
 <tr>
 <td>9</td>
 <td class="case">
@@ -1266,8 +1279,8 @@ F U2 F' U' M' F U' F' M
 </a>
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>19.2
+</td></tr>
 <tr>
 <td>9 U</td>
 <td class="case">
@@ -1301,12 +1314,15 @@ F U2 F' U' M' F U' F' M
 </td>
 <td>
 <a href="txt/oll_9_1.txt">
-r f2 R' f' M' d L' d' M 
+r f2 l' u' M' f L' f' M 
 </a>
+<br>
+r f2 R' f' M' U f' r' S' 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>23.3
+<br>24.6
+</td></tr>
 <tr>
 <td>9 U2</td>
 <td class="case">
@@ -1344,8 +1360,8 @@ f R2 f' U' M f R' f' M'
 </a>
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>20.7
+</td></tr>
 <tr>
 <td>9 U'</td>
 <td class="case">
@@ -1381,10 +1397,13 @@ f R2 f' U' M f R' f' M'
 <a href="txt/oll_9_3.txt">
 R U2 R' d' M' F U' F' M 
 </a>
+<br>
+R U2 R' U' S' R U' R' S 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>22.1
+<br>27.8
+</td></tr>
 <tr>
 <td>10</td>
 <td class="case">
@@ -1420,10 +1439,13 @@ R U2 R' d' M' F U' F' M
 <a href="txt/oll_10_0.txt">
 f' L2 f U M f' r u M' 
 </a>
+<br>
+f' L2 f U M f' L f M' 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>21.9
+<br>22.8
+</td></tr>
 <tr>
 <td>10 U</td>
 <td class="case">
@@ -1459,10 +1481,13 @@ f' L2 f U M f' r u M'
 <a href="txt/oll_10_1.txt">
 R' U2 R d M f' r u M' 
 </a>
+<br>
+R' d2 r f M' U' f l S 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>22.2
+<br>26.4
+</td></tr>
 <tr>
 <td>10 U2</td>
 <td class="case">
@@ -1500,8 +1525,8 @@ F' U2 F U M' F' U F M
 </a>
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>19.2
+</td></tr>
 <tr>
 <td>10 U'</td>
 <td class="case">
@@ -1537,10 +1562,13 @@ F' U2 F U M' F' U F M
 <a href="txt/oll_10_3.txt">
 r' F2 r d M' F' U F M 
 </a>
+<br>
+r' F2 L F E L' F r S' 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>21.9
+<br>27.9
+</td></tr>
 <tr>
 <td>11</td>
 <td class="case">
@@ -1574,12 +1602,15 @@ r' F2 r d M' F' U F M
 </td>
 <td>
 <a href="txt/oll_11_0.txt">
-R' L2 F r' u f L2 f' u M' 
+R M2 f U' f l U2 R' U M' 
 </a>
+<br>
+R M2 f U' f R f2 r' U M 
 </td>
 <td>10</td>
-<td>26</td>
-</tr>
+<td>16.6
+<br>20.0
+</td></tr>
 <tr>
 <td>11 U</td>
 <td class="case">
@@ -1617,8 +1648,8 @@ r' U2 R M2 U R' U' M2 U2 r
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.1
+</td></tr>
 <tr>
 <td>11 U2</td>
 <td class="case">
@@ -1656,8 +1687,8 @@ M2 r U R' U R U2 R' U M'
 </a>
 </td>
 <td>10</td>
-<td>12</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>11 U'</td>
 <td class="case">
@@ -1691,12 +1722,12 @@ M2 r U R' U R U2 R' U M'
 </td>
 <td>
 <a href="txt/oll_11_3.txt">
-R' F2 R2 r' U r' F' M2 F2 R 
+R' F2 M2 r U r' F' M2 F2 R 
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.9
+</td></tr>
 <tr>
 <td>12</td>
 <td class="case">
@@ -1732,10 +1763,13 @@ R' F2 R2 r' U r' F' M2 F2 R
 <a href="txt/oll_12_0.txt">
 f R2 u F D2 r F r2 D M' 
 </a>
+<br>
+R' M' U' R U' R' U2 R U' M 
 </td>
 <td>10</td>
-<td>23</td>
-</tr>
+<td>16.2
+<br>18.6
+</td></tr>
 <tr>
 <td>12 U</td>
 <td class="case">
@@ -1773,8 +1807,8 @@ r U2 R' M2 U' R U M2 U2 r'
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.1
+</td></tr>
 <tr>
 <td>12 U2</td>
 <td class="case">
@@ -1812,8 +1846,8 @@ R' M2 F' r U' r' F2 r U' M'
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>10.1
+</td></tr>
 <tr>
 <td>12 U'</td>
 <td class="case">
@@ -1847,12 +1881,12 @@ R' M2 F' r U' r' F2 r U' M'
 </td>
 <td>
 <a href="txt/oll_12_3.txt">
-R f2 R r2 f' U f M2 f2 R' 
+R f2 R' M2 f' U f M2 f2 R' 
 </a>
 </td>
 <td>10</td>
-<td>20</td>
-</tr>
+<td>15.4
+</td></tr>
 <tr>
 <td>13</td>
 <td class="case">
@@ -1886,12 +1920,15 @@ R f2 R r2 f' U f M2 f2 R'
 </td>
 <td>
 <a href="txt/oll_13_0.txt">
-R U' r' f l' U' R E M' 
+R U' L' u R' U' R E M' 
 </a>
+<br>
+R U' r' f R' F' R S' M' 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>22.5
+<br>24.0
+</td></tr>
 <tr>
 <td>13 U</td>
 <td class="case">
@@ -1925,12 +1962,12 @@ R U' r' f l' U' R E M'
 </td>
 <td>
 <a href="txt/oll_13_1.txt">
-F U' f' l F' r' D M' E 
+F U' f' R U' r' F M' S 
 </a>
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>23.5
+</td></tr>
 <tr>
 <td>13 U2</td>
 <td class="case">
@@ -1964,12 +2001,15 @@ F U' f' l F' r' D M' E
 </td>
 <td>
 <a href="txt/oll_13_2.txt">
-r f' U' F r' U' L E M 
+L U' R' u r' F' r E M 
 </a>
+<br>
+r f' U' F r' U' r S M 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>25.0
+<br>25.7
+</td></tr>
 <tr>
 <td>13 U'</td>
 <td class="case">
@@ -2005,10 +2045,13 @@ r f' U' F r' U' L E M
 <a href="txt/oll_13_3.txt">
 f R' F' r f' d' R E M' 
 </a>
+<br>
+f R' F' r f' U' f M S' 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>24.2
+<br>26.4
+</td></tr>
 <tr>
 <td>14</td>
 <td class="case">
@@ -2044,10 +2087,13 @@ f R' F' r f' d' R E M'
 <a href="txt/oll_14_0.txt">
 r' F R f' L F r' E M' 
 </a>
+<br>
+r' F R f' r U r' S M' 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>22.7
+<br>23.6
+</td></tr>
 <tr>
 <td>14 U</td>
 <td class="case">
@@ -2081,12 +2127,15 @@ r' F R f' L F r' E M'
 </td>
 <td>
 <a href="txt/oll_14_1.txt">
-f' r d B' L F r' E M' 
+f' r U l' u f r' E' M' 
 </a>
+<br>
+f' r U R' f U f' M S 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>24.5
+<br>26.0
+</td></tr>
 <tr>
 <td>14 U2</td>
 <td class="case">
@@ -2120,12 +2169,15 @@ f' r d B' L F r' E M'
 </td>
 <td>
 <a href="txt/oll_14_2.txt">
-R' U r F' U f l' E M 
+R' d F u' f l U' M' E 
 </a>
+<br>
+R' U r F' U f R' S' M 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>24.8
+<br>26.1
+</td></tr>
 <tr>
 <td>14 U'</td>
 <td class="case">
@@ -2161,10 +2213,13 @@ R' U r F' U f l' E M
 <a href="txt/oll_14_3.txt">
 F' U f L' U R U' M' E 
 </a>
+<br>
+F' U f r' F R F' M' S' 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>22.7
+<br>24.0
+</td></tr>
 <tr>
 <td>15</td>
 <td class="case">
@@ -2202,8 +2257,8 @@ R' F' M F' r U R' F R
 </a>
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>19.3
+</td></tr>
 <tr>
 <td>15 U</td>
 <td class="case">
@@ -2241,8 +2296,8 @@ F' r' E' r' F r u' r F
 </a>
 </td>
 <td>9</td>
-<td>39</td>
-</tr>
+<td>22.9
+</td></tr>
 <tr>
 <td>15 U2</td>
 <td class="case">
@@ -2280,8 +2335,8 @@ r' U' M' U' R U r' U r
 </a>
 </td>
 <td>9</td>
-<td>13</td>
-</tr>
+<td>9.7
+</td></tr>
 <tr>
 <td>15 U'</td>
 <td class="case">
@@ -2317,10 +2372,13 @@ r' U' M' U' R U r' U r
 <a href="txt/oll_15_3.txt">
 f' d' M U' r f u' f r 
 </a>
+<br>
+f' U' S U' F U f' U f 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>23.1
+<br>23.9
+</td></tr>
 <tr>
 <td>16</td>
 <td class="case">
@@ -2358,8 +2416,8 @@ r U M U R' U' r U' r'
 </a>
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>19.3
+</td></tr>
 <tr>
 <td>16 U</td>
 <td class="case">
@@ -2395,10 +2453,13 @@ r U M U R' U' r U' r'
 <a href="txt/oll_16_1.txt">
 f d M U R' U' r U' r' 
 </a>
+<br>
+f d M U R' U' r d' f' 
 </td>
 <td>9</td>
-<td>33</td>
-</tr>
+<td>22.1
+<br>24.4
+</td></tr>
 <tr>
 <td>16 U2</td>
 <td class="case">
@@ -2434,10 +2495,13 @@ f d M U R' U' r U' r'
 <a href="txt/oll_16_2.txt">
 l U M' U r' F' R U' R' 
 </a>
+<br>
+l U M' U r' F' R U' l' 
 </td>
 <td>9</td>
-<td>27</td>
-</tr>
+<td>15.9
+<br>19.1
+</td></tr>
 <tr>
 <td>16 U'</td>
 <td class="case">
@@ -2473,10 +2537,13 @@ l U M' U r' F' R U' R'
 <a href="txt/oll_16_3.txt">
 F l E R U' R' u R' u' 
 </a>
+<br>
+F R S R f' U' F R' F' 
 </td>
 <td>9</td>
-<td>37</td>
-</tr>
+<td>23.0
+<br>23.4
+</td></tr>
 <tr>
 <td>17</td>
 <td class="case">
@@ -2514,8 +2581,8 @@ R' F R F' U' M' F' U F M
 </a>
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>18.7
+</td></tr>
 <tr>
 <td>17 U</td>
 <td class="case">
@@ -2549,12 +2616,12 @@ R' F R F' U' M' F' U F M
 </td>
 <td>
 <a href="txt/oll_17_1.txt">
-F' r U r' d' M f' r u M' 
+r U' r' F U M' F U' F' M 
 </a>
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>18.8
+</td></tr>
 <tr>
 <td>17 U2</td>
 <td class="case">
@@ -2590,10 +2657,13 @@ F' r U r' d' M f' r u M'
 <a href="txt/oll_17_2.txt">
 r' U L U' F' M U' F U M' 
 </a>
+<br>
+L' f U f' U' M f' L f M' 
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>19.9
+<br>22.1
+</td></tr>
 <tr>
 <td>17 U'</td>
 <td class="case">
@@ -2631,8 +2701,8 @@ R f' U' f U M f R' f' M'
 </a>
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>20.2
+</td></tr>
 <tr>
 <td>18</td>
 <td class="case">
@@ -2670,8 +2740,8 @@ R' M' F U F M' U' F' U' R M2
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>6.9
+</td></tr>
 <tr>
 <td>18 U</td>
 <td class="case">
@@ -2705,12 +2775,12 @@ R' M' F U F M' U' F' U' R M2
 </td>
 <td>
 <a href="txt/oll_18_1.txt">
-R U2 R' F' r' F2 r F R U2 R' 
+r' U' F R' F R U r F U2 F' 
 </a>
 </td>
 <td>11</td>
-<td>13</td>
-</tr>
+<td>9.0
+</td></tr>
 <tr>
 <td>18 U2</td>
 <td class="case">
@@ -2744,12 +2814,12 @@ R U2 R' F' r' F2 r F R U2 R'
 </td>
 <td>
 <a href="txt/oll_18_2.txt">
-R U2 R' F' r' U' F' U F' r F 
+r' U' R' F2 R F2 R' F2 R U r 
 </a>
 </td>
 <td>11</td>
-<td>13</td>
-</tr>
+<td>9.2
+</td></tr>
 <tr>
 <td>18 U'</td>
 <td class="case">
@@ -2783,12 +2853,12 @@ R U2 R' F' r' U' F' U F' r F
 </td>
 <td>
 <a href="txt/oll_18_3.txt">
-F U2 F' r' U' R' F' R F' U r 
+F U2 F' r' U2 R U R' F2 U r 
 </a>
 </td>
 <td>11</td>
-<td>13</td>
-</tr>
+<td>9.2
+</td></tr>
 <tr>
 <td>19</td>
 <td class="case">
@@ -2826,8 +2896,8 @@ M f R f' M' U' f' U f R'
 </a>
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>20.2
+</td></tr>
 <tr>
 <td>19 U</td>
 <td class="case">
@@ -2861,12 +2931,15 @@ M f R f' M' U' f' U f R'
 </td>
 <td>
 <a href="txt/oll_19_1.txt">
-S' R U R' S U' R' F R F' 
+S' R' d' F M U F R' F' R 
 </a>
+<br>
+S' R U R' S U' R' F R F' 
 </td>
 <td>10</td>
-<td>41</td>
-</tr>
+<td>26.5
+<br>27.1
+</td></tr>
 <tr>
 <td>19 U2</td>
 <td class="case">
@@ -2900,12 +2973,12 @@ S' R U R' S U' R' F R F'
 </td>
 <td>
 <a href="txt/oll_19_2.txt">
-M' F U F' M U' F' r U r' 
+M' F' U' F M U F R' F' R 
 </a>
 </td>
 <td>10</td>
-<td>33</td>
-</tr>
+<td>18.7
+</td></tr>
 <tr>
 <td>19 U'</td>
 <td class="case">
@@ -2943,8 +3016,8 @@ S r f U' M f' r' f U f'
 </a>
 </td>
 <td>10</td>
-<td>40</td>
-</tr>
+<td>25.6
+</td></tr>
 <tr>
 <td>20</td>
 <td class="case">
@@ -2982,8 +3055,8 @@ M' U2 F2 U M2 U M' U2 F2
 </a>
 </td>
 <td>9</td>
-<td>10</td>
-</tr>
+<td>7.8
+</td></tr>
 <tr>
 <td>21</td>
 <td class="case">
@@ -3021,8 +3094,8 @@ r' F2 M' U F2 U F2 U' F2 R
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.1
+</td></tr>
 <tr>
 <td>21 U</td>
 <td class="case">
@@ -3060,8 +3133,8 @@ F U2 S R' U2 R' U2 R U2 f'
 </a>
 </td>
 <td>10</td>
-<td>40</td>
-</tr>
+<td>22.8
+</td></tr>
 <tr>
 <td>22</td>
 <td class="case">
@@ -3099,8 +3172,8 @@ R U2 R2 U' R2 U' R2 U2 R
 </a>
 </td>
 <td>9</td>
-<td>8</td>
-</tr>
+<td>6.6
+</td></tr>
 <tr>
 <td>22 U</td>
 <td class="case">
@@ -3138,8 +3211,8 @@ F U2 F2 U' F2 U' F2 U2 F
 </a>
 </td>
 <td>9</td>
-<td>10</td>
-</tr>
+<td>8.0
+</td></tr>
 <tr>
 <td>22 U2</td>
 <td class="case">
@@ -3173,12 +3246,12 @@ F U2 F2 U' F2 U' F2 U2 F
 </td>
 <td>
 <a href="txt/oll_22_2.txt">
-r f2 R2 f' U2 f' r2 F2 r 
+r' F2 r2 f U2 f R2 f2 r' 
 </a>
 </td>
 <td>9</td>
-<td>20</td>
-</tr>
+<td>15.2
+</td></tr>
 <tr>
 <td>22 U'</td>
 <td class="case">
@@ -3216,8 +3289,8 @@ f R2 f2 r' U2 r' F2 r2 f
 </a>
 </td>
 <td>9</td>
-<td>20</td>
-</tr>
+<td>15.2
+</td></tr>
 <tr>
 <td>23</td>
 <td class="case">
@@ -3255,8 +3328,8 @@ R2 u' F R2 F' u R U2 R
 </a>
 </td>
 <td>9</td>
-<td>16</td>
-</tr>
+<td>11.2
+</td></tr>
 <tr>
 <td>23 U</td>
 <td class="case">
@@ -3294,8 +3367,8 @@ F2 u' R U2 R' u F U2 F
 </a>
 </td>
 <td>9</td>
-<td>16</td>
-</tr>
+<td>11.0
+</td></tr>
 <tr>
 <td>23 U2</td>
 <td class="case">
@@ -3333,8 +3406,8 @@ r2 U' R F2 R' U r F2 r
 </a>
 </td>
 <td>9</td>
-<td>14</td>
-</tr>
+<td>10.3
+</td></tr>
 <tr>
 <td>23 U'</td>
 <td class="case">
@@ -3372,8 +3445,8 @@ F2 u R' F2 R u' F' U2 F'
 </a>
 </td>
 <td>9</td>
-<td>16</td>
-</tr>
+<td>11.7
+</td></tr>
 <tr>
 <td>24</td>
 <td class="case">
@@ -3411,8 +3484,8 @@ F R F' r U R' U' r'
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>24 U</td>
 <td class="case">
@@ -3450,8 +3523,8 @@ R' F' R f' U' F U f
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>13.3
+</td></tr>
 <tr>
 <td>24 U2</td>
 <td class="case">
@@ -3489,8 +3562,8 @@ R' F' r U R U' r' F
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>24 U'</td>
 <td class="case">
@@ -3528,8 +3601,8 @@ F' r' U r F r' U' r
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>10.9
+</td></tr>
 <tr>
 <td>25</td>
 <td class="case">
@@ -3567,8 +3640,8 @@ F' r U R' U' r' F R
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>25 U</td>
 <td class="case">
@@ -3606,8 +3679,8 @@ r' U r F' r' U' r F
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>10.9
+</td></tr>
 <tr>
 <td>25 U2</td>
 <td class="case">
@@ -3641,12 +3714,12 @@ r' U r F' r' U' r F
 </td>
 <td>
 <a href="txt/oll_25_2.txt">
-F' r' U' r F r' U r 
+r U R U' r' F R' F' 
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>25 U'</td>
 <td class="case">
@@ -3684,8 +3757,8 @@ F R' F' r U R U' r'
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>26</td>
 <td class="case">
@@ -3723,8 +3796,8 @@ R U2 R' U' R U' R'
 </a>
 </td>
 <td>7</td>
-<td>7</td>
-</tr>
+<td>4.6
+</td></tr>
 <tr>
 <td>26 U</td>
 <td class="case">
@@ -3762,8 +3835,8 @@ F U2 F' U' F U' F'
 </a>
 </td>
 <td>7</td>
-<td>11</td>
-</tr>
+<td>8.4
+</td></tr>
 <tr>
 <td>26 U2</td>
 <td class="case">
@@ -3801,8 +3874,8 @@ f' r U r' f U F'
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>14.4
+</td></tr>
 <tr>
 <td>26 U'</td>
 <td class="case">
@@ -3840,8 +3913,8 @@ R' U' R U' R' U2 R
 </a>
 </td>
 <td>7</td>
-<td>7</td>
-</tr>
+<td>4.6
+</td></tr>
 <tr>
 <td>27</td>
 <td class="case">
@@ -3879,8 +3952,8 @@ R U R' U R U2 R'
 </a>
 </td>
 <td>7</td>
-<td>7</td>
-</tr>
+<td>4.6
+</td></tr>
 <tr>
 <td>27 U</td>
 <td class="case">
@@ -3918,8 +3991,8 @@ F U F' U F U2 F'
 </a>
 </td>
 <td>7</td>
-<td>11</td>
-</tr>
+<td>8.4
+</td></tr>
 <tr>
 <td>27 U2</td>
 <td class="case">
@@ -3957,8 +4030,8 @@ r f' U' f r' U' R
 </a>
 </td>
 <td>7</td>
-<td>19</td>
-</tr>
+<td>14.2
+</td></tr>
 <tr>
 <td>27 U'</td>
 <td class="case">
@@ -3996,8 +4069,8 @@ R' U2 R U R' U R
 </a>
 </td>
 <td>7</td>
-<td>7</td>
-</tr>
+<td>4.6
+</td></tr>
 <tr>
 <td>28</td>
 <td class="case">
@@ -4035,8 +4108,8 @@ M U M' U2 M U M'
 </a>
 </td>
 <td>7</td>
-<td>33</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>28 U</td>
 <td class="case">
@@ -4074,8 +4147,8 @@ M U' M' U2 M U' M'
 </a>
 </td>
 <td>7</td>
-<td>33</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>28 U2</td>
 <td class="case">
@@ -4113,8 +4186,8 @@ M' U M U2 M' U M
 </a>
 </td>
 <td>7</td>
-<td>33</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>28 U'</td>
 <td class="case">
@@ -4152,8 +4225,8 @@ M' U' M U2 M' U' M
 </a>
 </td>
 <td>7</td>
-<td>33</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>29</td>
 <td class="case">
@@ -4191,8 +4264,8 @@ r U R' U' R' M2 F R F' M'
 </a>
 </td>
 <td>10</td>
-<td>12</td>
-</tr>
+<td>8.2
+</td></tr>
 <tr>
 <td>29 U</td>
 <td class="case">
@@ -4230,8 +4303,8 @@ F R' U' R2 U' R2 U2 R U' F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>29 U2</td>
 <td class="case">
@@ -4269,8 +4342,8 @@ r' U' r F' r' U2 r' F' r2 F
 </a>
 </td>
 <td>10</td>
-<td>14</td>
-</tr>
+<td>11.5
+</td></tr>
 <tr>
 <td>29 U'</td>
 <td class="case">
@@ -4308,8 +4381,8 @@ f U' R' U2 R' U2 R2 U R' f'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>12.5
+</td></tr>
 <tr>
 <td>30</td>
 <td class="case">
@@ -4347,8 +4420,8 @@ F R F' r U R2 U R U2 r'
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.2
+</td></tr>
 <tr>
 <td>30 U</td>
 <td class="case">
@@ -4382,12 +4455,12 @@ F R F' r U R2 U R U2 r'
 </td>
 <td>
 <a href="txt/oll_30_1.txt">
-R' F' r U R2 r' U' r' F M' 
+r' U F U2 F U2 F2 U' F r 
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.1
+</td></tr>
 <tr>
 <td>30 U2</td>
 <td class="case">
@@ -4425,8 +4498,8 @@ f R U R' F U' f' r U' r'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>13.0
+</td></tr>
 <tr>
 <td>30 U'</td>
 <td class="case">
@@ -4464,8 +4537,8 @@ R' F U F2 U F2 U2 F' U R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.9
+</td></tr>
 <tr>
 <td>31</td>
 <td class="case">
@@ -4503,8 +4576,8 @@ M' f R f' U' r' U' R
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>13.5
+</td></tr>
 <tr>
 <td>31 U</td>
 <td class="case">
@@ -4542,8 +4615,8 @@ S R U R' U' f' U' F
 </a>
 </td>
 <td>8</td>
-<td>40</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>31 U2</td>
 <td class="case">
@@ -4581,8 +4654,8 @@ M F U F' U' R' F' r
 </a>
 </td>
 <td>8</td>
-<td>33</td>
-</tr>
+<td>19.8
+</td></tr>
 <tr>
 <td>31 U'</td>
 <td class="case">
@@ -4620,8 +4693,8 @@ S' r f U' f' U' r' f
 </a>
 </td>
 <td>8</td>
-<td>41</td>
-</tr>
+<td>25.2
+</td></tr>
 <tr>
 <td>32</td>
 <td class="case">
@@ -4659,8 +4732,8 @@ M' f' r' U r U f r'
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>14.1
+</td></tr>
 <tr>
 <td>32 U</td>
 <td class="case">
@@ -4698,8 +4771,8 @@ S R' U' R U F R f'
 </a>
 </td>
 <td>8</td>
-<td>40</td>
-</tr>
+<td>24.1
+</td></tr>
 <tr>
 <td>32 U2</td>
 <td class="case">
@@ -4737,8 +4810,8 @@ M F' U' F U r U R'
 </a>
 </td>
 <td>8</td>
-<td>33</td>
-</tr>
+<td>19.8
+</td></tr>
 <tr>
 <td>32 U'</td>
 <td class="case">
@@ -4776,8 +4849,8 @@ S' r' F' r U f U F'
 </a>
 </td>
 <td>8</td>
-<td>41</td>
-</tr>
+<td>24.8
+</td></tr>
 <tr>
 <td>33</td>
 <td class="case">
@@ -4815,8 +4888,8 @@ R U R' U' R' F R F'
 </a>
 </td>
 <td>8</td>
-<td>11</td>
-</tr>
+<td>6.8
+</td></tr>
 <tr>
 <td>33 U</td>
 <td class="case">
@@ -4854,8 +4927,8 @@ F' U' F U F R' F' R
 </a>
 </td>
 <td>8</td>
-<td>11</td>
-</tr>
+<td>8.0
+</td></tr>
 <tr>
 <td>33 U2</td>
 <td class="case">
@@ -4893,8 +4966,8 @@ r' F' r U r U' r' F
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>10.9
+</td></tr>
 <tr>
 <td>33 U'</td>
 <td class="case">
@@ -4928,12 +5001,12 @@ r' F' r U r U' r' F
 </td>
 <td>
 <a href="txt/oll_33_3.txt">
-f R f' U' f' U f R' 
+f' r' U r f r' U' r 
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>14.3
+</td></tr>
 <tr>
 <td>34</td>
 <td class="case">
@@ -4969,10 +5042,13 @@ f R f' U' f' U f R'
 <a href="txt/oll_34_0.txt">
 R U R' U' f' U' F d M' 
 </a>
+<br>
+R U R' U' f' U' F U S 
 </td>
 <td>9</td>
-<td>30</td>
-</tr>
+<td>18.0
+<br>23.4
+</td></tr>
 <tr>
 <td>34 U</td>
 <td class="case">
@@ -5010,8 +5086,8 @@ f' r' U r U f r' U' M'
 </a>
 </td>
 <td>9</td>
-<td>19</td>
-</tr>
+<td>13.7
+</td></tr>
 <tr>
 <td>34 U2</td>
 <td class="case">
@@ -5047,10 +5123,13 @@ f' r' U r U f r' U' M'
 <a href="txt/oll_34_2.txt">
 R' U' R d R f U' f' M' 
 </a>
+<br>
+R' U' R U F R f' U' S 
 </td>
 <td>9</td>
-<td>30</td>
-</tr>
+<td>18.5
+<br>23.4
+</td></tr>
 <tr>
 <td>34 U'</td>
 <td class="case">
@@ -5088,8 +5167,8 @@ f R f' U' r' U' R U M'
 </a>
 </td>
 <td>9</td>
-<td>19</td>
-</tr>
+<td>13.1
+</td></tr>
 <tr>
 <td>35</td>
 <td class="case">
@@ -5127,8 +5206,8 @@ R U2 R2 F R F' R U2 R'
 </a>
 </td>
 <td>9</td>
-<td>11</td>
-</tr>
+<td>7.3
+</td></tr>
 <tr>
 <td>35 U</td>
 <td class="case">
@@ -5166,8 +5245,8 @@ F U2 F2 r U r' F U2 F'
 </a>
 </td>
 <td>9</td>
-<td>13</td>
-</tr>
+<td>9.8
+</td></tr>
 <tr>
 <td>35 U2</td>
 <td class="case">
@@ -5205,8 +5284,8 @@ f' r2 F2 U' F' U F' r2 f
 </a>
 </td>
 <td>9</td>
-<td>19</td>
-</tr>
+<td>14.1
+</td></tr>
 <tr>
 <td>35 U'</td>
 <td class="case">
@@ -5244,8 +5323,8 @@ R' U2 R2 f' U' f R' U2 R
 </a>
 </td>
 <td>9</td>
-<td>19</td>
-</tr>
+<td>12.8
+</td></tr>
 <tr>
 <td>36</td>
 <td class="case">
@@ -5283,8 +5362,8 @@ R' F' U' F2 U R U' R' F' R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>8.0
+</td></tr>
 <tr>
 <td>36 U</td>
 <td class="case">
@@ -5318,12 +5397,12 @@ R' F' U' F2 U R U' R' F' R
 </td>
 <td>
 <a href="txt/oll_36_1.txt">
-F' U2 F2 R2 f' U' f R2 F' R 
+f R2 F U F' R2 F U' F' f' 
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>12.9
+</td></tr>
 <tr>
 <td>36 U2</td>
 <td class="case">
@@ -5361,8 +5440,8 @@ R U2 R2 F2 r U' R U2 r' F
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.1
+</td></tr>
 <tr>
 <td>36 U'</td>
 <td class="case">
@@ -5400,8 +5479,8 @@ R U R2 F' U' F U R2 U2 R'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>37</td>
 <td class="case">
@@ -5435,12 +5514,12 @@ R U R2 F' U' F U R2 U2 R'
 </td>
 <td>
 <a href="txt/oll_37_0.txt">
-R' F R F' U' F' U F 
+F R' F' R U R U' R' 
 </a>
 </td>
 <td>8</td>
-<td>11</td>
-</tr>
+<td>6.8
+</td></tr>
 <tr>
 <td>37 U</td>
 <td class="case">
@@ -5474,12 +5553,12 @@ R' F R F' U' F' U F
 </td>
 <td>
 <a href="txt/oll_37_1.txt">
-F' r U r' U' r' F r 
+r U' r' F U F U' F' 
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.6
+</td></tr>
 <tr>
 <td>37 U2</td>
 <td class="case">
@@ -5517,8 +5596,8 @@ r' U r f' r' U' r f
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>14.3
+</td></tr>
 <tr>
 <td>37 U'</td>
 <td class="case">
@@ -5552,12 +5631,12 @@ r' U r f' r' U' r f
 </td>
 <td>
 <a href="txt/oll_37_3.txt">
-R f' U' f U f R' f' 
+f' U f R' U' R' U R 
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>13.1
+</td></tr>
 <tr>
 <td>38</td>
 <td class="case">
@@ -5595,8 +5674,8 @@ F' U' F2 R U R' U' F2 U2 F
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.9
+</td></tr>
 <tr>
 <td>38 U</td>
 <td class="case">
@@ -5634,8 +5713,8 @@ F' R U2 R' F2 r U2 r' U2 F
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>38 U2</td>
 <td class="case">
@@ -5669,12 +5748,12 @@ F' R U2 R' F2 r U2 r' U2 F
 </td>
 <td>
 <a href="txt/oll_38_2.txt">
-R U2 R2 F2 r U r' F2 R F' 
+r' F2 R' U' R F2 R' U M' R2 
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>8.6
+</td></tr>
 <tr>
 <td>38 U'</td>
 <td class="case">
@@ -5712,8 +5791,8 @@ F R U R2 U' F' U F R F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.8
+</td></tr>
 <tr>
 <td>39</td>
 <td class="case">
@@ -5747,12 +5826,12 @@ F R U R2 U' F' U F R F'
 </td>
 <td>
 <a href="txt/oll_39_0.txt">
-r f' d' f' d' R d M' 
+r f' U' r' U' r f M 
 </a>
 </td>
 <td>8</td>
-<td>31</td>
-</tr>
+<td>20.8
+</td></tr>
 <tr>
 <td>39 U</td>
 <td class="case">
@@ -5788,10 +5867,13 @@ r f' d' f' d' R d M'
 <a href="txt/oll_39_1.txt">
 f R' F' d' F' U F M' 
 </a>
+<br>
+f R' F' U' R' U R S' 
 </td>
 <td>8</td>
-<td>31</td>
-</tr>
+<td>19.1
+<br>24.6
+</td></tr>
 <tr>
 <td>39 U2</td>
 <td class="case">
@@ -5829,8 +5911,8 @@ R U' r' U' F' U F M'
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>8.7
+</td></tr>
 <tr>
 <td>39 U'</td>
 <td class="case">
@@ -5866,10 +5948,13 @@ R U' r' U' F' U F M'
 <a href="txt/oll_39_3.txt">
 F U' f' U' L' d F M' 
 </a>
+<br>
+F U' f' U' r' F r S 
 </td>
 <td>8</td>
-<td>30</td>
-</tr>
+<td>20.2
+<br>24.2
+</td></tr>
 <tr>
 <td>40</td>
 <td class="case">
@@ -5903,12 +5988,12 @@ F U' f' U' L' d F M'
 </td>
 <td>
 <a href="txt/oll_40_0.txt">
-l' f d f d L' d' M' 
+R' U r U f R' f' M 
 </a>
 </td>
 <td>8</td>
-<td>31</td>
-</tr>
+<td>20.6
+</td></tr>
 <tr>
 <td>40 U</td>
 <td class="case">
@@ -5944,10 +6029,13 @@ l' f d f d L' d' M'
 <a href="txt/oll_40_1.txt">
 F' U f U R d' F' M' 
 </a>
+<br>
+F' U f U R U' R' S' 
 </td>
 <td>8</td>
-<td>31</td>
-</tr>
+<td>19.1
+<br>24.6
+</td></tr>
 <tr>
 <td>40 U2</td>
 <td class="case">
@@ -5985,8 +6073,8 @@ r' F R U F U' F' M'
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>8.7
+</td></tr>
 <tr>
 <td>40 U'</td>
 <td class="case">
@@ -6020,12 +6108,15 @@ r' F R U F U' F' M'
 </td>
 <td>
 <a href="txt/oll_40_3.txt">
-f' r d L F r' u' M' 
+f' L F d F U' F' M' 
 </a>
+<br>
+f' r U f U f' r' S 
 </td>
 <td>8</td>
-<td>30</td>
-</tr>
+<td>20.0
+<br>24.7
+</td></tr>
 <tr>
 <td>41</td>
 <td class="case">
@@ -6061,10 +6152,13 @@ f' r d L F r' u' M'
 <a href="txt/oll_41_0.txt">
 R2 L u' R' D R f u' M' 
 </a>
+<br>
+R' M' F' U' F U R U' M 
 </td>
 <td>9</td>
-<td>24</td>
-</tr>
+<td>17.1
+<br>19.1
+</td></tr>
 <tr>
 <td>41 U</td>
 <td class="case">
@@ -6100,10 +6194,13 @@ R2 L u' R' D R f u' M'
 <a href="txt/oll_41_1.txt">
 F2 f r' F' r U F d' M' 
 </a>
+<br>
+F2 f r' F' r U F U' S' 
 </td>
 <td>9</td>
-<td>31</td>
-</tr>
+<td>18.7
+<br>24.0
+</td></tr>
 <tr>
 <td>41 U2</td>
 <td class="case">
@@ -6141,8 +6238,8 @@ R' M2 U' F' U F r U' M'
 </a>
 </td>
 <td>9</td>
-<td>12</td>
-</tr>
+<td>8.4
+</td></tr>
 <tr>
 <td>41 U'</td>
 <td class="case">
@@ -6178,10 +6275,13 @@ R' M2 U' F' U F r U' M'
 <a href="txt/oll_41_3.txt">
 F f2 U' L' d F r U' M' 
 </a>
+<br>
+F f2 U' r' F r f U' S 
 </td>
 <td>9</td>
-<td>30</td>
-</tr>
+<td>19.8
+<br>23.8
+</td></tr>
 <tr>
 <td>42</td>
 <td class="case">
@@ -6215,12 +6315,12 @@ F f2 U' L' d F r U' M'
 </td>
 <td>
 <a href="txt/oll_42_0.txt">
-R2 r' f R f' U' R' U M' 
+M2 r f R f' U' R' U M' 
 </a>
 </td>
 <td>9</td>
-<td>19</td>
-</tr>
+<td>13.1
+</td></tr>
 <tr>
 <td>42 U</td>
 <td class="case">
@@ -6256,10 +6356,13 @@ R2 r' f R f' U' R' U M'
 <a href="txt/oll_42_1.txt">
 F2 f' R U R' U' F' d M' 
 </a>
+<br>
+F2 f' R U R' U' F' U S 
 </td>
 <td>9</td>
-<td>30</td>
-</tr>
+<td>18.1
+<br>23.4
+</td></tr>
 <tr>
 <td>42 U2</td>
 <td class="case">
@@ -6295,10 +6398,13 @@ F2 f' R U R' U' F' d M'
 <a href="txt/oll_42_2.txt">
 R' L2 u r F' r' f' u M' 
 </a>
+<br>
+M' U f U R U' R' f' M 
 </td>
 <td>9</td>
-<td>26</td>
-</tr>
+<td>17.0
+<br>19.9
+</td></tr>
 <tr>
 <td>42 U'</td>
 <td class="case">
@@ -6334,10 +6440,13 @@ R' L2 u r F' r' f' u M'
 <a href="txt/oll_42_3.txt">
 F' f2 U R d' F' R' F M' 
 </a>
+<br>
+F' f2 U R U' R' f' U S' 
 </td>
 <td>9</td>
-<td>31</td>
-</tr>
+<td>18.8
+<br>24.3
+</td></tr>
 <tr>
 <td>43</td>
 <td class="case">
@@ -6375,8 +6484,8 @@ F' U' r' F r F
 </a>
 </td>
 <td>6</td>
-<td>13</td>
-</tr>
+<td>10.3
+</td></tr>
 <tr>
 <td>43 U</td>
 <td class="case">
@@ -6414,8 +6523,8 @@ r' F' U' F U r
 </a>
 </td>
 <td>6</td>
-<td>13</td>
-</tr>
+<td>10.2
+</td></tr>
 <tr>
 <td>43 U2</td>
 <td class="case">
@@ -6453,8 +6562,8 @@ f' r' F' r U f
 </a>
 </td>
 <td>6</td>
-<td>19</td>
-</tr>
+<td>14.9
+</td></tr>
 <tr>
 <td>43 U'</td>
 <td class="case">
@@ -6492,8 +6601,8 @@ R' U' F' U F R
 </a>
 </td>
 <td>6</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>44</td>
 <td class="case">
@@ -6531,8 +6640,8 @@ F U R U' R' F'
 </a>
 </td>
 <td>6</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>44 U</td>
 <td class="case">
@@ -6570,8 +6679,8 @@ r f R f' U' r'
 </a>
 </td>
 <td>6</td>
-<td>19</td>
-</tr>
+<td>14.8
+</td></tr>
 <tr>
 <td>44 U2</td>
 <td class="case">
@@ -6609,8 +6718,8 @@ f R U R' U' f'
 </a>
 </td>
 <td>6</td>
-<td>19</td>
-</tr>
+<td>14.1
+</td></tr>
 <tr>
 <td>44 U'</td>
 <td class="case">
@@ -6648,8 +6757,8 @@ R U f R' f' R'
 </a>
 </td>
 <td>6</td>
-<td>19</td>
-</tr>
+<td>14.1
+</td></tr>
 <tr>
 <td>45</td>
 <td class="case">
@@ -6687,8 +6796,8 @@ F R U R' U' F'
 </a>
 </td>
 <td>6</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>45 U</td>
 <td class="case">
@@ -6726,8 +6835,8 @@ R' F' U' F U R
 </a>
 </td>
 <td>6</td>
-<td>11</td>
-</tr>
+<td>7.2
+</td></tr>
 <tr>
 <td>45 U2</td>
 <td class="case">
@@ -6765,8 +6874,8 @@ F' r' F' r U F
 </a>
 </td>
 <td>6</td>
-<td>13</td>
-</tr>
+<td>10.7
+</td></tr>
 <tr>
 <td>45 U'</td>
 <td class="case">
@@ -6804,8 +6913,8 @@ r' U' F' U F r
 </a>
 </td>
 <td>6</td>
-<td>13</td>
-</tr>
+<td>10.2
+</td></tr>
 <tr>
 <td>46</td>
 <td class="case">
@@ -6843,8 +6952,8 @@ R' U' R' F R F' U R
 </a>
 </td>
 <td>8</td>
-<td>11</td>
-</tr>
+<td>6.8
+</td></tr>
 <tr>
 <td>46 U</td>
 <td class="case">
@@ -6882,8 +6991,8 @@ F U F R' F' R U' F'
 </a>
 </td>
 <td>8</td>
-<td>11</td>
-</tr>
+<td>8.0
+</td></tr>
 <tr>
 <td>46 U2</td>
 <td class="case">
@@ -6921,8 +7030,8 @@ r' U' F R' F' R U r
 </a>
 </td>
 <td>8</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>46 U'</td>
 <td class="case">
@@ -6960,8 +7069,8 @@ f U R' F R F' U' f'
 </a>
 </td>
 <td>8</td>
-<td>19</td>
-</tr>
+<td>13.3
+</td></tr>
 <tr>
 <td>47</td>
 <td class="case">
@@ -6999,8 +7108,8 @@ F' r' F' r U r' F' r U F
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>11.0
+</td></tr>
 <tr>
 <td>47 U</td>
 <td class="case">
@@ -7038,8 +7147,8 @@ r' U' F' U F U' F' U F r
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>47 U2</td>
 <td class="case">
@@ -7077,8 +7186,8 @@ f' U' r' F r U' r' F r f
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>13.5
+</td></tr>
 <tr>
 <td>47 U'</td>
 <td class="case">
@@ -7116,8 +7225,8 @@ R' F' U' F U F' U' F U R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>48</td>
 <td class="case">
@@ -7155,8 +7264,8 @@ F R U R' U' R U R' U' F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>6.4
+</td></tr>
 <tr>
 <td>48 U</td>
 <td class="case">
@@ -7190,12 +7299,15 @@ F R U R' U' R U R' U' F'
 </td>
 <td>
 <a href="txt/oll_48_1.txt">
-r U f R' f' U f R' f' r' 
+L F U F' U' F U F' U' r' 
 </a>
+<br>
+r U f R' f' U f R' f' r' 
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>14.1
+<br>15.1
+</td></tr>
 <tr>
 <td>48 U2</td>
 <td class="case">
@@ -7233,8 +7345,8 @@ f U R U' R' U R U' R' f'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>12.4
+</td></tr>
 <tr>
 <td>48 U'</td>
 <td class="case">
@@ -7272,8 +7384,8 @@ R f R f' U' f R f' U' R'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>14.7
+</td></tr>
 <tr>
 <td>49</td>
 <td class="case">
@@ -7311,8 +7423,8 @@ r U' r2 U r2 U r2 U' r
 </a>
 </td>
 <td>9</td>
-<td>14</td>
-</tr>
+<td>11.5
+</td></tr>
 <tr>
 <td>49 U</td>
 <td class="case">
@@ -7346,12 +7458,15 @@ r U' r2 U r2 U r2 U' r
 </td>
 <td>
 <a href="txt/oll_49_1.txt">
-f U' f2 U f2 U f2 U' f 
+f D' R2 u F2 u F2 u' R 
 </a>
+<br>
+f U' f2 U f2 U f2 U' f 
 </td>
 <td>9</td>
-<td>20</td>
-</tr>
+<td>15.6
+<br>16.6
+</td></tr>
 <tr>
 <td>49 U2</td>
 <td class="case">
@@ -7389,8 +7504,8 @@ R F' U2 F U2 F R2 F' R
 </a>
 </td>
 <td>9</td>
-<td>11</td>
-</tr>
+<td>8.2
+</td></tr>
 <tr>
 <td>49 U'</td>
 <td class="case">
@@ -7428,8 +7543,8 @@ F R' F2 R U2 R U2 R' F
 </a>
 </td>
 <td>9</td>
-<td>10</td>
-</tr>
+<td>6.7
+</td></tr>
 <tr>
 <td>50</td>
 <td class="case">
@@ -7467,8 +7582,8 @@ r' U r2 U' r2 U' r2 U r'
 </a>
 </td>
 <td>9</td>
-<td>14</td>
-</tr>
+<td>11.8
+</td></tr>
 <tr>
 <td>50 U</td>
 <td class="case">
@@ -7502,12 +7617,15 @@ r' U r2 U' r2 U' r2 U r'
 </td>
 <td>
 <a href="txt/oll_50_1.txt">
-f' U f2 U' f2 U' f2 U f' 
+f' D r2 U' r2 u' r2 U r' 
 </a>
+<br>
+f' U f2 U' f2 U' f2 U f' 
 </td>
 <td>9</td>
-<td>20</td>
-</tr>
+<td>15.6
+<br>16.9
+</td></tr>
 <tr>
 <td>50 U2</td>
 <td class="case">
@@ -7545,8 +7663,8 @@ R' F R2 F' U2 F' U2 F R'
 </a>
 </td>
 <td>9</td>
-<td>11</td>
-</tr>
+<td>8.2
+</td></tr>
 <tr>
 <td>50 U'</td>
 <td class="case">
@@ -7584,8 +7702,8 @@ F' R U2 R' U2 R' F2 R F'
 </a>
 </td>
 <td>9</td>
-<td>11</td>
-</tr>
+<td>8.4
+</td></tr>
 <tr>
 <td>51</td>
 <td class="case">
@@ -7623,8 +7741,8 @@ F U R U' R' U R U' R' F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>6.4
+</td></tr>
 <tr>
 <td>51 U</td>
 <td class="case">
@@ -7662,8 +7780,8 @@ R' U' F' U F U' F' U F R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>51 U2</td>
 <td class="case">
@@ -7701,8 +7819,8 @@ F' U' r' F r U' r' F r F
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>10.4
+</td></tr>
 <tr>
 <td>51 U'</td>
 <td class="case">
@@ -7740,8 +7858,8 @@ r' F' U' F U F' U' F U r
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.5
+</td></tr>
 <tr>
 <td>52</td>
 <td class="case">
@@ -7779,8 +7897,8 @@ R' U' R U' R' U F' U F R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>6.4
+</td></tr>
 <tr>
 <td>52 U</td>
 <td class="case">
@@ -7818,8 +7936,8 @@ F U F' U F U' R U' R' F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>52 U2</td>
 <td class="case">
@@ -7857,8 +7975,8 @@ R' F' U' F U' R U R' U R
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>6.4
+</td></tr>
 <tr>
 <td>52 U'</td>
 <td class="case">
@@ -7896,8 +8014,8 @@ F R U R' U F' U' F U' F'
 </a>
 </td>
 <td>10</td>
-<td>11</td>
-</tr>
+<td>7.5
+</td></tr>
 <tr>
 <td>53</td>
 <td class="case">
@@ -7935,8 +8053,8 @@ R' F R F' U2 R2 f' U' f R'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>12.7
+</td></tr>
 <tr>
 <td>53 U</td>
 <td class="case">
@@ -7974,8 +8092,8 @@ F' r U r' U2 F2 R' F' R F'
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>10.1
+</td></tr>
 <tr>
 <td>53 U2</td>
 <td class="case">
@@ -8013,8 +8131,8 @@ r' U r f' r2 U2 f' r' U r'
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>14.2
+</td></tr>
 <tr>
 <td>53 U'</td>
 <td class="case">
@@ -8052,8 +8170,8 @@ f' U f R' U2 f2 R' f' U f'
 </a>
 </td>
 <td>10</td>
-<td>20</td>
-</tr>
+<td>16.0
+</td></tr>
 <tr>
 <td>54</td>
 <td class="case">
@@ -8091,8 +8209,8 @@ r U' r' F U2 r2 F r U' r
 </a>
 </td>
 <td>10</td>
-<td>14</td>
-</tr>
+<td>10.8
+</td></tr>
 <tr>
 <td>54 U</td>
 <td class="case">
@@ -8130,8 +8248,8 @@ f U' f' r f2 U2 r f U' f
 </a>
 </td>
 <td>10</td>
-<td>20</td>
-</tr>
+<td>16.0
+</td></tr>
 <tr>
 <td>54 U2</td>
 <td class="case">
@@ -8169,8 +8287,8 @@ R f' U' f U2 R2 F R F' R
 </a>
 </td>
 <td>10</td>
-<td>19</td>
-</tr>
+<td>12.7
+</td></tr>
 <tr>
 <td>54 U'</td>
 <td class="case">
@@ -8208,8 +8326,8 @@ F R' F' R U2 F2 r U r' F
 </a>
 </td>
 <td>10</td>
-<td>13</td>
-</tr>
+<td>9.4
+</td></tr>
 <tr>
 <td>55</td>
 <td class="case">
@@ -8247,8 +8365,8 @@ F' U2 F2 U F' U F U2 R' F' R
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>8.6
+</td></tr>
 <tr>
 <td>55 U</td>
 <td class="case">
@@ -8286,8 +8404,8 @@ R U2 R2 U' R U' R' U2 F R F'
 </a>
 </td>
 <td>11</td>
-<td>11</td>
-</tr>
+<td>6.9
+</td></tr>
 <tr>
 <td>56</td>
 <td class="case">
@@ -8321,12 +8439,12 @@ R U2 R2 U' R U' R' U2 F R F'
 </td>
 <td>
 <a href="txt/oll_56_0.txt">
-R' F' r' u F2 u' F' r U F R' 
+F u2 M' u2 F U2 F U2 F M' F 
 </a>
 </td>
 <td>11</td>
-<td>16</td>
-</tr>
+<td>11.3
+</td></tr>
 <tr>
 <td>56 U</td>
 <td class="case">
@@ -8364,8 +8482,8 @@ F' r' U' r F2 r' F' U F r F'
 </a>
 </td>
 <td>11</td>
-<td>13</td>
-</tr>
+<td>10.9
+</td></tr>
 <tr>
 <td>57</td>
 <td class="case">
@@ -8399,12 +8517,12 @@ F' r' U' r F2 r' F' U F r F'
 </td>
 <td>
 <a href="txt/oll_57_0.txt">
-M' f U' f' M f U f' 
+F U F' M' F U' F' M 
 </a>
 </td>
 <td>8</td>
-<td>33</td>
-</tr>
+<td>19.8
+</td></tr>
 <tr>
 <td>57 U</td>
 <td class="case">
@@ -8438,12 +8556,15 @@ M' f U' f' M f U f'
 </td>
 <td>
 <a href="txt/oll_57_1.txt">
-R d' F' M' F U F' M 
+r f' D' M u R u' M' 
 </a>
+<br>
+r f U' M' U f' r' S' 
 </td>
 <td>8</td>
-<td>33</td>
-</tr>
+<td>21.4
+<br>25.0
+</td></tr>
 </table>
 <p>216 algorithms in total.</p>
 </body>
