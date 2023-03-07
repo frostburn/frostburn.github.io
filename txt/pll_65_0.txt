@@ -22,14 +22,6 @@ F2 d S' d2 S' U r2
 F2 d S' d2 S' U L2 
 F2 d S' d2 S' d F2 
 F2 d S' d2 S' d b2 
-S2 u S' u2 S' u S2 
-S2 u S' u2 S' D M2 
-S2 u S' D2 S u S2 
-S2 u S' D2 S D M2 
-S2 D M u2 M u M2 
-S2 D M u2 M D S2 
-S2 D M D2 M' u M2 
-S2 D M D2 M' D S2 
 b2 u S' u2 S' u F2 
 b2 u S' u2 S' u b2 
 b2 u S' u2 S' D R2 
@@ -46,3 +38,11 @@ b2 D M D2 M' u r2
 b2 D M D2 M' u L2 
 b2 D M D2 M' D F2 
 b2 D M D2 M' D b2 
+S2 u S' u2 S' u S2 
+S2 u S' u2 S' D M2 
+S2 u S' D2 S u S2 
+S2 u S' D2 S D M2 
+S2 D M u2 M u M2 
+S2 D M u2 M D S2 
+S2 D M D2 M' u M2 
+S2 D M D2 M' D S2 
